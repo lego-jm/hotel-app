@@ -8,6 +8,9 @@ import Home from "./pages/Home";
 import Rooms from "./pages/Rooms";
 import RoomDetail from "./pages/RoomDetail";
 import Reservation from "./pages/Reservation";
+import Intro from "./pages/Intro";
+import JoinMembership from "./pages/JoinMembeship";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +24,9 @@ const router = createBrowserRouter([
       { path: "/rooms", element: <Rooms /> },
       { path: "/rooms/:roomId", element: <RoomDetail /> },
       { path: "/reservation/:roomId", element: <Reservation /> },
+      { path: "/intro", element: <Intro /> },
+      { path: "/login", element: <Login /> },
+      { path: "/member", element: <JoinMembership /> },
     ],
   },
 ]);

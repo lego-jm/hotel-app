@@ -1,9 +1,14 @@
 import { Outlet } from "react-router-dom";
+import HotelHeader from "./components/HotelHeader";
+import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <div>
-      <Outlet />
+      <AuthContextProvider>
+        <HotelHeader />
+        <Outlet />
+      </AuthContextProvider>
     </div>
   );
 }
