@@ -20,7 +20,9 @@ export default function HotelHeader() {
     <header className="flex justify-center border-b border-gray-400 p-5 text-default-black">
       <div className="flex justify-between items-center w-full max-w-7xl">
         <Link to="/" className="flex items-center gap-1">
-          <img className="w-10" src="/imgs/logo.png" alt="logo" />
+          <figure>
+            <img className="w-10" src="/images/logo.png" alt="logo" />
+          </figure>
           <h3 className="text-theme-color text-2xl font-bold">RealHotel</h3>
         </Link>
         <nav className="flex items-center gap-5 transition-all">
@@ -48,6 +50,7 @@ export default function HotelHeader() {
             </button>
           </form>
           <div className="flex items-center justify-end basis-3/6 gap-5">
+            {user?.isAdmin && <Link to="/admin">관리자 화면</Link>}
             {user ? (
               <Link
                 onClick={logOut}

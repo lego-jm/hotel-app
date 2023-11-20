@@ -11,6 +11,9 @@ import Reservation from "./pages/Reservation";
 import Intro from "./pages/Intro";
 import JoinMembership from "./pages/JoinMembeship";
 import Login from "./pages/Login";
+import ProtectRoute from "./components/ProtectRoute";
+import AdminHome from "./pages/admin/AdminHome";
+import AdminRooms from "./pages/admin/AdminRooms";
 
 const router = createBrowserRouter([
   {
@@ -23,10 +26,33 @@ const router = createBrowserRouter([
       },
       { path: "/rooms", element: <Rooms /> },
       { path: "/rooms/:roomId", element: <RoomDetail /> },
-      { path: "/reservation/:roomId", element: <Reservation /> },
+      {
+        path: "/reservation/:roomId",
+        element: (
+          <ProtectRoute>
+            <Reservation />
+          </ProtectRoute>
+        ),
+      },
       { path: "/intro", element: <Intro /> },
       { path: "/login", element: <Login /> },
       { path: "/member", element: <JoinMembership /> },
+      {
+        path: "/admin",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminHome />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/rooms",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminRooms />
+          </ProtectRoute>
+        ),
+      },
     ],
   },
 ]);
