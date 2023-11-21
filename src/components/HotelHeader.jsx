@@ -50,7 +50,7 @@ export default function HotelHeader() {
             </button>
           </form>
           <div className="flex items-center justify-end basis-3/6 gap-5">
-            {user?.isAdmin && <Link to="/admin">관리자 화면</Link>}
+            {user?.isAdmin && <Link to="/admin/rooms">관리자 화면</Link>}
             {user ? (
               <Link
                 onClick={logOut}

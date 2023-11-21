@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import ProtectRoute from "./components/ProtectRoute";
 import AdminHome from "./pages/admin/AdminHome";
 import AdminRooms from "./pages/admin/AdminRooms";
+import AdminAddRoom from "./pages/admin/AdminAddRoom";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectRoute requireAdmin>
             <AdminRooms />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/rooms/add",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminAddRoom />
           </ProtectRoute>
         ),
       },

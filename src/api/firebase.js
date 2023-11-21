@@ -5,7 +5,8 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
-import { get, getDatabase, ref } from "firebase/database";
+import { get, getDatabase, ref, set } from "firebase/database";
+import { v4 as uuid } from "uuid";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -35,6 +36,30 @@ export function getAuthState(callback) {
 
 export async function logOut() {
   auth.signOut();
+}
+
+export async function addRoom(room, url) {
+  const uid = uuid();
+  set(ref(database, `rooms/${uid}`), {
+    ...room,
+    id: uid,
+    imgUrl: url,
+    people: parseInt(room.people),
+    price: parseInt(room.price),
+  });
+}
+
+export async function getRooms() {
+  return get(ref(database, `rooms/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val());
+      }
+      return {};
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 async function getAdminInfo(user) {

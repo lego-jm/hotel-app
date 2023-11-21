@@ -7,7 +7,7 @@ export default function AdminButton({ text, link }) {
   return (
     <button
       onClick={() => navigate(link)}
-      className="w-2/12 bg-theme-color rounded-lg py-4 hover:text-white transition-all"
+      className="w-2/12 bg-theme-color rounded-lg py-3 hover:text-white transition-all"
     >
       {text}
     </button>
