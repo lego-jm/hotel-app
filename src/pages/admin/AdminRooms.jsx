@@ -2,17 +2,14 @@ import React from "react";
 import AdminPannel from "../../components/admin/AdminPannel";
 import AdminButton from "../../components/admin/AdminButton";
 import { useNavigate } from "react-router-dom";
-import { getRooms } from "../../api/firebase";
-import { useQuery } from "react-query";
 import AdminRoomCard from "../../components/admin/AdminRoomCard";
+import { useRooms } from "../../hooks/useRooms";
 
 export default function AdminRooms() {
   const navigate = useNavigate();
   const {
-    isLoading,
-    error,
-    data: rooms,
-  } = useQuery(["rooms"], () => getRooms());
+    getRoomsQuery: { isLoading, error, data: rooms },
+  } = useRooms();
 
   console.log(rooms);
 
@@ -28,9 +25,7 @@ export default function AdminRooms() {
           </li>
 
           {rooms &&
-            rooms.map((room, index) => (
-              <AdminRoomCard key={index} room={room} />
-            ))}
+            rooms.map((room) => <AdminRoomCard key={room.id} room={room} />)}
         </ul>
         <div className="flex justify-end gap-10 mt-3">
           <AdminButton text="객실 추가" link="/admin/rooms/add" />

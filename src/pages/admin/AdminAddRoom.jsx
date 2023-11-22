@@ -1,29 +1,33 @@
 import React, { useState } from "react";
 import AdminPannel from "../../components/admin/AdminPannel";
 import AdminButton from "../../components/admin/AdminButton";
-import { addRoom } from "../../api/firebase";
 import { useNavigate } from "react-router-dom";
 import { upload } from "../../api/uplode";
+import { useRooms } from "../../hooks/useRooms";
 
 export default function AdminAddRoom() {
   const [file, setFile] = useState();
   const [room, setRoom] = useState();
+  const { addRoomQuery } = useRooms();
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     upload(file).then((url) => {
-      addRoom(room, url);
+      addRoomQuery.mutate(
+        { ...room, imgUrl: url },
+        { onSuccess: () => console.log("succcess") }
+      );
       navigate("/admin/rooms");
     });
   };
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-
-    setRoom((prev) => ({ ...prev, [name]: value }));
     if (name === "file") {
-      setFile(files && files[0]);
+      setFile(files && Object.values(files));
       return;
     }
+    setRoom((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -148,9 +152,13 @@ export default function AdminAddRoom() {
               type="file"
               name="file"
               onChange={handleChange}
+              accept="image/*"
+              multiple
             />
           </div>
-          {file && <img src={URL.createObjectURL(file)} alt="" />}
+          {file &&
+            file.map((file) => <img src={URL.createObjectURL(file)} alt="" />)}
+
           <AdminButton text="객실 추가" />
         </form>
       </section>

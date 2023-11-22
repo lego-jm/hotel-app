@@ -38,12 +38,11 @@ export async function logOut() {
   auth.signOut();
 }
 
-export async function addRoom(room, url) {
+export async function addRoom(room) {
   const uid = uuid();
   set(ref(database, `rooms/${uid}`), {
     ...room,
     id: uid,
-    imgUrl: url,
     people: parseInt(room.people),
     price: parseInt(room.price),
   });

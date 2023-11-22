@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { googleLogin, logOut } from "../api/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
 export default function HotelHeader() {
+  const { pathname } = useLocation();
   const [text, setText] = useState("");
   const { user } = useAuthContext();
   const handleSubmit = (e) => {
@@ -14,10 +15,12 @@ export default function HotelHeader() {
     googleLogin();
   };
 
-  console.log(user);
-
   return (
-    <header className="flex justify-center border-b border-gray-400 p-5 text-default-black">
+    <header
+      className={`${
+        pathname === "/" ? "fixed top-0 left-0 w-full" : ""
+      } bg-white bg-opacity-80 z-10 flex justify-center border-b border-gray-400 p-5 text-default-black`}
+    >
       <div className="flex justify-between items-center w-full max-w-7xl">
         <Link to="/" className="flex items-center gap-1">
           <figure>
