@@ -10,9 +10,15 @@ export default function KakaoMap() {
   return (
     <Map
       center={{ lat: 37.565265, lng: 126.980896 }}
-      style={{ width: "100%", height: "450px" }}
+      style={{ width: "100%", height: "450px", position: "relative" }}
     >
-      <MapMarker position={{ lat: 37.565265, lng: 126.980996 }}></MapMarker>
+      <MapMarker position={{ lat: 37.565265, lng: 126.980996 }}>
+        <p className="text-xs font-bold text-gray-700 p-2 w-44">
+          RealHotel
+          <br />
+          서울특별시 중구 을지로 30
+        </p>
+      </MapMarker>
     </Map>
   );
 }

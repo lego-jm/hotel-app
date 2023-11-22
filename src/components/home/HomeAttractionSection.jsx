@@ -13,10 +13,10 @@ export default function HomeAttractionSection() {
       </div>
       <div className="relative">
         <img src="/images/main-attraction.jpg" alt="" />
-        <div className="absolute top-16 left-16">
+        {/* <div className="absolute top-16 left-16">
           <h3 className="text-3xl">Le Salon</h3>
           <p className="text-md mt-4">스타일과 럭셔리의 조화</p>
-        </div>
+        </div> */}
       </div>
     </section>
   );

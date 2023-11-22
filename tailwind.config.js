@@ -6,8 +6,9 @@ module.exports = {
       colors: {
         "default-font-black": "#333",
         "theme-color": "rgba(173,158,135,.97)",
+        "footer-color": "#111",
+        "footer-font-color": "#a7a7a7",
       },
-      backgroundColor: { "default-bg": "rgba(173,158,135,.97)" },
     },
   },
   plugins: [],
