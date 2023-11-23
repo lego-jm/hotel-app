@@ -50,7 +50,7 @@ export default function AdminAddOrUpdate({ state }) {
 
   return (
     <>
-      <h3 className="text-2xl mb-3">객실 {`${room ? "수정" : "추가"}`}</h3>
+      <h3 className="text-2xl mb-3">객실 {`${state ? "수정" : "추가"}`}</h3>
       <form
         className="w-full flex flex-col gap-5 border border-theme-color rounded-lg p-10"
         onSubmit={handleSubmit}

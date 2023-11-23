@@ -2,9 +2,9 @@ import React from "react";
 
 export default function RoomDescriptionCard({ title, data }) {
   return (
-    <div className="w-1/3 flex">
-      <span className="w-5/12 font-bold">{title}</span>
-      <span>{data}</span>
+    <div className="w-full flex text-sm gap-3">
+      <span className="basis-4/12 font-bold">{title}</span>
+      <span className="basis-7/12">{data}</span>
     </div>
   );
 }

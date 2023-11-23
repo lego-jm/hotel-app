@@ -10,9 +10,13 @@ export default function RoomList() {
 
   if (isLoading) return <Loading />;
 
+  const sortRooms = rooms.sort(
+    (a, b) => new Date(a.createdDate) - new Date(b.createdDate)
+  );
+
   return (
     <section className="max-w-7xl mx-auto mt-5 grid grid-cols-1 lg:grid-cols-2 gap-10 px-3">
-      {rooms && rooms.map((room) => <RoomCard key={room.id} room={room} />)}
+      {rooms && sortRooms.map((room) => <RoomCard key={room.id} room={room} />)}
     </section>
   );
 }
