@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
-import { get, getDatabase, ref, set } from "firebase/database";
+import { get, getDatabase, ref, remove, set } from "firebase/database";
 import { v4 as uuid } from "uuid";
 
 const firebaseConfig = {
@@ -19,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const database = getDatabase();
+const nowDate = new Date();
 
 export async function googleLogin() {
   signInWithPopup(auth, provider).catch((error) => {
@@ -45,6 +46,17 @@ export async function addRoom(room) {
     id: uid,
     people: parseInt(room.people),
     price: parseInt(room.price),
+    modifyDate: nowDate.toLocaleString(),
+    createdDate: nowDate.toLocaleString(),
+  });
+}
+
+export async function updateRoom(room) {
+  set(ref(database, `rooms/${room.id}`), {
+    ...room,
+    people: parseInt(room.people),
+    price: parseInt(room.price),
+    modifyDate: nowDate.toLocaleString(),
   });
 }
 
@@ -75,4 +87,8 @@ async function getAdminInfo(user) {
     .catch((error) => {
       console.error(error);
     });
+}
+
+export async function removeRoom(id) {
+  remove(ref(database, `rooms/${id}`));
 }

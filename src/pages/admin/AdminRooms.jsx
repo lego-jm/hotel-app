@@ -26,7 +26,14 @@ export default function AdminRooms() {
           </li>
           {!rooms && <li className="mx-auto p-3">객실을 추가해주세요</li>}
           {rooms &&
-            rooms.map((room) => <AdminRoomCard key={room.id} room={room} />)}
+            rooms.map((room, index) => (
+              <AdminRoomCard
+                key={room.id}
+                room={room}
+                no={index}
+                length={rooms.length}
+              />
+            ))}
         </ul>
         <div className="flex justify-end gap-10 mt-3">
           <AdminButton text="객실 추가" link="/admin/rooms/add" />
