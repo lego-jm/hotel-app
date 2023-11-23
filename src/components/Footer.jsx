@@ -12,7 +12,9 @@ export default function Footer() {
         <div>
           <span>(주)리얼호텔</span>
           <div className="flex">
-            <address>04533 서울특별시 중구 을지로 30</address>
+            <address className="not-italic">
+              04533 서울특별시 중구 을지로 30
+            </address>
             <p>/+82-123-1234</p>
           </div>
           <span>대표이사 홍길동 /</span>
