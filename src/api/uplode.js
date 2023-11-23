@@ -4,14 +4,15 @@ export async function upload(files) {
   const data = new FormData();
 
   data.append("upload_preset", uploadPreset);
-  for (const file of files) {
-    data.append("file", file);
-  }
 
-  return fetch(url, { method: "post", body: data })
-    .then((res) => res.json())
-    .then((data) => console.log(data.resources))
-    .catch((e) => {
-      console.log(e);
-    });
+  const uploadPromises = files.map(async (file) => {
+    data.append("file", file);
+    return fetch(url, { method: "post", body: data })
+      .then((res) => res.json())
+      .catch((e) => {
+        console.log(e);
+      });
+  });
+
+  return Promise.all(uploadPromises).then((data) => data);
 }

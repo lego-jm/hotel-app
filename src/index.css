@@ -25,3 +25,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* Swiper bullet Custom */
+.swiper-pagination-bullet {
+  @apply bg-white !important;
+}

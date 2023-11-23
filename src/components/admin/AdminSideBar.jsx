@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function AdminSideBar() {
   const navigate = useNavigate();
   return (
-    <ul className="p-10 flex flex-col gap-5 border-r border-gray-400 w-2/12 h-full">
+    <ul className="p-10 flex flex-col gap-5 border-r border-gray-400 w-2/12">
       <li
         onClick={() => navigate("/admin/rooms")}
         className="cursor-pointer transition-all hover:text-theme-color"

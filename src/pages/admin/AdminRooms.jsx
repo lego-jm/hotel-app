@@ -4,6 +4,7 @@ import AdminButton from "../../components/admin/AdminButton";
 import { useNavigate } from "react-router-dom";
 import AdminRoomCard from "../../components/admin/AdminRoomCard";
 import { useRooms } from "../../hooks/useRooms";
+import Loading from "../../components/Loading";
 
 export default function AdminRooms() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function AdminRooms() {
     getRoomsQuery: { isLoading, error, data: rooms },
   } = useRooms();
 
-  console.log(rooms);
+  // if (isLoading) return <Loading />;
 
   return (
     <AdminPannel>
@@ -23,7 +24,7 @@ export default function AdminRooms() {
             <span className="basis-1/6">투숙인원</span>
             <span className="basis-1/6"></span>
           </li>
-
+          {!rooms && <li className="mx-auto p-3">객실을 추가해주세요</li>}
           {rooms &&
             rooms.map((room) => <AdminRoomCard key={room.id} room={room} />)}
         </ul>

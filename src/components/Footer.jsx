@@ -19,7 +19,7 @@ export default function Footer() {
           <span> 사업자등록번호 123456-123456 / </span>
         </div>
       </div>
-      <div className="flex gap-5">
+      <div className="flex gap-5 text-sm">
         <span className="hover:text-white transition-all cursor-pointer">
           개인정보처리방침
         </span>

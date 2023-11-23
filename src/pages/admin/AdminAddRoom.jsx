@@ -13,9 +13,9 @@ export default function AdminAddRoom() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    upload(file).then((url) => {
+    upload(file).then((urls) => {
       addRoomQuery.mutate(
-        { ...room, imgUrl: url },
+        { ...room, imgUrl: urls.map((data) => data.url) },
         { onSuccess: () => console.log("succcess") }
       );
       navigate("/admin/rooms");
@@ -157,8 +157,9 @@ export default function AdminAddRoom() {
             />
           </div>
           {file &&
-            file.map((file) => <img src={URL.createObjectURL(file)} alt="" />)}
-
+            file.map((file, index) => (
+              <img key={index} src={URL.createObjectURL(file)} alt="" />
+            ))}
           <AdminButton text="객실 추가" />
         </form>
       </section>

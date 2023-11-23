@@ -3,7 +3,7 @@ import AdminSideBar from "./AdminSideBar";
 
 export default function AdminPannel({ children }) {
   return (
-    <section className="h-screen flex">
+    <section className="flex">
       <AdminSideBar />
       {children}
     </section>

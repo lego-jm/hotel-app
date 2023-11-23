@@ -54,7 +54,7 @@ export async function getRooms() {
       if (snapshot.exists()) {
         return Object.values(snapshot.val());
       }
-      return {};
+      return null;
     })
     .catch((error) => {
       console.error(error);
