@@ -12,6 +12,8 @@ export default function Banner() {
     <>
       <Swiper
         loop={true}
+        touchRatio={0}
+        navigation={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,

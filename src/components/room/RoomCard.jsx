@@ -22,6 +22,7 @@ export default function RoomCard({
     <div>
       <Swiper
         loop={true}
+        touchRatio={0}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
@@ -30,6 +31,7 @@ export default function RoomCard({
           dynamicBullets: true,
           clickable: true,
         }}
+        navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
@@ -57,22 +59,25 @@ export default function RoomCard({
           <span>{roomtype}</span>
         </div>
         <h3 className="text-xl">{title}</h3>
-        <div className="mt-5 flex">
-          <p className="after:border-r after:border-gray-400 after:mx-2">
-            <span className="opacity-70">침대타입</span> {bedtype}
-          </p>
-          <p className="after:border-r after:border-gray-400 after:mx-2">
-            <span className="opacity-70">전망</span> {outlook}
-          </p>
-          <p className="after:border-r after:border-gray-400 after:mx-2">
-            <span className="opacity-70">투숙인원</span> {`${people}명`}
-          </p>
-        </div>
-        <div className="flex justify-between">
-          <p>
-            <span className="opacity-70">객실면적</span> {area}
-          </p>
-          <button onClick={() => navigate(`/rooms/${id}`, { state: { room } })}>
+        <div className="mt-5 flex justify-between h-10">
+          <div className="flex flex-wrap w-10/12">
+            <p className="after:border-r after:border-gray-400 after:mx-2">
+              <span className="opacity-70">침대타입</span> {bedtype}
+            </p>
+            <p className="after:border-r after:border-gray-400 after:mx-2">
+              <span className="opacity-70">전망</span> {outlook}
+            </p>
+            <p className="after:border-r after:border-gray-400 after:mx-2">
+              <span className="opacity-70">투숙인원</span> {`${people}명`}
+            </p>
+            <p>
+              <span className="opacity-70">객실면적</span> {area}
+            </p>
+          </div>
+          <button
+            className="self-end whitespace-nowrap opacity-70"
+            onClick={() => navigate(`/rooms/${id}`, { state: { room } })}
+          >
             자세히 보기 &gt;
           </button>
         </div>

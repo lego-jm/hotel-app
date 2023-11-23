@@ -32,7 +32,7 @@ export default function AdminAddRoom() {
 
   return (
     <AdminPannel>
-      <section className="w-4/6 p-3 flex flex-col justify-start mx-auto mt-10">
+      <section className="w-4/6 p-3 flex flex-col justify-start mx-auto my-10">
         <h3 className="text-2xl mb-3">객실 추가</h3>
         <form
           className="w-full flex flex-col gap-5 border border-theme-color rounded-lg p-10"
@@ -127,6 +127,20 @@ export default function AdminAddRoom() {
               name="outlook"
               placeholder="전망을 입력하세요"
               onChange={handleChange}
+            />
+          </div>
+          <div className="flex items-start gap-3">
+            <label className="w-1/12 mt-2" htmlFor="title">
+              객실 설명
+            </label>
+            <textarea
+              id="content"
+              className="border w-3/6 border-gray-400 outline-none p-2 px-2 resize-none"
+              type="text"
+              name="content"
+              placeholder="객실 설명을 입력하세요"
+              onChange={handleChange}
+              rows={10}
             />
           </div>
           <div className="flex items-center gap-3">

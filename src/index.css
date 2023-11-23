@@ -30,3 +30,8 @@ code {
 .swiper-pagination-bullet {
   @apply bg-white !important;
 }
+.swiper-button-prev,
+.swiper-button-next {
+  @apply text-white !important;
+  @apply hover:bg-black hover:bg-opacity-70 rounded-lg p-10 transition-all duration-500;
+}
