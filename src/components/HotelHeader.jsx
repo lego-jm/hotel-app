@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
-import { googleLogin, logOut } from "../api/firebase";
+import { logOut } from "../api/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
 export default function HotelHeader() {
@@ -11,15 +11,12 @@ export default function HotelHeader() {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  const handleGoogleLogin = () => {
-    googleLogin();
-  };
 
   return (
     <header
       className={`${
-        pathname === "/" ? "fixed top-0 left-0 w-full" : ""
-      } bg-white bg-opacity-80 z-10 flex justify-center border-b border-gray-400 p-5 text-default-black`}
+        pathname === "/" ? "bg-opacity-80" : ""
+      } fixed top-0 left-0 w-full bg-white z-10 flex justify-center border-b border-gray-400 p-5 text-default-black`}
     >
       <div className="flex justify-between items-center w-full max-w-7xl">
         <Link to="/" className="flex items-center gap-1">
@@ -35,9 +32,21 @@ export default function HotelHeader() {
           <Link to="/rooms" className="hover:text-theme-color duration-300">
             객실
           </Link>
-          <Link to="/rooms" className="hover:text-theme-color duration-300">
+          <button
+            onClick={() => window.alert("준비중입니다.")}
+            className="hover:text-theme-color duration-300"
+          >
             다이닝
-          </Link>
+          </button>
+          <button
+            onClick={() => window.alert("준비중입니다.")}
+            className="hover:text-theme-color duration-300"
+          >
+            주요명소
+          </button>
+          {/* <Link to="/dyning" className="hover:text-theme-color duration-300">
+            다이닝
+          </Link> */}
         </nav>
         <div className="flex justify-evenly basis-2/6">
           <form onSubmit={handleSubmit} className="relative basis-3/6">
@@ -53,7 +62,14 @@ export default function HotelHeader() {
             </button>
           </form>
           <div className="flex items-center justify-end basis-3/6 gap-5">
-            {user?.isAdmin && <Link to="/admin/rooms">관리자 화면</Link>}
+            {user?.isAdmin && (
+              <Link
+                to="/admin/rooms"
+                className="hover:text-theme-color duration-300"
+              >
+                관리자 화면
+              </Link>
+            )}
             {user ? (
               <Link
                 onClick={logOut}
@@ -65,7 +81,6 @@ export default function HotelHeader() {
             ) : (
               <>
                 <Link
-                  onClick={handleGoogleLogin}
                   to="/login"
                   className="hover:text-theme-color duration-300"
                 >

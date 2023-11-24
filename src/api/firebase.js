@@ -4,6 +4,8 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { get, getDatabase, ref, remove, set } from "firebase/database";
 import { v4 as uuid } from "uuid";
@@ -22,10 +24,13 @@ const database = getDatabase();
 const nowDate = new Date();
 
 export async function googleLogin() {
-  signInWithPopup(auth, provider).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+  return signInWithPopup(auth, provider).catch((error) => console.error(error));
+}
+
+export async function emailLogin(member) {
+  signInWithEmailAndPassword(auth, member.email, member.password).catch(
+    (error) => console.error(error)
+  );
 }
 
 export function getAuthState(callback) {
@@ -110,4 +115,10 @@ export async function getFilterList() {
     .catch((error) => {
       console.error(error);
     });
+}
+
+export async function joinMember(member) {
+  createUserWithEmailAndPassword(auth, member.email, member.password).catch(
+    (error) => console.log(error.message)
+  );
 }

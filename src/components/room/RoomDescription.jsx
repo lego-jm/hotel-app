@@ -2,17 +2,12 @@ import React from "react";
 import RoomDescriptionCard from "./RoomDescriptionCard";
 
 export default function RoomDescription({
-  room: { people, bedtype, area, outlook, location, id },
+  room: { people, bedtype, area, outlook, location, id, content },
 }) {
   return (
     <section className="max-w-7xl mx-auto mb-20 text-gray-800">
       <p className="text-center text-md font-light opacity-70 p-14">
-        {/* 임시 컨텐츠 */}
-        롯데호텔 서울의 스탠다드 디럭스룸은 다른 특급 호텔의 동급 객실보다
-        여유로운 공간을 제공하며, 비즈니스와 여행의 여유로움을 즐길 수 있습니다.
-        <br /> 고객의 다양한 취향과 감각을 고려하여 SOM 사, WILSON & ASSOCIATES
-        사, HBA 사 등 세계적인 인테리어 회사들이 디자인한 각기 다른 3가지
-        인테리어 스타일의 객실이 준비되어 있습니다.
+        {content}
       </p>
       <section className="border-t border-gray-400 flex px-5 py-16">
         <h3 className="basis-3/12 text-3xl">객실개요</h3>

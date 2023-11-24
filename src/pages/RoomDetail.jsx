@@ -12,7 +12,7 @@ export default function RoomDetail() {
   } = useLocation();
 
   return (
-    <section>
+    <section className="my-24">
       <section>
         <div className="flex flex-col items-center p-10">
           <p>

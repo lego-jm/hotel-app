@@ -17,7 +17,7 @@ export default function Rooms() {
   };
 
   return (
-    <section className="mx-auto py-20">
+    <section className="mx-auto py-40">
       <ContentIntro title="객실" text={text} />
       <div className="border-y border-400 py-6 px-12">
         <div className="max-w-7xl mx-auto flex">

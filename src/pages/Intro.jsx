@@ -14,7 +14,7 @@ const text = `국내 최고의 럭셔리 비즈니스 호텔인 리얼호텔은 
 
 export default function Intro() {
   return (
-    <section className="max-w-7xl mx-auto py-20">
+    <section className="max-w-7xl mx-auto py-40">
       <ContentIntro title="리얼호텔 소개" text={text} />
       <section className="border-t border-gray-400 pt-14">
         <h3 className="text-4xl text-center">ROOMS & SUITE</h3>
