@@ -1,5 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addRoom, getRooms, removeRoom, updateRoom } from "../api/firebase";
+import {
+  addRoom,
+  getFilterList,
+  getRooms,
+  removeRoom,
+  updateRoom,
+} from "../api/firebase";
 
 export function useRooms() {
   const queryClient = useQueryClient();
@@ -18,6 +24,15 @@ export function useRooms() {
       queryClient.invalidateQueries(["rooms"]);
     },
   });
+  const getFilterQuery = useQuery(["filters"], async () => getFilterList(), {
+    staleTime: 1000 * 60 * 10,
+  });
 
-  return { addRoomQuery, updateRoomQuery, getRoomsQuery, removeRoomQuery };
+  return {
+    addRoomQuery,
+    updateRoomQuery,
+    getRoomsQuery,
+    removeRoomQuery,
+    getFilterQuery,
+  };
 }

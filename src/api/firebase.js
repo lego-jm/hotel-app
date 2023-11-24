@@ -64,7 +64,10 @@ export async function getRooms() {
   return get(ref(database, `rooms/`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        return Object.values(snapshot.val());
+        const sort = Object.values(snapshot.val()).sort(
+          (a, b) => new Date(a.createdDate) - new Date(b.createdDate)
+        );
+        return sort;
       }
       return null;
     })
@@ -91,4 +94,20 @@ async function getAdminInfo(user) {
 
 export async function removeRoom(id) {
   remove(ref(database, `rooms/${id}`));
+}
+
+export async function getFilterList() {
+  return get(ref(database, `rooms/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const dupleFilter = new Set(
+          Object.values(snapshot.val()).map((room) => room.roomtype)
+        );
+        return [...dupleFilter];
+      }
+      return null;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }

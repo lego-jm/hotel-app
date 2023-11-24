@@ -17,13 +17,13 @@ export default function AdminRooms() {
   const offset = (page - 1) * limit;
 
   // if (isLoading) return <Loading />;
-  const sortRooms = rooms.sort(
+  /* const sortRooms = rooms.sort(
     (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-  );
+  ); */
 
   return (
     <AdminPannel>
-      <section className="w-4/6 p-3 flex flex-col justify-start mx-auto mt-10">
+      <section className="w-4/6 p-3 flex flex-col justify-start mx-auto my-20">
         <ul className="w-full flex flex-col gap-4 shadow-xl rounded-lg border border-theme-color p-4 mb-5">
           <li className="flex justify-between text-center border-b border-gray-300">
             <span className="basis-1/6">no.</span>
@@ -33,7 +33,7 @@ export default function AdminRooms() {
           </li>
           {!rooms && <li className="mx-auto p-3">객실을 추가해주세요</li>}
           {rooms &&
-            sortRooms
+            rooms
               .slice(offset, offset + limit)
               .map((room, index) => (
                 <AdminRoomCard
