@@ -14,9 +14,9 @@ export default function HotelHeader() {
 
   return (
     <header
-      className={`${
-        pathname === "/" ? "bg-opacity-80" : ""
-      } fixed top-0 left-0 w-full bg-white z-10 flex justify-center border-b border-gray-400 p-5 text-default-black`}
+      className={`${pathname === "/" ? "bg-opacity-80" : ""} ${
+        !pathname.includes("/admin") && "fixed top-0 left-0 w-full"
+      } bg-white z-10 flex justify-center border-b border-gray-400 p-5 text-default-black`}
     >
       <div className="flex justify-between items-center w-full max-w-7xl">
         <Link to="/" className="flex items-center gap-1">
@@ -70,6 +70,16 @@ export default function HotelHeader() {
                 관리자 화면
               </Link>
             )}
+
+            {user && !user.isAdmin && (
+              <Link
+                to="/mypage"
+                className="hover:text-theme-color duration-300"
+              >
+                마이페이지
+              </Link>
+            )}
+
             {user ? (
               <Link
                 onClick={logOut}

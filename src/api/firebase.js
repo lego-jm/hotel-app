@@ -21,7 +21,10 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const database = getDatabase();
-const nowDate = new Date();
+const date = new Date();
+const nowDate = `${date.getFullYear()}/${
+  date.getMonth() + 1
+}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getMilliseconds()}`;
 
 export async function googleLogin() {
   return signInWithPopup(auth, provider).catch((error) => console.error(error));
@@ -45,14 +48,14 @@ export async function logOut() {
 }
 
 export async function addRoom(room) {
-  const uid = uuid();
-  set(ref(database, `rooms/${uid}`), {
+  const roomUid = uuid();
+  set(ref(database, `rooms/${roomUid}`), {
     ...room,
-    id: uid,
+    id: roomUid,
     people: parseInt(room.people),
     price: parseInt(room.price),
-    modifyDate: nowDate.toLocaleString(),
-    createdDate: nowDate.toLocaleString(),
+    modifyDate: nowDate,
+    createdDate: nowDate,
   });
 }
 
@@ -61,7 +64,7 @@ export async function updateRoom(room) {
     ...room,
     people: parseInt(room.people),
     price: parseInt(room.price),
-    modifyDate: nowDate.toLocaleString(),
+    modifyDate: nowDate,
   });
 }
 
@@ -118,7 +121,33 @@ export async function getFilterList() {
 }
 
 export async function joinMember(member) {
-  createUserWithEmailAndPassword(auth, member.email, member.password).catch(
-    (error) => console.log(error.message)
-  );
+  createUserWithEmailAndPassword(auth, member.email, member.password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      delete member.passwordCheck;
+      set(ref(database, `users/${user.uid}`), {
+        uid: user.uid,
+        ...member,
+        createdDate: nowDate,
+        modifyDate: nowDate,
+      });
+    })
+    .catch((error) => console.log(error.message));
+}
+
+export async function idCheck(email) {
+  return get(ref(database, `users/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const isIdCheck = Object.values(snapshot.val()).filter(
+          (item) => item.email === email
+        );
+
+        return isIdCheck.length > 0 ? true : false;
+      }
+      return null;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }

@@ -16,6 +16,7 @@ import AdminHome from "./pages/admin/AdminHome";
 import AdminRooms from "./pages/admin/AdminRooms";
 import AdminAddRoom from "./pages/admin/AdminAddRoom";
 import AdminRoomDetail from "./pages/admin/AdminRoomDetail";
+import MyPage from "./pages/MyPage";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       { path: "/intro", element: <Intro /> },
       { path: "/login", element: <Login /> },
       { path: "/member", element: <JoinMembership /> },
+      { path: "/mypage", element: <MyPage /> },
       {
         path: "/admin",
         element: (

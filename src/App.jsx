@@ -3,6 +3,7 @@ import HotelHeader from "./components/HotelHeader";
 import { AuthContextProvider } from "./context/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const client = new QueryClient();
@@ -10,8 +11,10 @@ function App() {
     <QueryClientProvider client={client}>
       <AuthContextProvider>
         <HotelHeader />
-        <Outlet />
-        <Footer />
+        <ScrollToTop>
+          <Outlet />
+          <Footer />
+        </ScrollToTop>
       </AuthContextProvider>
     </QueryClientProvider>
   );
