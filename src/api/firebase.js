@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { get, getDatabase, ref, remove, set } from "firebase/database";
+import moment from "moment";
 import { v4 as uuid } from "uuid";
 
 const firebaseConfig = {
@@ -21,10 +22,7 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const database = getDatabase();
-const date = new Date();
-const nowDate = `${date.getFullYear()}/${
-  date.getMonth() + 1
-}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getMilliseconds()}`;
+const nowDate = moment().format("YYYY/MM/DD HH:mm:ss");
 
 export async function googleLogin() {
   return signInWithPopup(auth, provider).catch((error) => console.error(error));
@@ -147,6 +145,37 @@ export async function idCheck(email) {
       }
       return null;
     })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function setReservation(data) {
+  const reservationUid = uuid();
+  set(ref(database, `reservation/${data.uid}/${reservationUid}`), {
+    id: reservationUid,
+    people: parseInt(data.people),
+    request: data.request,
+    startDate: data.reservationDate.startDate,
+    endDate: data.reservationDate.endDate,
+    totalPrice: parseInt(data.totalPrice),
+    diffDay: parseInt(data.diffDay),
+    createdDate: nowDate,
+    modifyDate: nowDate,
+  }).catch((error) => console.error(error));
+}
+
+export async function getUserInfo(uid) {
+  return get(ref(database, `users/${uid}`))
+    .then((snapshot) => snapshot.val())
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function getReservation(uid) {
+  return get(ref(database, `reservation/${uid}`))
+    .then((snapshot) => Object.values(snapshot.val()))
     .catch((error) => {
       console.error(error);
     });

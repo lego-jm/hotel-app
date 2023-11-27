@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { logOut } from "../api/firebase";
 import { useAuthContext } from "../context/AuthContext";
-import CalendarModal from "./CalendarModal";
 
 export default function HotelHeader() {
   const { pathname } = useLocation();
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   const [isModalCheck, setIsModalCheck] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +51,9 @@ export default function HotelHeader() {
           <button onClick={() => setIsModalCheck((state) => !state)}>
             객실 조회
           </button>
+          <button onClick={() => navigate(`/reservation/check/${user?.uid}`)}>
+            예약 조회
+          </button>
         </nav>
         <div className="flex justify-evenly basis-2/6">
           {/* <form onSubmit={handleSubmit} className="relative basis-3/6">
@@ -65,9 +68,7 @@ export default function HotelHeader() {
               <IoSearchSharp />
             </button>
           </form> */}
-          <div className={`${!isModalCheck ? "hidden" : "block"}`}>
-            <CalendarModal />
-          </div>
+
           <div className="flex items-center justify-end basis-3/6 gap-5">
             {user?.isAdmin && (
               <Link

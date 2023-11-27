@@ -17,6 +17,8 @@ import AdminRooms from "./pages/admin/AdminRooms";
 import AdminAddRoom from "./pages/admin/AdminAddRoom";
 import AdminRoomDetail from "./pages/admin/AdminRoomDetail";
 import MyPage from "./pages/MyPage";
+import ReservationCheck from "./pages/ReservationCheck";
+import MyPageDatail from "./pages/MyPageDatail";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
           </ProtectRoute>
         ),
       },
+      {
+        path: "/reservation/check/:uid",
+        element: (
+          <ProtectRoute>
+            <ReservationCheck />
+          </ProtectRoute>
+        ),
+      },
       { path: "/intro", element: <Intro /> },
       { path: "/login", element: <Login /> },
       { path: "/member", element: <JoinMembership /> },
@@ -45,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectRoute>
             <MyPage />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/mypage/:uid",
+        element: (
+          <ProtectRoute>
+            <MyPageDatail />
           </ProtectRoute>
         ),
       },
