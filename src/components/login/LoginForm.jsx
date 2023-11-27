@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useUsers } from "../../hooks/useUsers";
 import { useNavigate } from "react-router-dom";
 import { emailLogin, googleLogin } from "../../api/firebase";
 
@@ -9,7 +8,20 @@ export default function LoginForm({ children }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    emailLogin(account).then(navigate("/"));
+
+    emailLogin(account).then((res) => {
+      if (res?.uid) {
+        emailLogin(account).then(navigate("/"));
+      }
+
+      if (res?.errorCode === "auth/invalid-login-credentials") {
+        window.alert("비밀번호를 확인해주세요");
+      } else if (res?.errorCode === "auth/invalid-email") {
+        window.alert("이메일을 확인해주세요");
+      } else if (res?.errorCode === "auth/too-many-requests") {
+        window.alert("1분 후 다시 시도해주세요");
+      }
+    });
   };
 
   const handleGoogleLogin = () => {

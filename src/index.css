@@ -18,7 +18,7 @@ body {
   font-family: "GmarketSansMedium";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  position: relative;
+  @apply relative;
 }
 
 code {

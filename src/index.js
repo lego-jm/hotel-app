@@ -40,7 +40,14 @@ const router = createBrowserRouter([
       { path: "/intro", element: <Intro /> },
       { path: "/login", element: <Login /> },
       { path: "/member", element: <JoinMembership /> },
-      { path: "/mypage", element: <MyPage /> },
+      {
+        path: "/mypage",
+        element: (
+          <ProtectRoute>
+            <MyPage />
+          </ProtectRoute>
+        ),
+      },
       {
         path: "/admin",
         element: (

@@ -2,6 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
+import Button from "../ui/Button";
 
 export default function RoomCard({
   room,
@@ -18,6 +19,7 @@ export default function RoomCard({
   },
 }) {
   const navigate = useNavigate();
+
   return (
     <div>
       <Swiper
@@ -51,7 +53,7 @@ export default function RoomCard({
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="p-5 text-sm border-b border-gray-500">
+      <div className="p-5 text-sm border-b border-gray-500 mb-2">
         <div className="">
           <span className="after:border-r after:border-gray-400 after:mx-2">
             {location}
@@ -82,6 +84,11 @@ export default function RoomCard({
           </button>
         </div>
       </div>
+      <Button
+        text="예약하기"
+        type="button"
+        event={() => navigate(`/reservation/${id}`, { state: { room } })}
+      />
     </div>
   );
 }

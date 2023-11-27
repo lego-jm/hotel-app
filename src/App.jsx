@@ -13,8 +13,8 @@ function App() {
         <HotelHeader />
         <ScrollToTop>
           <Outlet />
-          <Footer />
         </ScrollToTop>
+        <Footer />
       </AuthContextProvider>
     </QueryClientProvider>
   );

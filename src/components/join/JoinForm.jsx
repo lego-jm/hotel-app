@@ -10,7 +10,7 @@ export default function JoinForm({ children }) {
   const navigate = useNavigate();
   const [account, setAccount] = useState();
   const [nationChoice, setNationChoice] = useState();
-  const [text, setText] = useState("");
+  const [text, setText] = useState({ email: "", password: "", isCheck: false });
   const { joinMemberQuery, idCheckQuery } = useUsers();
 
   const handleSubmit = (e) => {
@@ -30,11 +30,14 @@ export default function JoinForm({ children }) {
     if (account?.email) {
       idCheckQuery.mutate(account.email, {
         onSuccess: (isCheck) => {
-          isCheck && window.alert("사용자가 이미 있습니다.");
+          isCheck
+            ? setText({ email: "사용자가 이미 있습니다." })
+            : setText({ email: "사용가능한 이메일입니다.", isCheck: true });
+          setTimeout(() => setText({ email: "" }), [1500]);
         },
       });
     } else {
-      window.alert("이메일을 먼저 입력해주세요");
+      setText({ email: "이메일을 먼저 입력해주세요." });
     }
   };
 
@@ -45,7 +48,7 @@ export default function JoinForm({ children }) {
 
   useEffect(() => {
     account?.password !== account?.passwordCheck
-      ? setText("비밀번호가 일치하지 않습니다.")
+      ? setText({ password: "비밀번호가 일치하지 않습니다." })
       : setText("");
   }, [account]);
 
@@ -74,6 +77,11 @@ export default function JoinForm({ children }) {
             />
             <Button text="중복확인" type="button" event={handleIdCheck} />
           </div>
+          <p
+            className={`${text.isCheck && "text-green-500"} text-red-500 mt-2`}
+          >
+            {text.email}
+          </p>
         </div>
         <div className="flex flex-col border-t border-gray-200">
           <label className="self-start mt-5" htmlFor="password">
@@ -102,7 +110,7 @@ export default function JoinForm({ children }) {
               required
             />
           </div>
-          <p className="text-red-500">{text}</p>
+          <p className="text-red-500">{text.password}</p>
           <p className="w-8/12 flex items-center gap-1 text-xs font-light text-yellow-700 bg-yellow-100 p-4 border border-yellow-700 ">
             <PiWarningCircleLight className="text-xl font-bold" />
             아이디, 이름, 생일, 휴대전화번호 등을 포함하는 비밀번호 사용은
@@ -170,6 +178,7 @@ export default function JoinForm({ children }) {
             value={account?.birth || ""}
             autoComplete="off"
             required
+            maxLength={10}
           />
         </div>
         <div className="flex flex-col border-t border-gray-200 gap-2">
@@ -186,6 +195,7 @@ export default function JoinForm({ children }) {
             value={account?.phoneNumber || ""}
             autoComplete="off"
             required
+            maxLength={11}
           />
           <p className="w-8/12 flex items-center gap-1 text-xs font-light text-yellow-700 bg-yellow-100 p-4 border border-yellow-700 ">
             <PiWarningCircleLight className="text-xl font-bold" />

@@ -31,9 +31,9 @@ export async function googleLogin() {
 }
 
 export async function emailLogin(member) {
-  signInWithEmailAndPassword(auth, member.email, member.password).catch(
-    (error) => console.error(error)
-  );
+  return signInWithEmailAndPassword(auth, member.email, member.password)
+    .then((res) => ({ uid: res.user.uid }))
+    .catch((error) => ({ errorCode: error.code }));
 }
 
 export function getAuthState(callback) {
@@ -132,7 +132,7 @@ export async function joinMember(member) {
         modifyDate: nowDate,
       });
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => console.log(error.code));
 }
 
 export async function idCheck(email) {
