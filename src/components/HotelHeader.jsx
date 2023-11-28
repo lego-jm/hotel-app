@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { IoSearchSharp } from "react-icons/io5";
 import { logOut } from "../api/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
@@ -8,10 +7,6 @@ export default function HotelHeader() {
   const { pathname } = useLocation();
   const { user } = useAuthContext();
   const navigate = useNavigate();
-  const [isModalCheck, setIsModalCheck] = useState(false);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
 
   return (
     <header
@@ -45,12 +40,6 @@ export default function HotelHeader() {
           >
             주요명소
           </button>
-          {/* <Link to="/dyning" className="hover:text-theme-color duration-300">
-            다이닝
-          </Link> */}
-          <button onClick={() => setIsModalCheck((state) => !state)}>
-            객실 조회
-          </button>
           <button onClick={() => navigate(`/reservation/check/${user?.uid}`)}>
             예약 조회
           </button>
@@ -68,7 +57,6 @@ export default function HotelHeader() {
               <IoSearchSharp />
             </button>
           </form> */}
-
           <div className="flex items-center justify-end basis-3/6 gap-5">
             {user?.isAdmin && (
               <Link

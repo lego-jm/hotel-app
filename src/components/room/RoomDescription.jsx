@@ -6,7 +6,7 @@ export default function RoomDescription({
   room: { people, bedtype, area, outlook, location, id, content },
 }) {
   return (
-    <Wrapper custom="my-0">
+    <Wrapper custom="!my-0">
       <p className="text-center text-md font-light opacity-70 p-14">
         {content}
       </p>

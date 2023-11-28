@@ -15,7 +15,7 @@ export default function MyPage() {
 
   return (
     <Wrapper>
-      <h2 className="text-4xl text-center border-b-2 p-10 border-black">
+      <h2 className="text-4xl text-center border-b-2 py-10 border-black">
         나의 정보
       </h2>
       <div className="flex gap-10 mt-10 text-center">

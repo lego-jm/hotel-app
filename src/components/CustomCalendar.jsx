@@ -10,7 +10,10 @@ export default function CustomCalendar({
   reservationDate,
 }) {
   const nowDate = new Date();
+  const minDate = new Date(nowDate);
   const minEndDate = new Date(reservationDate?.startDate);
+  minDate.setDate(nowDate.getDate() + 1);
+  minEndDate.setDate(minEndDate.getDate() + 1);
 
   useEffect(() => {
     setDiffDay(
@@ -40,7 +43,7 @@ export default function CustomCalendar({
               endDate: moment(value).format("YYYY-MM-DD"),
             })
           }
-          minDate={nowDate}
+          minDate={minEndDate || minDate}
         />
       </div>
       {reservationDate && (

@@ -198,7 +198,10 @@ export async function getReservation(uid) {
   return get(ref(database, `reservation/${uid}`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        return Object.values(snapshot.val());
+        const sort = Object.values(snapshot.val()).sort(
+          (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+        );
+        return sort;
       }
       return null;
     })

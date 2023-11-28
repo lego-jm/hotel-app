@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useReservation } from "../../hooks/useReservation";
 import moment from "moment";
 import ReservationCard from "./ReservationCard";
+import Pagination from "../Pagination";
 
 export default function ReservationList({ reservationDate }) {
   const {
     getReservationQuery: { isLoading, error, data: reservations },
   } = useReservation();
   let filteredList = [];
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const offset = (page - 1) * limit;
 
   if (reservationDate) {
     filteredList = reservations?.filter((reservation) => {
@@ -21,7 +25,7 @@ export default function ReservationList({ reservationDate }) {
 
   return (
     <article className="mt-5">
-      <ul className="flex flex-col text-center">
+      <ul className="flex flex-col text-center mb-10">
         <li className="flex justify-between border-y border-gray-500 py-5">
           <span className="basis-1/6">No.</span>
           <span className="basis-2/6">숙박기간</span>
@@ -29,13 +33,27 @@ export default function ReservationList({ reservationDate }) {
           <span className="basis-2/6">예약일</span>
         </li>
         {filteredList?.length !== 0 ? (
-          filteredList?.map((reservation) => (
-            <ReservationCard key={reservation.id} reservation={reservation} />
-          ))
+          filteredList
+            ?.slice(offset, offset + limit)
+            .map((reservation, index) => (
+              <ReservationCard
+                key={reservation.id}
+                reservation={reservation}
+                offset={offset}
+                length={filteredList?.length}
+                no={index}
+              />
+            ))
         ) : (
           <li className="text-lg py-5">예약 내역이 없습니다.</li>
         )}
       </ul>
+      <Pagination
+        page={page}
+        total={filteredList?.length}
+        limit={limit}
+        setPage={setPage}
+      />
     </article>
   );
 }

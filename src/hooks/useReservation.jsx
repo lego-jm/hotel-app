@@ -14,7 +14,6 @@ export function useReservation() {
       },
     }
   );
-
   const getReservationQuery = useQuery(
     ["reservation"],
     async () => getReservation(user.uid),
