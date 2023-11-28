@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   deleteAccount,
+  emailLogin,
   getUserInfo,
   idCheck,
   joinUser,
@@ -13,10 +14,13 @@ export function useUsers() {
   const queryClient = useQueryClient();
   const { user } = useAuthContext();
 
+  const emailLoginQuery = useMutation(async (account) => emailLogin(account), {
+    onSuccess: () => queryClient.invalidateQueries(["userInfo"]),
+  });
   const joinMemberQuery = useMutation(async (newUser) => joinUser(newUser));
   const getUserInfoQuery = useQuery(
-    ["userInfo"],
-    async () => getUserInfo(user.uid),
+    ["userInfo", user?.uid],
+    async () => getUserInfo(user?.uid),
     { staleTime: 1000 * 60 * 5 }
   );
   const updateUserQuery = useMutation(
@@ -30,6 +34,7 @@ export function useUsers() {
   const deleteAccountQuery = useMutation(() => deleteAccount(user));
 
   return {
+    emailLoginQuery,
     joinMemberQuery,
     updateUserQuery,
     updatePassWordSendQuery,

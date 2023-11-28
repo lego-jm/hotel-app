@@ -20,7 +20,7 @@ const firebaseConfig = {
   projectId: process.env.REACT_APP_PROJECT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const database = getDatabase();
@@ -31,14 +31,14 @@ export async function googleLogin() {
 }
 
 export async function emailLogin(member) {
-  return signInWithEmailAndPassword(auth, member.email, member.password)
-    .then((res) => ({ uid: res.user.uid }))
-    .catch((error) => ({ errorCode: error.code }));
+  return signInWithEmailAndPassword(auth, member.email, member.password).catch(
+    (error) => ({ errorCode: error.code })
+  );
 }
 
 export async function joinUser(newUser) {
   delete newUser.passwordCheck;
-  createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
+  return createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
     .then((userCredential) => {
       const user = userCredential.user;
       set(ref(database, `users/${user.uid}`), {
@@ -48,7 +48,7 @@ export async function joinUser(newUser) {
         modifyDate: nowDate,
       });
     })
-    .catch((error) => console.log(error.code));
+    .catch((error) => ({ errorCode: error.code }));
 }
 
 export async function updateUser(updateUser) {

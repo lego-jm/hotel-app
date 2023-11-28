@@ -10,10 +10,10 @@ export default function CustomCalendar({
   reservationDate,
 }) {
   const nowDate = new Date();
-  const minDate = new Date(nowDate);
+  /* const minDate = new Date(nowDate);
   const minEndDate = new Date(reservationDate?.startDate);
   minDate.setDate(nowDate.getDate() + 1);
-  minEndDate.setDate(minEndDate.getDate() + 1);
+  minEndDate.setDate(minEndDate.getDate() + 1); */
 
   useEffect(() => {
     setDiffDay(
@@ -26,16 +26,20 @@ export default function CustomCalendar({
       <h3 className="text-2xl border-b gray-300 mb-5">숙박 일자</h3>
       <div className="flex justify-center gap-5">
         <Calendar
+          selectRange
+          calendarType="gregory"
           formatDay={(_, date) => moment(date).format("D")}
-          onChange={(value) =>
+          onChange={(value) => {
             setReservationDate({
               ...reservationDate,
-              startDate: moment(value).format("YYYY-MM-DD"),
-            })
-          }
+              startDate: moment(value[0]).format("YYYY-MM-DD"),
+              endDate: moment(value[1]).format("YYYY-MM-DD"),
+            });
+          }}
           minDate={nowDate}
         />
-        <Calendar
+        {/* <Calendar
+          calendarType="gregory"
           formatDay={(_, date) => moment(date).format("D")}
           onChange={(value) =>
             setReservationDate({
@@ -43,8 +47,8 @@ export default function CustomCalendar({
               endDate: moment(value).format("YYYY-MM-DD"),
             })
           }
-          minDate={minEndDate || minDate}
-        />
+          minDate={(reservationDate?.startDate && minEndDate) || minDate}
+        /> */}
       </div>
       {reservationDate && (
         <p className="mt-5 text-center">

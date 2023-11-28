@@ -16,10 +16,11 @@ export default function AdminRooms() {
   const [limit, setLimit] = useState(10);
   const offset = (page - 1) * limit;
 
-  // if (isLoading) return <Loading />;
   /* const sortRooms = rooms.sort(
     (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
   ); */
+
+  if (isLoading) return <Loading />;
 
   return (
     <AdminPannel>

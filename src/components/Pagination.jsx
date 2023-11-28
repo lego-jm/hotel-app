@@ -16,6 +16,7 @@ export default function Pagination({ page, total, limit, setPage }) {
         .fill()
         .map((_, i) => (
           <button
+            key={i}
             className={`p-2 px-3 bg-theme-color rounded-full hover:text-white transition-all duration-300 ${
               page === i + 1 ? "text-white" : ""
             }`}

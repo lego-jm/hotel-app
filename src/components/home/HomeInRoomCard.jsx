@@ -2,7 +2,7 @@ import React from "react";
 
 export default function HomeInRoomCard({ text, img }) {
   return (
-    <div className="flex flex-col cursor-pointer">
+    <div className="flex flex-col">
       <div className="overflow-hidden">
         <img
           className="transition-all hover:scale-105 duration-500"

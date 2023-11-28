@@ -5,7 +5,10 @@ import { CiCalendarDate } from "react-icons/ci";
 import Button from "../ui/Button";
 
 export default function ReservationFilter({ setReservationDate }) {
-  const [date, setDate] = useState();
+  const [date, setDate] = useState({
+    startDate: moment().format("YYYY-MM-DD"),
+    endDate: moment().add(1, "days").format("YYYY-MM-DD"),
+  });
   const [toggle, setToggle] = useState({ isStart: false, isEnd: false });
 
   const handleSubmit = (e) => {
@@ -15,7 +18,7 @@ export default function ReservationFilter({ setReservationDate }) {
 
   return (
     <div className="bg-gray-200 flex items-center justify-center gap-3 p-5 mt-16">
-      <h3>투숙기간</h3>
+      <h3>예약일자</h3>
       <form onSubmit={handleSubmit} className="flex items-center gap-5">
         <div className="relative">
           <input
@@ -32,6 +35,7 @@ export default function ReservationFilter({ setReservationDate }) {
           {toggle?.isStart && (
             <div className="absolute">
               <Calendar
+                calendarType="gregory"
                 formatDay={(_, date) => moment(date).format("D")}
                 onChange={(value) =>
                   setDate({
@@ -59,6 +63,7 @@ export default function ReservationFilter({ setReservationDate }) {
           {toggle?.isEnd && (
             <div className="absolute">
               <Calendar
+                calendarType="gregory"
                 formatDay={(_, date) => moment(date).format("D")}
                 onChange={(value) =>
                   setDate({

@@ -1,27 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { emailLogin, googleLogin } from "../../api/firebase";
+import { googleLogin } from "../../api/firebase";
 import Button from "../ui/Button";
+import { validationCheck } from "../util/validationCheck";
+import { useUsers } from "../../hooks/useUsers";
 
 export default function LoginForm({ children }) {
   const [account, setAccount] = useState();
+  const { emailLoginQuery } = useUsers();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    emailLogin(account).then((res) => {
-      if (res?.uid) {
-        emailLogin(account).then(navigate("/"));
-      }
-
-      if (res?.errorCode === "auth/invalid-login-credentials") {
-        window.alert("비밀번호를 확인해주세요");
-      } else if (res?.errorCode === "auth/invalid-email") {
-        window.alert("이메일을 확인해주세요");
-      } else if (res?.errorCode === "auth/too-many-requests") {
-        window.alert("1분 후 다시 시도해주세요");
-      }
+    emailLoginQuery.mutate(account, {
+      onSuccess: (res) => {
+        validationCheck(res);
+        navigate("/");
+      },
     });
   };
 

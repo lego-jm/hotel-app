@@ -5,6 +5,8 @@ import PlusMinusButton from "./PlusMinusButton";
 import { useReservation } from "../../hooks/useReservation";
 import { useNavigate } from "react-router-dom";
 
+import confirm from "../Confirm";
+
 export default function ReservationOption({ room }) {
   const [diffDay, setDiffDay] = useState(0);
   const [people, setPeople] = useState(1);
@@ -15,6 +17,35 @@ export default function ReservationOption({ room }) {
   const TIP_PRICE = 60900;
   const roomPrice = room.price * diffDay;
   const totalPrice = roomPrice + TIP_PRICE;
+
+  const handleClick = () => {
+    if (!reservationDate?.startDate || !reservationDate?.endDate) {
+      window.alert("날짜를 선택해주세요.");
+      return;
+    }
+
+    confirm("예약을 진행하시겠습니까?", () =>
+      setReservationQuery.mutate(
+        {
+          data: {
+            roomId: room.id,
+            roomTitle: room.title,
+            request,
+            people,
+            reservationDate,
+            totalPrice,
+            diffDay,
+          },
+        },
+        {
+          onSuccess: () => {
+            window.alert("예약이 완료되었습니다.");
+            navigate("/rooms");
+          },
+        }
+      )
+    );
+  };
 
   return (
     <section className="mb-14">
@@ -53,27 +84,7 @@ export default function ReservationOption({ room }) {
               text="예약하기"
               type="button"
               custom="block w-5/12 mx-auto"
-              event={() =>
-                setReservationQuery.mutate(
-                  {
-                    data: {
-                      roomId: room.id,
-                      roomTitle: room.title,
-                      request,
-                      people,
-                      reservationDate,
-                      totalPrice,
-                      diffDay,
-                    },
-                  },
-                  {
-                    onSuccess: () => {
-                      window.alert("예약이 완료되었습니다.");
-                      navigate("/rooms");
-                    },
-                  }
-                )
-              }
+              event={handleClick}
             />
           </div>
           <div className="basis-1/2 flex justify-center items-center p-7">

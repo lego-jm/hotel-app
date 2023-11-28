@@ -6,6 +6,8 @@ import nationData from "../../data/nation";
 import IdCheck from "./IdCheck";
 import PassWord from "./PassWord";
 import Warning from "./Warning";
+import confirm from "../Confirm";
+import { validationCheck } from "../util/validationCheck";
 
 export default function JoinForm({ children, userInfo }) {
   const nationArr = nationData();
@@ -17,36 +19,41 @@ export default function JoinForm({ children, userInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userInfo) {
-      updateUserQuery.mutate(
-        { ...account, ...nationChoice },
-        {
-          onSuccess: () => {
-            window.alert("수정이 완료되었습니다.");
-            navigate("/mypage");
-          },
-        }
+      confirm("수정하시겠습니까?", () =>
+        updateUserQuery.mutate(
+          { ...account, ...nationChoice },
+          {
+            onSuccess: (res) => {
+              validationCheck(res);
+              window.alert("수정이 완료되었습니다.");
+              navigate("/mypage");
+            },
+          }
+        )
       );
       return;
     }
-    joinMemberQuery.mutate(
+    /* joinMemberQuery.mutate(
       { ...account, ...nationChoice },
       {
-        onSuccess: () => {
+        onSuccess: (res) => {
+          validationCheck(res);
           window.alert("회원가입이 완료되었습니다");
           navigate("/");
         },
       }
-    );
+    ); */
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAccount((prev) => ({ ...prev, [name]: value }));
   };
-
   useEffect(() => {
     userInfo && setAccount(userInfo);
   }, [userInfo]);
+
+  console.log(nationChoice);
 
   return (
     <section className="p-10">
@@ -77,13 +84,10 @@ export default function JoinForm({ children, userInfo }) {
             onChange={(e) =>
               setNationChoice({ [e.target.name]: e.target.value })
             }
+            value={account?.nation || nationChoice?.nation}
           >
             {nationArr.map((nation, index) => (
-              <option
-                key={index}
-                value={nation}
-                selected={account?.nation === nation}
-              >
+              <option key={index} value={nation}>
                 {nation}
               </option>
             ))}
@@ -141,7 +145,7 @@ export default function JoinForm({ children, userInfo }) {
           <input
             id="phoneNumber"
             className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
-            type="text"
+            type="number"
             name="phoneNumber"
             placeholder="연락처를 입력하세요"
             onChange={handleChange}

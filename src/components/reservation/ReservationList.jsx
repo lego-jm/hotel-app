@@ -3,6 +3,7 @@ import { useReservation } from "../../hooks/useReservation";
 import moment from "moment";
 import ReservationCard from "./ReservationCard";
 import Pagination from "../Pagination";
+import Loading from "../Loading";
 
 export default function ReservationList({ reservationDate }) {
   const {
@@ -22,6 +23,8 @@ export default function ReservationList({ reservationDate }) {
       return createdDate >= startDate && createdDate <= endDate;
     });
   }
+
+  if (isLoading) return <Loading />;
 
   return (
     <article className="mt-5">
