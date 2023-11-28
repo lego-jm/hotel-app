@@ -1,5 +1,6 @@
 import React from "react";
+import Wrapper from "../components/Wrapper";
 
 export default function MyPageDatail() {
-  return <div>MyPageDatail</div>;
+  return <Wrapper>MyPageDatail</Wrapper>;
 }

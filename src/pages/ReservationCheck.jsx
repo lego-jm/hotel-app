@@ -1,5 +1,6 @@
 import React from "react";
+import Wrapper from "../components/Wrapper";
 
 export default function ReservationCheck() {
-  return <div>ReservationCheck</div>;
+  return <Wrapper>ReservationCheck</Wrapper>;
 }

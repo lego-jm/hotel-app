@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { emailLogin, googleLogin } from "../../api/firebase";
+import Button from "../ui/Button";
 
 export default function LoginForm({ children }) {
   const [account, setAccount] = useState();
@@ -34,7 +35,7 @@ export default function LoginForm({ children }) {
   };
 
   return (
-    <section>
+    <section className="flex flex-col items-center gap-3 p-10">
       {children}
       <form
         onSubmit={handleSubmit}
@@ -67,16 +68,18 @@ export default function LoginForm({ children }) {
           autoComplete="off"
           required
         />
-        <button className="w-full bg-theme-color p-3 mt-2 rounded-lg hover:text-white transition-all duration-300">
-          로그인
-        </button>
+        <Button
+          text="로그인"
+          type="submit"
+          className="w-full bg-theme-color p-3 mt-2 rounded-lg hover:text-white transition-all duration-300"
+        />
       </form>
-      <button
-        className="w-4/12 bg-theme-color p-3 mt-2 rounded-lg hover:text-white transition-all duration-300"
-        onClick={handleGoogleLogin}
-      >
-        Google 로그인
-      </button>
+      <Button
+        text="Google 로그인"
+        type="button"
+        event={handleGoogleLogin}
+        custom="w-4/12"
+      />
     </section>
   );
 }

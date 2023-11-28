@@ -1,11 +1,12 @@
 import React from "react";
 import RoomDescriptionCard from "./RoomDescriptionCard";
+import Wrapper from "../Wrapper";
 
 export default function RoomDescription({
   room: { people, bedtype, area, outlook, location, id, content },
 }) {
   return (
-    <section className="max-w-7xl mx-auto mb-20 text-gray-800">
+    <Wrapper custom="my-0">
       <p className="text-center text-md font-light opacity-70 p-14">
         {content}
       </p>
@@ -114,6 +115,6 @@ export default function RoomDescription({
           </div>
         </div>
       </section>
-    </section>
+    </Wrapper>
   );
 }

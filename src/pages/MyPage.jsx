@@ -4,6 +4,7 @@ import MyPageInfo from "../components/mypage/MyPageInfo";
 import MyPageUse from "../components/mypage/MyPageUse";
 import { useUsers } from "../hooks/useUsers";
 import { useNavigate } from "react-router-dom";
+import Wrapper from "../components/Wrapper";
 
 export default function MyPage() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function MyPage() {
   } = useUsers();
 
   return (
-    <section className="max-w-7xl pb-9 mx-auto my-40">
+    <Wrapper>
       <h2 className="text-4xl text-center border-b-2 p-10 border-black">
         나의 정보
       </h2>
@@ -34,6 +35,6 @@ export default function MyPage() {
           event={() => navigate(`/reservation/check/${userInfo.uid}`)}
         />
       </div>
-    </section>
+    </Wrapper>
   );
 }

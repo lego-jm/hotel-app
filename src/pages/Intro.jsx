@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ContentIntro from "../components/ContentIntro";
+import Wrapper from "../components/Wrapper";
 
 const text = `국내 최고의 럭셔리 비즈니스 호텔인 리얼호텔은 1,015실 규모를 자랑하며
 서울 소공동에 자리잡고 있습니다. 명동, 을지로, 청계천 등 서울의 중심
@@ -14,7 +15,7 @@ const text = `국내 최고의 럭셔리 비즈니스 호텔인 리얼호텔은 
 
 export default function Intro() {
   return (
-    <section className="max-w-7xl mx-auto py-40">
+    <Wrapper>
       <ContentIntro title="리얼호텔 소개" text={text} />
       <section className="border-t border-gray-400 pt-14">
         <h3 className="text-4xl text-center">ROOMS & SUITE</h3>
@@ -37,6 +38,6 @@ export default function Intro() {
           </article>
         </section>
       </section>
-    </section>
+    </Wrapper>
   );
 }

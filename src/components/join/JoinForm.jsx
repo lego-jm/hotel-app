@@ -53,7 +53,7 @@ export default function JoinForm({ children }) {
   }, [account]);
 
   return (
-    <section className="p-20">
+    <section className="p-10">
       {children}
       <p className="mb-5 text-theme-color">*필수입력</p>
       <form

@@ -90,7 +90,7 @@ async function getAdminInfo(user) {
         if (isAdmin) {
           return { ...user, isAdmin };
         }
-        return { user };
+        return { ...user };
       }
     })
     .catch((error) => {
