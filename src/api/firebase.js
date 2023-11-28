@@ -6,6 +6,8 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  deleteUser,
 } from "firebase/auth";
 import { get, getDatabase, ref, remove, set } from "firebase/database";
 import moment from "moment";
@@ -34,15 +36,68 @@ export async function emailLogin(member) {
     .catch((error) => ({ errorCode: error.code }));
 }
 
+export async function joinUser(newUser) {
+  delete newUser.passwordCheck;
+  createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      set(ref(database, `users/${user.uid}`), {
+        uid: user.uid,
+        ...newUser,
+        createdDate: nowDate,
+        modifyDate: nowDate,
+      });
+    })
+    .catch((error) => console.log(error.code));
+}
+
+export async function updateUser(updateUser) {
+  delete updateUser.passwordCheck;
+  console.log(updateUser);
+  set(ref(database, `users/${updateUser.uid}`), {
+    ...updateUser,
+    modifyDate: nowDate,
+  });
+}
+
+export async function updatePassWordSendEmail(email) {
+  sendPasswordResetEmail(auth, email).then((res) => console.log(res));
+}
+
+export async function deleteAccount(user) {
+  deleteUser(auth.currentUser)
+    .then((res) => console.log(res))
+    .catch((error) => console.error(error));
+
+  remove(ref(database, `users/${user.uid}`));
+}
+
+export async function idCheck(email) {
+  return get(ref(database, `users/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const isIdCheck = Object.values(snapshot.val()).filter(
+          (item) => item.email === email
+        );
+
+        return isIdCheck.length > 0 ? true : false;
+      }
+      return null;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function logOut() {
+  auth.signOut();
+}
+
 export function getAuthState(callback) {
   onAuthStateChanged(auth, async (user) => {
     const updateUser = user ? await getAdminInfo(user) : null;
     callback(updateUser);
   });
-}
-
-export async function logOut() {
-  auth.signOut();
 }
 
 export async function addRoom(room) {
@@ -118,46 +173,12 @@ export async function getFilterList() {
     });
 }
 
-export async function joinMember(member) {
-  createUserWithEmailAndPassword(auth, member.email, member.password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      delete member.passwordCheck;
-      set(ref(database, `users/${user.uid}`), {
-        uid: user.uid,
-        ...member,
-        createdDate: nowDate,
-        modifyDate: nowDate,
-      });
-    })
-    .catch((error) => console.log(error.code));
-}
-
-export async function idCheck(email) {
-  return get(ref(database, `users/`))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const isIdCheck = Object.values(snapshot.val()).filter(
-          (item) => item.email === email
-        );
-
-        return isIdCheck.length > 0 ? true : false;
-      }
-      return null;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
 export async function setReservation(data) {
   const reservationUid = uuid();
   set(ref(database, `reservation/${data.uid}/${reservationUid}`), {
+    ...data,
     id: reservationUid,
     people: parseInt(data.people),
-    request: data.request,
-    startDate: data.reservationDate.startDate,
-    endDate: data.reservationDate.endDate,
     totalPrice: parseInt(data.totalPrice),
     diffDay: parseInt(data.diffDay),
     createdDate: nowDate,
@@ -175,7 +196,12 @@ export async function getUserInfo(uid) {
 
 export async function getReservation(uid) {
   return get(ref(database, `reservation/${uid}`))
-    .then((snapshot) => Object.values(snapshot.val()))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val());
+      }
+      return null;
+    })
     .catch((error) => {
       console.error(error);
     });

@@ -42,13 +42,11 @@ export default function ReservationOption({ room }) {
               <textarea
                 className="resize-none border border-gray-400 outline-none p-3"
                 name="request"
-                value={request.request || ""}
+                value={request || ""}
                 cols="50"
                 rows="6"
                 placeholder="예시) 추가 배드를 요청합니다."
-                onChange={(e) =>
-                  setRequest({ [e.target.name]: e.target.value })
-                }
+                onChange={(e) => setRequest(e.target.value)}
               ></textarea>
             </div>
             <Button
@@ -59,6 +57,8 @@ export default function ReservationOption({ room }) {
                 setReservationQuery.mutate(
                   {
                     data: {
+                      roomId: room.id,
+                      roomTitle: room.title,
                       request,
                       people,
                       reservationDate,

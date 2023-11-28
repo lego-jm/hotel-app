@@ -11,16 +11,12 @@ export default function CustomCalendar({
 }) {
   const nowDate = new Date();
   const minEndDate = new Date(reservationDate?.startDate);
-  console.log(reservationDate);
-  console.log(minEndDate);
 
   useEffect(() => {
     setDiffDay(
       getDiffDate(reservationDate?.startDate, reservationDate?.endDate)
     );
   }, [reservationDate]);
-
-  console.log(minEndDate.getDate());
 
   return (
     <div className="p-14 pb-0">

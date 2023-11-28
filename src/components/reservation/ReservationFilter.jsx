@@ -1,0 +1,77 @@
+import moment from "moment";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import { CiCalendarDate } from "react-icons/ci";
+import Button from "../ui/Button";
+
+export default function ReservationFilter({ setReservationDate }) {
+  const [date, setDate] = useState();
+  const [toggle, setToggle] = useState({ isStart: false, isEnd: false });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setReservationDate(date);
+  };
+
+  return (
+    <div className="bg-gray-200 flex items-center justify-center gap-3 p-5 mt-16">
+      <h3>투숙기간</h3>
+      <form onSubmit={handleSubmit} className="flex items-center gap-5">
+        <div className="relative">
+          <input
+            className="border border-gray-500 p-2 outline-none cursor-default"
+            type="text"
+            name="startDate"
+            value={date?.startDate || ""}
+            readOnly
+          />
+          <CiCalendarDate
+            className="absolute top-1.5 right-3 text-2xl cursor-pointer"
+            onClick={() => setToggle((prev) => ({ isStart: !prev.isStart }))}
+          />
+          {toggle?.isStart && (
+            <div className="absolute">
+              <Calendar
+                formatDay={(_, date) => moment(date).format("D")}
+                onChange={(value) =>
+                  setDate({
+                    ...date,
+                    startDate: moment(value).format("YYYY-MM-DD"),
+                  })
+                }
+              />
+            </div>
+          )}
+        </div>
+        <p> ~ </p>
+        <div className="relative">
+          <input
+            className="border border-gray-500 p-2 outline-none cursor-default"
+            type="text"
+            name="endDate"
+            value={date?.endDate || ""}
+            readOnly
+          />
+          <CiCalendarDate
+            className="absolute top-1.5 right-3 text-2xl cursor-pointer"
+            onClick={() => setToggle((prev) => ({ isEnd: !prev.isEnd }))}
+          />
+          {toggle?.isEnd && (
+            <div className="absolute">
+              <Calendar
+                formatDay={(_, date) => moment(date).format("D")}
+                onChange={(value) =>
+                  setDate({
+                    ...date,
+                    endDate: moment(value).format("YYYY-MM-DD"),
+                  })
+                }
+              />
+            </div>
+          )}
+        </div>
+        <Button text="조회" type="submit" />
+      </form>
+    </div>
+  );
+}

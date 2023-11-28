@@ -9,6 +9,7 @@ import Wrapper from "../components/Wrapper";
 export default function MyPage() {
   const navigate = useNavigate();
   const {
+    deleteAccountQuery,
     getUserInfoQuery: { isLoading, error, data: userInfo },
   } = useUsers();
 
@@ -30,9 +31,23 @@ export default function MyPage() {
           }
         />
         <Button
-          text="예약조회"
+          text="예약내역"
           type="button"
           event={() => navigate(`/reservation/check/${userInfo.uid}`)}
+        />
+        <Button
+          text="회원탈퇴"
+          type="button"
+          event={() =>
+            deleteAccountQuery.mutate(
+              {},
+              {
+                onSuccess: () => {
+                  console.log("success");
+                },
+              }
+            )
+          }
         />
       </div>
     </Wrapper>

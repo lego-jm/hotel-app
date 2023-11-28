@@ -19,7 +19,7 @@ export default function MyPageUse() {
       <div className="border-y border-gray-400 py-10">
         <h3 className="text-lg">투숙일수</h3>
         <p className="text-2xl mt-3">
-          <span className="text-theme-color">{totalDay}</span> 박
+          <span className="text-theme-color">{totalDay || 0}</span> 박
         </p>
       </div>
     </div>

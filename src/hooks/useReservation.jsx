@@ -15,8 +15,10 @@ export function useReservation() {
     }
   );
 
-  const getReservationQuery = useQuery(["reservation"], async () =>
-    getReservation(user.uid)
+  const getReservationQuery = useQuery(
+    ["reservation"],
+    async () => getReservation(user.uid),
+    { staleTime: 1000 * 60 * 5 }
   );
 
   return { setReservationQuery, getReservationQuery };
