@@ -64,7 +64,7 @@ export async function updatePassWordSendEmail(email) {
   sendPasswordResetEmail(auth, email).then((res) => console.log(res));
 }
 
-export async function deleteAccount(user) {
+export async function removeAccount(user) {
   deleteUser(auth.currentUser)
     .then((res) => console.log(res))
     .catch((error) => console.error(error));
@@ -215,6 +215,22 @@ export async function getReservation(uid) {
         const sort = Object.values(snapshot.val()).sort(
           (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
         );
+        return sort;
+      }
+      return null;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function getAllReservation() {
+  return get(ref(database, `reservation/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const sort = Object.values(
+          Object.assign(...Object.values(snapshot.val()))
+        ).sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
         return sort;
       }
       return null;

@@ -1,5 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getReservation, setReservation } from "../api/firebase";
+import {
+  getAllReservation,
+  getReservation,
+  setReservation,
+} from "../api/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
 export function useReservation() {
@@ -14,11 +18,17 @@ export function useReservation() {
       },
     }
   );
+  const getAllReservationQuery = useQuery(
+    ["all-reservation"],
+    async () => getAllReservation(),
+    {}
+  );
+
   const getReservationQuery = useQuery(
-    ["reservation"],
+    ["reservation", user.uid],
     async () => getReservation(user.uid),
     { staleTime: 1000 * 60 * 5 }
   );
 
-  return { setReservationQuery, getReservationQuery };
+  return { setReservationQuery, getReservationQuery, getAllReservationQuery };
 }

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import AdminButton from "../ui/AdminButton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { upload } from "../../../api/uplode";
 import { useAttraction } from "../../../hooks/useAttraction";
 
-export default function AdminAttractionAddOrUpdate({ state }) {
+export default function AdminAttractionAddOrUpdate() {
+  const {
+    state: { attraction: currentAttraction },
+  } = useLocation();
   const [file, setFile] = useState();
   const [attraction, setAttraction] = useState();
   const [category, setCategory] = useState();
@@ -12,14 +15,17 @@ export default function AdminAttractionAddOrUpdate({ state }) {
     useAttraction();
   const navigate = useNavigate();
   useEffect(() => {
-    state && setAttraction({ ...state });
-    state &&
-      setCategory({ category1: state.category1, category2: state.category2 });
-  }, [state]);
+    currentAttraction && setAttraction({ ...currentAttraction });
+    currentAttraction &&
+      setCategory({
+        category1: currentAttraction.category1,
+        category2: currentAttraction.category2,
+      });
+  }, [currentAttraction]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!state) {
+    if (!currentAttraction) {
       upload(file).then((urls) => {
         addAttractionQuery.mutate(
           {
@@ -55,7 +61,9 @@ export default function AdminAttractionAddOrUpdate({ state }) {
 
   return (
     <>
-      <h3 className="text-2xl mb-3">명소 {`${state ? "수정" : "추가"}`}</h3>
+      <h3 className="text-2xl mb-3">
+        명소 {`${currentAttraction ? "수정" : "추가"}`}
+      </h3>
       <form
         className="w-full flex flex-col gap-5 border border-theme-color rounded-lg p-10"
         onSubmit={handleSubmit}
@@ -178,14 +186,14 @@ export default function AdminAttractionAddOrUpdate({ state }) {
         <div className="flex gap-5">
           <AdminButton
             type="submit"
-            text={`${state ? "명소 수정" : "명소 추가"}`}
+            text={`${currentAttraction ? "명소 수정" : "명소 추가"}`}
           />
-          {state && (
+          {currentAttraction && (
             <AdminButton
               type="button"
               text="명소 삭제"
               event={() =>
-                removeAttractionQuery.mutate(state.id, {
+                removeAttractionQuery.mutate(currentAttraction.id, {
                   onSuccess: () => {
                     navigate("/admin/attraction");
                   },

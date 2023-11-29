@@ -34,7 +34,7 @@ export default function AdminUsers() {
               .map((user, index) => (
                 <AdminUserCard
                   key={user.id}
-                  content={user}
+                  user={user}
                   offset={offset}
                   no={index}
                   length={users.length}

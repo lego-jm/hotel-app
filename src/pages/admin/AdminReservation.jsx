@@ -8,11 +8,13 @@ import Loading from "../../components/Loading";
 
 export default function AdminReservation() {
   const {
-    getReservationQuery: { isLoading, error, data: reservations },
+    getAllReservationQuery: { isLoading, error, data: reservations },
   } = useReservation();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const offset = (page - 1) * limit;
+
+  // console.log(reservations);
 
   if (isLoading) return <Loading />;
 

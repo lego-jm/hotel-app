@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
-  deleteAccount,
   emailLogin,
   getUserInfo,
   getUsers,
   idCheck,
   joinUser,
+  removeAccount,
   updatePassWordSendEmail,
   updateUser,
 } from "../api/firebase";
@@ -29,13 +29,13 @@ export function useUsers() {
   );
   const updateUserQuery = useMutation(
     async (updateUserData) => updateUser(updateUserData),
-    { onSuccess: () => queryClient.invalidateQueries(["userInfo"]) }
+    { onSuccess: () => queryClient.invalidateQueries(["users"]) }
   );
   const updatePassWordSendQuery = useMutation(async () =>
     updatePassWordSendEmail(user.email)
   );
   const idCheckQuery = useMutation(async (id) => idCheck(id));
-  const deleteAccountQuery = useMutation(() => deleteAccount(user));
+  const removeAccountQuery = useMutation(() => removeAccount(user));
 
   return {
     emailLoginQuery,
@@ -45,6 +45,6 @@ export function useUsers() {
     getUsersQuery,
     getUserInfoQuery,
     idCheckQuery,
-    deleteAccountQuery,
+    removeAccountQuery,
   };
 }
