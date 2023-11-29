@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import AdminPannel from "../../components/admin/AdminPannel";
 import AdminButton from "../../components/admin/AdminButton";
 import { useNavigate } from "react-router-dom";
-import AdminRoomCard from "../../components/admin/AdminRoomCard";
+import AdminRoomCard from "../../components/admin/room/AdminRoomCard";
 import { useRooms } from "../../hooks/useRooms";
 import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination";
+import AdminListWrapper from "../../components/admin/AdminListWrapper";
 
 export default function AdminRooms() {
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ export default function AdminRooms() {
 
   return (
     <AdminPannel>
-      <section className="w-4/6 p-3 flex flex-col justify-start mx-auto my-20">
-        <ul className="w-full flex flex-col gap-4 shadow-xl rounded-lg border border-theme-color p-4 mb-5">
+      <section className="w-full p-20">
+        <AdminListWrapper>
           <li className="flex justify-between text-center border-b border-gray-300">
             <span className="basis-1/6">no.</span>
             <span className="basis-3/6">객실명</span>
@@ -45,7 +46,7 @@ export default function AdminRooms() {
                   length={rooms.length}
                 />
               ))}
-        </ul>
+        </AdminListWrapper>
 
         {rooms && (
           <Pagination
@@ -55,10 +56,8 @@ export default function AdminRooms() {
             setPage={setPage}
           />
         )}
-
         <div className="flex justify-end gap-10 mt-3">
           <AdminButton text="객실 추가" link="/admin/rooms/add" />
-          {/* <AdminButton text="객실 삭제" /> */}
         </div>
       </section>
     </AdminPannel>

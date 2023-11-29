@@ -186,6 +186,20 @@ export async function setReservation(data) {
   }).catch((error) => console.error(error));
 }
 
+export async function getUsers() {
+  return get(ref(database, `users/`)) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const sort = Object.values(snapshot.val()).sort(
+          (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+        );
+        return sort;
+      }
+      return null;
+    })
+    .catch((error) => console.error(error));
+}
+
 export async function getUserInfo(uid) {
   return get(ref(database, `users/${uid}`))
     .then((snapshot) => snapshot.val())

@@ -3,6 +3,7 @@ import {
   deleteAccount,
   emailLogin,
   getUserInfo,
+  getUsers,
   idCheck,
   joinUser,
   updatePassWordSendEmail,
@@ -18,6 +19,9 @@ export function useUsers() {
     onSuccess: () => queryClient.invalidateQueries(["userInfo"]),
   });
   const joinMemberQuery = useMutation(async (newUser) => joinUser(newUser));
+  const getUsersQuery = useQuery(["users"], async () => getUsers(), {
+    staleTime: 1000 * 60 * 5,
+  });
   const getUserInfoQuery = useQuery(
     ["userInfo", user?.uid],
     async () => getUserInfo(user?.uid),
@@ -38,6 +42,7 @@ export function useUsers() {
     joinMemberQuery,
     updateUserQuery,
     updatePassWordSendQuery,
+    getUsersQuery,
     getUserInfoQuery,
     idCheckQuery,
     deleteAccountQuery,

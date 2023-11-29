@@ -1,12 +1,11 @@
 import React from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { logOut } from "../api/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
 export default function HotelHeader() {
   const { pathname } = useLocation();
   const { user } = useAuthContext();
-  const navigate = useNavigate();
 
   return (
     <header
@@ -34,15 +33,18 @@ export default function HotelHeader() {
           >
             다이닝
           </button>
-          <button
-            onClick={() => window.alert("준비중입니다.")}
+          <Link
+            to="/attraction"
             className="hover:text-theme-color duration-300"
           >
             주요명소
-          </button>
-          <button onClick={() => navigate(`/reservation/check/${user?.uid}`)}>
-            예약 조회
-          </button>
+          </Link>
+          <Link
+            to={`/reservation/check/${user?.uid}`}
+            className="hover:text-theme-color duration-300"
+          >
+            예약조회
+          </Link>
         </nav>
         <div className="flex justify-evenly basis-2/6">
           {/* <form onSubmit={handleSubmit} className="relative basis-3/6">
@@ -57,10 +59,10 @@ export default function HotelHeader() {
               <IoSearchSharp />
             </button>
           </form> */}
-          <div className="flex items-center justify-end basis-3/6 gap-5">
+          <nav className="flex items-center justify-end basis-3/6 gap-5">
             {user?.isAdmin && (
               <Link
-                to="/admin/rooms"
+                to="/admin/users"
                 className="hover:text-theme-color duration-300"
               >
                 관리자 화면
@@ -100,7 +102,7 @@ export default function HotelHeader() {
                 </Link>
               </>
             )}
-          </div>
+          </nav>
         </div>
       </div>
     </header>

@@ -12,13 +12,16 @@ import Intro from "./pages/Intro";
 import JoinMembership from "./pages/JoinMembeship";
 import Login from "./pages/Login";
 import ProtectRoute from "./components/ProtectRoute";
-import AdminHome from "./pages/admin/AdminHome";
 import AdminRooms from "./pages/admin/AdminRooms";
 import AdminAddRoom from "./pages/admin/AdminAddRoom";
 import AdminRoomDetail from "./pages/admin/AdminRoomDetail";
 import MyPage from "./pages/MyPage";
 import ReservationCheck from "./pages/ReservationCheck";
 import MyPageDatail from "./pages/MyPageDatail";
+import Attraction from "./pages/Attraction";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminAttraction from "./pages/admin/AdminAttraction";
+import AdminReservation from "./pages/admin/AdminReservation";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +51,7 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/intro", element: <Intro /> },
+      { path: "/attraction", element: <Attraction /> },
       { path: "/login", element: <Login /> },
       { path: "/member", element: <JoinMembership /> },
       {
@@ -66,14 +70,14 @@ const router = createBrowserRouter([
           </ProtectRoute>
         ),
       },
-      {
+      /* {
         path: "/admin",
         element: (
           <ProtectRoute requireAdmin>
             <AdminHome />
           </ProtectRoute>
         ),
-      },
+      }, */
       {
         path: "/admin/rooms",
         element: (
@@ -92,6 +96,62 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin/rooms/:roomId",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminRoomDetail />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/users",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminUsers />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/users/:userId",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminRoomDetail />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/attraction",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminAttraction />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/attraction/add",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminRooms />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/attraction/:attractionId",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminRoomDetail />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/reservation",
+        element: (
+          <ProtectRoute requireAdmin>
+            <AdminReservation />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/admin/reservation/:reservationId",
         element: (
           <ProtectRoute requireAdmin>
             <AdminRoomDetail />

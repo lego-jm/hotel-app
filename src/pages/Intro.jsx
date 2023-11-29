@@ -38,6 +38,30 @@ export default function Intro() {
           </article>
         </section>
       </section>
+      <section className="mt-20">
+        <h3 className="text-4xl text-center">DINING</h3>
+        <section className="flex gap-7 mt-7">
+          <figure>
+            <img src="/images/intro/intro-dining-img.jpg" alt="" />
+          </figure>
+          <article>
+            <h5 className="text-xl font-bold">다이닝</h5>
+            <p className="text-lg mt-5">
+              세계적으로 인정받는 셰프들이 직접 선보이는 다양한 일품요리를
+              즐기실 수 있습니다.
+            </p>
+            <ul className="text-md text-gray-500 mb-10">
+              <li>- 미쉐린 1스타 레스토랑 피에르 가니에르 서울</li>
+              <li>- 신선한 재료를 엄선하여 만든 최고급 요리</li>
+              <li>- 세련되고 현대적인 감각의 호텔 레스토랑</li>
+            </ul>
+            <button onClick={() => window.alert("준비중입니다.")}>
+              자세히 보기 &gt;
+            </button>
+            {/* <Link to="/dining">자세히 보기 &gt;</Link> */}
+          </article>
+        </section>
+      </section>
     </Wrapper>
   );
 }

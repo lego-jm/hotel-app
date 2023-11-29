@@ -7,7 +7,7 @@ export default function HomeAttractionSection() {
       <div className="flex flex-col items-center gap-6 basis-4/12">
         <h3 className="text-2xl border-b py-3 border-gray-500">주요명소</h3>
         <p>역사와 문화가 숨쉬는 곳</p>
-        <Link className="text-blue-500 brightness-75" to="/">
+        <Link className="text-blue-500 brightness-75" to="/attraction">
           자세히 보기 &gt;
         </Link>
       </div>

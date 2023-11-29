@@ -32,8 +32,9 @@ export default function ReservationList({ reservationDate }) {
         <li className="flex justify-between border-y border-gray-500 py-5">
           <span className="basis-1/6">No.</span>
           <span className="basis-2/6">숙박기간</span>
+          <span className="basis-1/6">룸 이름</span>
           <span className="basis-1/6">숙박인원</span>
-          <span className="basis-2/6">예약일</span>
+          <span className="basis-1/6">예약일</span>
         </li>
         {filteredList?.length !== 0 ? (
           filteredList

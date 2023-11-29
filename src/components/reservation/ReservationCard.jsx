@@ -8,8 +8,9 @@ export default function ReservationCard({ reservation, offset, length, no }) {
       <p className="basis-2/6">
         {reservationDate.startDate} ~ {reservationDate.endDate}
       </p>
+      <p className="basis-1/6">{reservation.roomTitle}</p>
       <p className="basis-1/6">{`${reservation.people}명`}</p>
-      <p className="basis-2/6">{reservation.createdDate}</p>
+      <p className="basis-1/6">{reservation.createdDate}</p>
     </li>
   );
 }
