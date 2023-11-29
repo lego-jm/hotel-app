@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import AdminPannel from "../../components/admin/AdminPannel";
-import AdminButton from "../../components/admin/AdminButton";
-import { useNavigate } from "react-router-dom";
+import AdminButton from "../../components/admin/ui/AdminButton";
 import AdminRoomCard from "../../components/admin/room/AdminRoomCard";
 import { useRooms } from "../../hooks/useRooms";
 import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination";
 import AdminListWrapper from "../../components/admin/AdminListWrapper";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminRooms() {
   const navigate = useNavigate();
@@ -57,7 +57,10 @@ export default function AdminRooms() {
           />
         )}
         <div className="flex justify-end gap-10 mt-3">
-          <AdminButton text="객실 추가" link="/admin/rooms/add" />
+          <AdminButton
+            text="객실 추가"
+            event={() => navigate("/admin/rooms/add")}
+          />
         </div>
       </section>
     </AdminPannel>

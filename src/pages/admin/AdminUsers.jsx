@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import AdminPannel from "../../components/admin/AdminPannel";
 import AdminListWrapper from "../../components/admin/AdminListWrapper";
-import { useNavigate } from "react-router-dom";
 import { useUsers } from "../../hooks/useUsers";
 import Pagination from "../../components/Pagination";
 import Loading from "../../components/Loading";
 import AdminUserCard from "../../components/admin/user/AdminUserCard";
 
 export default function AdminUsers() {
-  const navigate = useNavigate();
   const {
     getUsersQuery: { isLoading, error, data: users },
   } = useUsers();
@@ -35,7 +33,7 @@ export default function AdminUsers() {
               .slice(offset, offset + limit)
               .map((user, index) => (
                 <AdminUserCard
-                  key={users.id}
+                  key={user.id}
                   content={user}
                   offset={offset}
                   no={index}

@@ -4,6 +4,7 @@ import AdminListWrapper from "../../components/admin/AdminListWrapper";
 import Pagination from "../../components/Pagination";
 import { useReservation } from "../../hooks/useReservation";
 import AdminReservationCard from "../../components/admin/reservation/AdminReservationCard";
+import Loading from "../../components/Loading";
 
 export default function AdminReservation() {
   const {
@@ -12,6 +13,8 @@ export default function AdminReservation() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const offset = (page - 1) * limit;
+
+  if (isLoading) return <Loading />;
 
   return (
     <AdminPannel>

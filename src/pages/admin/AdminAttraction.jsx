@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import AdminPannel from "../../components/admin/AdminPannel";
 import AdminListWrapper from "../../components/admin/AdminListWrapper";
 import Pagination from "../../components/Pagination";
-import { useReservation } from "../../hooks/useReservation";
+import { useAttraction } from "../../hooks/useAttraction";
+import AdminAttactionCard from "../../components/admin/attraction/AttractionCard";
+import AdminButton from "../../components/admin/ui/AdminButton";
+import Loading from "../../components/Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminAttraction() {
-  /* const {
-    getReservationQuery: { isLoading, error, data: reservations },
-  } = useReservation(); */
+  const navigate = useNavigate();
+  const {
+    getAttractionQuery: { isLoading, error, data: attractions },
+  } = useAttraction();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const offset = (page - 1) * limit;
+
+  if (isLoading) return <Loading />;
 
   return (
     <AdminPannel>
@@ -18,35 +25,41 @@ export default function AdminAttraction() {
         <AdminListWrapper>
           <li className="flex justify-between text-center border-b border-gray-300">
             <span className="basis-1/6">no.</span>
-            <span className="basis-2/6">숙박기간</span>
-            <span className="basis-1/6">예약자이름</span>
-            <span className="basis-1/6">예약일</span>
+            <span className="basis-1/6">명소종류</span>
+            <span className="basis-1/6">명소이름</span>
+            <span className="basis-2/6">등록날짜</span>
             <span className="basis-1/6"></span>
           </li>
-          {/* {!reservations && (
+          {!attractions && (
             <li className="mx-auto p-3">등록된 컨텐츠가 없습니다.</li>
-          )} */}
-          {/* {reservations &&
-            reservations
+          )}
+          {attractions &&
+            attractions
               .slice(offset, offset + limit)
-              .map((reservation, index) => (
-                <AdminAttraction
-                  key={reservations.id}
-                  reservation={reservation}
+              .map((attraction, index) => (
+                <AdminAttactionCard
+                  key={attractions.id}
+                  attraction={attraction}
                   offset={offset}
                   no={index}
-                  length={reservations.length}
+                  length={attractions.length}
                 />
-              ))} */}
+              ))}
         </AdminListWrapper>
-        {/* {reservations && (
+        {attractions && (
           <Pagination
             limit={limit}
             page={page}
-            total={reservations.length}
+            total={attractions.length}
             setPage={setPage}
           />
-        )} */}
+        )}
+        <div className="flex justify-end gap-10 mt-3">
+          <AdminButton
+            text="명소 추가"
+            event={() => navigate("/admin/attraction/add")}
+          />
+        </div>
       </section>
     </AdminPannel>
   );

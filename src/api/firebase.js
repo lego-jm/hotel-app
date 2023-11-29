@@ -223,3 +223,41 @@ export async function getReservation(uid) {
       console.error(error);
     });
 }
+
+/* attraction */
+export async function addAttraction(attraction) {
+  const attractionUid = uuid();
+
+  set(ref(database, `attractions/${attractionUid}`), {
+    id: attractionUid,
+    ...attraction,
+    imgUrl: attraction.imgUrl[0],
+    createdDate: nowDate,
+    modifyDate: nowDate,
+  }) //
+    .catch((error) => console.error(error));
+}
+
+export async function updateAttraction(attraction) {
+  set(ref(database, `attractions/${attraction.id}`), {
+    ...attraction,
+    modifyDate: nowDate,
+  }) //
+    .catch((error) => console.error(error));
+}
+
+export async function removeAttraction(attractionId) {
+  remove(ref(database, `attractions/${attractionId}`));
+}
+
+export async function getAttraction() {
+  return get(ref(database, `attractions/`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      const sort = Object.values(snapshot.val()).sort(
+        (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+      );
+      return sort;
+    }
+    return null;
+  });
+}

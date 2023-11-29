@@ -22,6 +22,8 @@ import Attraction from "./pages/Attraction";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminAttraction from "./pages/admin/AdminAttraction";
 import AdminReservation from "./pages/admin/AdminReservation";
+import AdminAddAttraction from "./pages/admin/AdminAddAttraction";
+import AdminAttractionDetail from "./pages/admin/AdminAttractionDetail";
 
 const router = createBrowserRouter([
   {
@@ -130,7 +132,7 @@ const router = createBrowserRouter([
         path: "/admin/attraction/add",
         element: (
           <ProtectRoute requireAdmin>
-            <AdminRooms />
+            <AdminAddAttraction />
           </ProtectRoute>
         ),
       },
@@ -138,7 +140,7 @@ const router = createBrowserRouter([
         path: "/admin/attraction/:attractionId",
         element: (
           <ProtectRoute requireAdmin>
-            <AdminRoomDetail />
+            <AdminAttractionDetail />
           </ProtectRoute>
         ),
       },

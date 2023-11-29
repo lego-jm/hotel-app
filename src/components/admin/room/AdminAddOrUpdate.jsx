@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import AdminButton from "../../components/admin/AdminButton";
+import AdminButton from "../ui/AdminButton";
 import { useNavigate } from "react-router-dom";
-import { upload } from "../../api/uplode";
-import { useRooms } from "../../hooks/useRooms";
+import { upload } from "../../../api/uplode";
+import { useRooms } from "../../../hooks/useRooms";
 
 export default function AdminAddOrUpdate({ state }) {
   const [file, setFile] = useState();
   const [room, setRoom] = useState();
-  const { addRoomQuery, updateRoomQuery } = useRooms();
+  const { addRoomQuery, updateRoomQuery, removeRoomQuery } = useRooms();
   const navigate = useNavigate();
-
   useEffect(() => {
     setRoom(state && { ...state.room });
   }, []);
@@ -36,7 +35,6 @@ export default function AdminAddOrUpdate({ state }) {
         );
       }
     }
-
     navigate("/admin/rooms");
   };
   const handleChange = (e) => {
@@ -217,7 +215,17 @@ export default function AdminAddOrUpdate({ state }) {
             text={`${state ? "객실 수정" : "객실 추가"}`}
           />
           {state && (
-            <AdminButton type="button" id={state.room.id} text="객실 삭제" />
+            <AdminButton
+              type="button"
+              text="객실 삭제"
+              event={() =>
+                removeRoomQuery.mutate(state.room.id, {
+                  onSuccess: () => {
+                    console.log("success");
+                  },
+                })
+              }
+            />
           )}
         </div>
       </form>
