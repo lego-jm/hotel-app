@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function AttractionCard({
+export default function AdminAttractionCard({
   attraction,
   attraction: { title, category1, createdDate, id },
   offset,

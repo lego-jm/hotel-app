@@ -3,7 +3,7 @@ import AdminPannel from "../../components/admin/AdminPannel";
 import AdminListWrapper from "../../components/admin/AdminListWrapper";
 import Pagination from "../../components/Pagination";
 import { useAttraction } from "../../hooks/useAttraction";
-import AdminAttactionCard from "../../components/admin/attraction/AttractionCard";
+import AdminAttactionCard from "../../components/admin/attraction/AdminAttractionCard";
 import AdminButton from "../../components/admin/ui/AdminButton";
 import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
