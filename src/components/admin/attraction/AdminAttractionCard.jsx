@@ -13,7 +13,10 @@ export default function AdminAttractionCard({
   return (
     <li className="flex justify-between text-center py-2">
       <span className="basis-1/6">{length - offset - no}</span>
-      <span className="basis-1/6">{category1}</span>
+      <span className="basis-1/6">
+        {category1 === "culture" && "문화"}
+        {category1 === "history" && "역사"}
+      </span>
       <span className="basis-1/6">{title}</span>
       <span className="basis-2/6">{createdDate}</span>
       <span

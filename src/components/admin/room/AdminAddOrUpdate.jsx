@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AdminButton from "../ui/AdminButton";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { upload } from "../../../api/uplode";
 import { useRooms } from "../../../hooks/useRooms";
 
-export default function AdminAddOrUpdate() {
-  const {
-    state: { room: currentRoom },
-  } = useLocation();
+export default function AdminAddOrUpdate({ currentRoom }) {
   const [file, setFile] = useState();
   const [room, setRoom] = useState();
   const { addRoomQuery, updateRoomQuery, removeRoomQuery } = useRooms();

@@ -40,7 +40,7 @@ export default function HotelHeader() {
             주요명소
           </Link>
           <Link
-            to={`/reservation/check/${user?.uid}`}
+            to={`/reservation/check`}
             className="hover:text-theme-color duration-300"
           >
             예약조회

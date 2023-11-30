@@ -173,15 +173,30 @@ export async function getFilterList() {
     });
 }
 
-export async function setReservation(data) {
+export async function addReservation(reservation) {
   const reservationUid = uuid();
-  set(ref(database, `reservation/${data.uid}/${reservationUid}`), {
-    ...data,
+  const { userInfo } = reservation;
+
+  set(ref(database, `reservation/${userInfo.uid}/${reservationUid}`), {
+    ...reservation,
     id: reservationUid,
-    people: parseInt(data.people),
-    totalPrice: parseInt(data.totalPrice),
-    diffDay: parseInt(data.diffDay),
+    people: parseInt(reservation.people),
+    totalPrice: parseInt(reservation.totalPrice),
+    diffDay: parseInt(reservation.diffDay),
+    status: "ing",
     createdDate: nowDate,
+    modifyDate: nowDate,
+  }).catch((error) => console.error(error));
+}
+
+export async function updateReservation(reservation) {
+  const { userInfo } = reservation;
+
+  set(ref(database, `reservation/${userInfo.uid}/${reservation.id}`), {
+    ...reservation,
+    people: parseInt(reservation.people),
+    totalPrice: parseInt(reservation.totalPrice),
+    diffDay: parseInt(reservation.diffDay),
     modifyDate: nowDate,
   }).catch((error) => console.error(error));
 }
@@ -217,7 +232,7 @@ export async function getReservation(uid) {
         );
         return sort;
       }
-      return null;
+      return [];
     })
     .catch((error) => {
       console.error(error);
@@ -238,6 +253,10 @@ export async function getAllReservation() {
     .catch((error) => {
       console.error(error);
     });
+}
+
+export async function removeReservation(reservationId, uId) {
+  remove(ref(database, `reservation/${uId}/${reservationId}`));
 }
 
 /* attraction */

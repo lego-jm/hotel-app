@@ -29,10 +29,6 @@
 /* 월 달력 */
 .react-calendar__month-view {
   @apply px-3;
-
-  abbr {
-    /* @apply text-theme-color text-md font-medium; */
-  }
 }
 
 /* 요일 */

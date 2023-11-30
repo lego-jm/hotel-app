@@ -9,27 +9,24 @@ export default function AdminReservationUpdate() {
   } = useLocation();
 
   const navigate = useNavigate();
-  const [updateReservation, setUpdateReservation] = useState();
-  const { updateUserQuery, removeAccountQuery } = useReservation();
+  const [status, setStatus] = useState();
+  const { updateReservationQuery } = useReservation();
+  const { userInfo } = reservation;
 
   useEffect(() => {
-    reservation && setUpdateReservation({ ...reservation });
+    reservation && setStatus(reservation.status);
   }, [reservation]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (window.confirm("회원정보를 수정하시겠습니까?")) {
-      updateUserQuery.mutate(
+    if (window.confirm("예약 상태 변경 하시겠습니까?")) {
+      updateReservationQuery.mutate(
+        { ...reservation, status },
         {
-          ...updateReservation,
-        },
-        { onSuccess: () => navigate("/admin/reservation") }
+          onSuccess: () => navigate("/admin/reservation"),
+        }
       );
     }
-  };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUpdateReservation((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -39,97 +36,76 @@ export default function AdminReservationUpdate() {
         className="w-full flex flex-col gap-7 border border-theme-color rounded-lg p-10"
         onSubmit={handleSubmit}
       >
-        <div className="flex items-start gap-3">
-          <label className="w-1/12 mt-2" htmlFor="email">
-            회원 이메일
+        <div className="flex items-center gap-3">
+          <label className="w-2/12" htmlFor="email">
+            예약자 이름
           </label>
-          <input
-            id="email"
-            className="border w-3/6 border-gray-400 outline-none p-2 px-2 resize-none"
-            type="text"
-            name="email"
-            onChange={handleChange}
-            value={updateReservation?.email || ""}
-            disabled
-          />
+          <p className="w-4/12 p-2 px-3">{userInfo?.email}</p>
         </div>
 
-        <div className="flex items-start gap-3">
-          <label className="w-1/12 mt-2" htmlFor="enNameFt">
+        <div className="flex items-center gap-3">
+          <label className="w-2/12" htmlFor="enNameFt">
             영문 이름
           </label>
+
           <div className="flex gap-2 w-8/12">
-            <input
-              id="enNameFt"
-              className="w-1/2 border border-gray-400 p-2 px-3 outline-none"
-              type="text"
-              name="enNameFt"
-              placeholder="영문 성을 입력하세요"
-              onChange={handleChange}
-              value={updateReservation?.enNameFt || ""}
-              autoComplete="off"
-              required
-            />
-            <input
-              className="w-1/2 border border-gray-400 p-2 px-3 outline-none"
-              type="text"
-              name="enNameLt"
-              placeholder="영문 이름을 입력하세요"
-              onChange={handleChange}
-              value={updateReservation?.enNameLt || ""}
-              autoComplete="off"
-              required
-            />
+            <p className="w-4/12 p-2 px-3">
+              {userInfo?.enNameFt} {userInfo?.enNameLt}
+            </p>
           </div>
         </div>
-        <div className="flex items-start gap-3">
-          <label className="w-1/12 mt-2" htmlFor="birth">
-            생년월일
-          </label>
-          <input
-            id="birth"
-            className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
-            type="text"
-            name="birth"
-            placeholder="YYYY.MM.DD"
-            onChange={handleChange}
-            value={updateReservation?.birth || ""}
-            autoComplete="off"
-            required
-            maxLength={10}
-          />
-        </div>
-        <div className="flex items-start gap-3">
-          <label className="w-1/12 mt-2" htmlFor="phoneNumber">
+        <div className="flex items-center gap-3">
+          <label className="w-2/12" htmlFor="phoneNumber">
             연락처
           </label>
-          <input
-            id="phoneNumber"
-            className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
-            type="number"
-            name="phoneNumber"
-            placeholder="연락처를 입력하세요"
-            onChange={handleChange}
-            value={updateReservation?.phoneNumber || ""}
-            autoComplete="off"
-            required
-            maxLength={11}
-          />
+          <p className="w-4/12 p-2 px-3">{userInfo?.phoneNumber || ""}</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <label className="w-2/12" htmlFor="roomTitle">
+            객실 이름
+          </label>
+          <p className="w-4/12 p-2 px-3">{reservation?.roomTitle || ""}</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <label className="w-2/12" htmlFor="phoneNumber">
+            숙박 기간
+          </label>
+          <p className="w-4/12 p-2 px-3">
+            {`${reservation.reservationDate.startDate} ~ `}
+            {reservation.reservationDate.endDate}
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <label className="w-2/12" htmlFor="phoneNumber">
+            숙박 인원
+          </label>
+          <p className="w-4/12 p-2 px-3">{`${reservation.people}명`}</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <label className="w-2/12" htmlFor="phoneNumber">
+            추가 요청 사항
+          </label>
+          <p className="w-5/12 p-2 px-3">{reservation.request}</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <label className="w-2/12" htmlFor="status">
+            예약 상태
+          </label>
+          <select
+            onChange={(e) => setStatus(e.target.value)}
+            className="border border-gray-300 p-2"
+            name="status"
+            id="status"
+            value={status}
+          >
+            <option value="ing">예약진행중</option>
+            <option value="confirm">예약확정</option>
+            <option value="cancle">예약취소</option>
+          </select>
         </div>
 
         <div className="flex gap-5">
-          <AdminButton type="submit" text="회원수정" />
-          <AdminButton
-            type="button"
-            text="회원 삭제"
-            event={() =>
-              removeAccountQuery.mutate(updateReservation.id, {
-                onSuccess: () => {
-                  navigate("/admin/users");
-                },
-              })
-            }
-          />
+          <AdminButton type="submit" text="예약상태변경" />
         </div>
       </form>
     </>

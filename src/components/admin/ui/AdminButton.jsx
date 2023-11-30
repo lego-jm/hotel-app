@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AdminButton({ text, type, event }) {
+export default function AdminButton({ text, type, event, custom }) {
   return (
     <button
       onClick={event}

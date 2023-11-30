@@ -26,18 +26,19 @@ export default function AdminReservation() {
             <span className="basis-1/6">no.</span>
             <span className="basis-2/6">숙박기간</span>
             <span className="basis-1/6">예약자이름</span>
+            <span className="basis-1/6">예약 상태</span>
             <span className="basis-1/6">예약일</span>
             <span className="basis-1/6"></span>
           </li>
           {!reservations && (
-            <li className="mx-auto p-3">가입한 회원이 없습니다.</li>
+            <li className="mx-auto p-3">예약 내역이 없습니다.</li>
           )}
           {reservations &&
             reservations
               .slice(offset, offset + limit)
               .map((reservation, index) => (
                 <AdminReservationCard
-                  key={reservations.id}
+                  key={reservation.id}
                   reservation={reservation}
                   offset={offset}
                   no={index}

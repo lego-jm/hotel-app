@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AdminButton from "../ui/AdminButton";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { upload } from "../../../api/uplode";
 import { useAttraction } from "../../../hooks/useAttraction";
 
-export default function AdminAttractionAddOrUpdate() {
-  const {
-    state: { attraction: currentAttraction },
-  } = useLocation();
+export default function AdminAttractionAddOrUpdate({ currentAttraction }) {
   const [file, setFile] = useState();
   const [attraction, setAttraction] = useState();
   const [category, setCategory] = useState();
@@ -18,8 +15,8 @@ export default function AdminAttractionAddOrUpdate() {
     currentAttraction && setAttraction({ ...currentAttraction });
     currentAttraction &&
       setCategory({
-        category1: currentAttraction.category1,
-        category2: currentAttraction.category2,
+        category1: currentAttraction?.category1,
+        category2: currentAttraction?.category2,
       });
   }, [currentAttraction]);
 

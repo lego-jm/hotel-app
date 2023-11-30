@@ -48,9 +48,9 @@ export default function MyPage() {
           }
         />
         <Button
-          text="예약내역"
+          text="예약상세조회"
           type="button"
-          event={() => navigate(`/reservation/check/${userInfo.uid}`)}
+          event={() => navigate("/reservation/check/")}
         />
         <Button text="회원탈퇴" type="button" event={handleRemoveAccount} />
       </div>

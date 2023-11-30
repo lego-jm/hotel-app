@@ -26,6 +26,7 @@ import AdminAddAttraction from "./pages/admin/AdminAddAttraction";
 import AdminAttractionDetail from "./pages/admin/AdminAttractionDetail";
 import AdminUserDetail from "./pages/admin/AdminUserDetail";
 import AdminReservationDetail from "./pages/admin/AdminReservationDetail";
+import ReservationDetail from "./pages/ReservationDetail";
 
 const router = createBrowserRouter([
   {
@@ -47,10 +48,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/reservation/check/:uid",
+        path: "/reservation/check",
         element: (
           <ProtectRoute>
             <ReservationCheck />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/reservation/check/:reservationId",
+        element: (
+          <ProtectRoute>
+            <ReservationDetail />
           </ProtectRoute>
         ),
       },

@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 import CustomCalendar from "../CustomCalendar";
 import PlusMinusButton from "./PlusMinusButton";
 import { useReservation } from "../../hooks/useReservation";
+import { useUsers } from "../../hooks/useUsers";
 import { useNavigate } from "react-router-dom";
 
 import confirm from "../Confirm";
@@ -12,7 +13,10 @@ export default function ReservationOption({ room }) {
   const [people, setPeople] = useState(1);
   const [request, setRequest] = useState("");
   const [reservationDate, setReservationDate] = useState();
-  const { setReservationQuery } = useReservation();
+  const { addReservationQuery } = useReservation();
+  const {
+    getUserInfoQuery: { data: userInfo },
+  } = useUsers();
   const navigate = useNavigate();
   const TIP_PRICE = 60900;
   const roomPrice = room.price * diffDay;
@@ -25,17 +29,16 @@ export default function ReservationOption({ room }) {
     }
 
     confirm("예약을 진행하시겠습니까?", () =>
-      setReservationQuery.mutate(
+      addReservationQuery.mutate(
         {
-          data: {
-            roomId: room.id,
-            roomTitle: room.title,
-            request,
-            people,
-            reservationDate,
-            totalPrice,
-            diffDay,
-          },
+          userInfo,
+          roomId: room.id,
+          roomTitle: room.title,
+          request,
+          people,
+          reservationDate,
+          totalPrice,
+          diffDay,
         },
         {
           onSuccess: () => {
