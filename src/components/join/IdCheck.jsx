@@ -26,10 +26,10 @@ export default function IdCheck({ account, handleChange, userInfo }) {
       <label className="self-start" htmlFor="email">
         이메일*
       </label>
-      <div className="flex gap-2">
+      <div className="md:flex-row flex flex-col gap-2">
         <input
           id="email"
-          className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
+          className="basis-4/12 border border-gray-400 p-2 px-3 outline-none"
           type="text"
           name="email"
           placeholder="이메일을 입력하세요"

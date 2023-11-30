@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useReservation } from "../../hooks/useReservation";
-import AdminButton from "../admin/ui/AdminButton";
+import Button from "../ui/Button";
 
 export default function ReservationUpdate({ reservation }) {
   const navigate = useNavigate();
@@ -18,85 +18,72 @@ export default function ReservationUpdate({ reservation }) {
 
   return (
     <>
-      <section className="w-6/12 flex flex-col gap-7 border border-theme-color rounded-lg p-10 mx-auto">
-        <div className="flex items-center gap-3">
-          <label className="basis-3/12" htmlFor="email">
-            예약자 이메일
-          </label>
-          <p className="p-2 px-3">{userInfo?.email}</p>
-        </div>
+      <section className="md:text-base md:m-0 mx-3 text-xs flex flex-col gap-y-3 items-center justify-center">
+        <div className="md:p-10 p-5 flex flex-col gap-5 border border-theme-color rounded-lg max-w-2xl w-full">
+          <div className="flex gap-2">
+            <span className="basis-4/12">예약자 이메일:</span>
+            <p className="">{userInfo?.email}</p>
+          </div>
 
-        <div className="flex items-center gap-3">
-          <label className="basis-3/12" htmlFor="enNameFt">
-            영문 이름
-          </label>
-          <div className="flex gap-2 w-8/12">
-            <p className="p-2 px-3">
+          <div className="flex gap-2">
+            <span className="basis-4/12">영문 이름:</span>
+            <p className="">
               {userInfo?.enNameFt} {userInfo?.enNameLt}
             </p>
           </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <label className="basis-3/12" htmlFor="phoneNumber">
-            연락처
-          </label>
-          <p className="p-2 px-3">{userInfo?.phoneNumber || ""}</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <label className="basis-3/12" htmlFor="roomTitle">
-            객실 이름
-          </label>
-          <p className="p-2 px-3">{reservation?.roomTitle || ""}</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <label className="basis-3/12" htmlFor="phoneNumber">
-            숙박 기간
-          </label>
-          <p className="p-2 px-3">
-            {`${reservation.reservationDate.startDate} ~ `}
-            {reservation.reservationDate.endDate}
+          <div className="flex gap-2">
+            <span className="basis-4/12">연락처:</span>
+            <p className="">{userInfo?.phoneNumber || ""}</p>
+          </div>
+          <div className="flex gap-2">
+            <span className="basis-4/12">객실 이름:</span>
+            <p className="">{reservation?.roomTitle || ""}</p>
+          </div>
+          <div className="flex gap-2">
+            <span className="basis-4/12">숙박 기간:</span>
+            <p className="">
+              {`${reservation.reservationDate.startDate} ~ `}
+              {reservation.reservationDate.endDate}
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <span className="basis-4/12">숙박 인원:</span>
+            <p className="">{`${reservation.people}명`}</p>
+          </div>
+
+          <div className="flex gap-2">
+            <span className="basis-4/12">추가 요청 사항:</span>
+            <p className="">{reservation.request}</p>
+          </div>
+
+          <div className="flex gap-2">
+            <span className="basis-4/12">예약 상태</span>
+            <p>
+              {reservation.status === "ing" && "예약진행중"}
+              {reservation.status === "confirm" && "예약확정"}
+              {reservation.status === "cancle" && "예약취소"}
+            </p>
+          </div>
+
+          <p className="mx-auto text-theme-color">
+            * 예약 확정 시 예약 취소가 불가능합니다.
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <label className="basis-3/12" htmlFor="phoneNumber">
-            숙박 인원
-          </label>
-          <p className="p-2 px-3">{`${reservation.people}명`}</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <label className="basis-3/12" htmlFor="phoneNumber">
-            추가 요청 사항
-          </label>
-          <p className="p-2 px-3">{reservation.request}</p>
-        </div>
-        <div className="flex items-center gap-6">
-          <label className="basis-3/12" htmlFor="status">
-            예약 상태
-          </label>
-          <p>
-            {reservation.status === "ing" && "예약진행중"}
-            {reservation.status === "confirm" && "예약확정"}
-            {reservation.status === "cancle" && "예약취소"}
-          </p>
-        </div>
-        <p className="mx-auto text-theme-color">
-          * 예약 확정 시 예약 취소가 불가능합니다.
-        </p>
-      </section>
-      <div className="mt-3 w-6/12 mx-auto flex gap-3">
-        <AdminButton
-          type="button"
-          text="뒤로가기"
-          event={() => window.history.back()}
-        />
-        {reservation?.status !== "confirm" && (
-          <AdminButton
+        <div className="md:flex-row flex flex-col justify-center gap-3 w-full">
+          <Button
             type="button"
-            text="예약 취소"
-            event={handleRemoveReservation}
+            text="뒤로가기"
+            event={() => window.history.back()}
           />
-        )}
-      </div>
+          {reservation?.status !== "confirm" && (
+            <Button
+              type="button"
+              text="예약 취소"
+              event={handleRemoveReservation}
+            />
+          )}
+        </div>
+      </section>
     </>
   );
 }

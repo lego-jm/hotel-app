@@ -2,7 +2,7 @@ import React from "react";
 
 export default function AttractionFirstDepth({ select, setSelect }) {
   return (
-    <nav className="flex gap-2 text-white">
+    <nav className="xl:p-0 md:text-base sm:flex-row flex flex-col gap-2 text-sm text-white p-5">
       <button
         onClick={() =>
           setSelect({ firstDepth: "history", secondDepth: "palace" })

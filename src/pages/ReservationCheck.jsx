@@ -7,7 +7,7 @@ export default function ReservationCheck() {
   const [reservationDate, setReservationDate] = useState();
   return (
     <Wrapper custom="py-5">
-      <h3 className="text-4xl text-center">예약조회</h3>
+      <h3 className="md:text-4xl text-2xl text-center">예약조회</h3>
       <ReservationFilter setReservationDate={setReservationDate} />
       <ReservationList reservationDate={reservationDate} />
     </Wrapper>

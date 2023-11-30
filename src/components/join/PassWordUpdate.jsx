@@ -17,7 +17,7 @@ export default function PassWordUpdate() {
   };
 
   return (
-    <div className="flex flex-col gap-3 items-start border-t border-gray-200 pt-5">
+    <div className="md:w-8/12 flex flex-col gap-3 items-start border-t border-gray-200 pt-5">
       <p>비밀번호 재설정</p>
       <Button text="비밀번호 재설정 하기" type="button" event={handleClick} />
       <Warning text="비밀번호를 재설정하려면 위 버튼을 클릭해주세요." />

@@ -29,13 +29,15 @@ export default function AttractionContents() {
         <AttractionFirstDepth select={select} setSelect={setSelect} />
         <AttractionSecondDepth select={select} setSelect={setSelect} />
       </nav>
-      {filterAttraction?.map((attraction, index) => (
-        <AttractionCard
-          key={attraction.id}
-          attraction={attraction}
-          index={index}
-        />
-      ))}
+      <ul className="">
+        {filterAttraction?.map((attraction, index) => (
+          <AttractionCard
+            key={attraction.id}
+            attraction={attraction}
+            index={index}
+          />
+        ))}
+      </ul>
     </section>
   );
 }

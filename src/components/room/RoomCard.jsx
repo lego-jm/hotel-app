@@ -53,15 +53,15 @@ export default function RoomCard({
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="p-5 text-sm border-b border-gray-500 mb-2">
+      <div className="sm:text-sm text-xs p-5 border-b border-gray-500 mb-2">
         <div className="">
           <span className="after:border-r after:border-gray-400 after:mx-2">
             {location}
           </span>
           <span>{roomtype}</span>
         </div>
-        <h3 className="text-xl">{title}</h3>
-        <div className="mt-5 flex justify-between h-10">
+        <h3 className="sm:text-xl text-lg">{title}</h3>
+        <div className="sm:h-10 mt-5 flex justify-between h-auto">
           <div className="flex flex-wrap w-10/12">
             <p className="after:border-r after:border-gray-400 after:mx-2">
               <span className="opacity-70">침대타입</span> {bedtype}

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function AttractionSecondDepth({ select, setSelect }) {
   return (
-    <nav className="flex">
+    <nav className="xl:p-0 sm:flex-row sm:gap-y-0 flex flex-col gap-y-3 p-5">
       <button
         onClick={() =>
           setSelect((preSelect) => ({
@@ -13,7 +13,7 @@ export default function AttractionSecondDepth({ select, setSelect }) {
         }
         className={`basis-1/3 p-3 border border-gray-300 ${
           select.secondDepth === "palace" || select.secondDepth === "experience"
-            ? "border-b-0"
+            ? "sm:border-b-0"
             : ""
         } `}
       >
@@ -28,7 +28,7 @@ export default function AttractionSecondDepth({ select, setSelect }) {
         }
         className={`basis-1/3 p-3 border border-gray-300 ${
           select.secondDepth === "hanok" || select.secondDepth === "shopping"
-            ? "border-b-0"
+            ? "sm:border-b-0"
             : ""
         } `}
       >
@@ -43,7 +43,7 @@ export default function AttractionSecondDepth({ select, setSelect }) {
         }
         className={`basis-1/3 p-3 border border-gray-300 ${
           select.secondDepth === "museum" || select.secondDepth === "show"
-            ? "border-b-0"
+            ? "sm:border-b-0"
             : ""
         } `}
       >

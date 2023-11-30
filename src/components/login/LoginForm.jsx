@@ -30,13 +30,13 @@ export default function LoginForm({ children }) {
   };
 
   return (
-    <section className="flex flex-col items-center gap-3 p-10">
+    <section className="flex flex-col items-center gap-3 p-10 max-w-xl mx-auto">
       {children}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-2 w-4/12 mx-auto"
+        className="md:text-base flex flex-col gap-2 w-full text-sm"
       >
-        <label className="self-start  mt-5" htmlFor="email">
+        <label className="self-start mt-5" htmlFor="email">
           이메일
         </label>
         <input
@@ -73,7 +73,7 @@ export default function LoginForm({ children }) {
         text="Google 로그인"
         type="button"
         event={handleGoogleLogin}
-        custom="w-4/12"
+        custom="w-full"
       />
     </section>
   );

@@ -9,7 +9,7 @@ export default function MyPageDatail() {
   } = useLocation();
   return (
     <Wrapper>
-      <h3 className="text-3xl text-center">회원 정보 수정</h3>
+      <h3 className="md:text-3xl text-2xl text-center">회원 정보 수정</h3>
       <JoinForm userInfo={userInfo} />
     </Wrapper>
   );

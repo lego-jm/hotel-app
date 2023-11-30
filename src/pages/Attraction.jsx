@@ -5,7 +5,7 @@ import AttractionContents from "../components/attraction/AttractionContents";
 export default function Attraction() {
   return (
     <Wrapper>
-      <h3 className="text-4xl text-center">주요명소</h3>
+      <h3 className="md:text-4xl text-3xl text-center">주요명소</h3>
       <AttractionContents />
     </Wrapper>
   );

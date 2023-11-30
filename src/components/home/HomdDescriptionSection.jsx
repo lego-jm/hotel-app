@@ -2,7 +2,7 @@ import React from "react";
 
 export default function HomdDescriptionSection() {
   return (
-    <p className="text-xs text-center font-light text-gray-400 max-w-7xl mx-auto my-10">
+    <p className="xl:p-0 text-xs text-center font-light text-gray-400 max-w-7xl mx-auto my-10 px-5">
       리얼호텔은 을지로입구 역 인근에 위치하고 있어 서울시청, 명동, 청계천 등
       서울의 주요 관광지로의 접근성이 높은 5성급 럭셔리 호텔입니다. 서울 지하철,
       버스, 공항 리무진 버스 등 대중 교통을 이용하여 편리하게 이동이 가능하여

@@ -18,44 +18,49 @@ export default function Intro() {
     <Wrapper>
       <ContentIntro title="리얼호텔 소개" text={text} />
       <section className="border-t border-gray-400 pt-14">
-        <h3 className="text-4xl text-center">ROOMS & SUITE</h3>
-        <section className="flex gap-7 mt-7">
-          <figure>
+        <h3 className="md:text-4xl text-3xl text-center">ROOMS & SUITE</h3>
+        <section className="md:p-0 md:flex-row flex flex-col gap-7 p-5 mt-7">
+          <figure className="basis-1/2">
             <img src="/images/intro/intro-room-img.jpg" alt="" />
           </figure>
-          <article>
-            <h5 className="text-xl font-bold">객실</h5>
-            <p className="text-lg mt-5">
+          <article className="basis-1/2">
+            <h5 className="sm:text-xl text-lg font-bold">객실</h5>
+            <p className="sm:text-lg text-base mt-5">
               비즈니스 고객, 관광객을 포함한 다양한 고객층이 만족할 수 있는
               맞춤형 공간을 제공합니다.
             </p>
-            <ul className="text-md text-gray-500 mb-10">
+            <ul className="md:mb-10 sm:text-base text-sm text-gray-500 mb-5">
               <li>- 전 객실에서 서울 도심의 환상적인 야경을 감상</li>
               <li>- 최신 시설과 현대적인 감각의 인테리어</li>
               <li>- 최상의 평온함을 위한 해온(he:on) 베딩 시스템</li>
             </ul>
-            <Link to="/rooms">자세히 보기 &gt;</Link>
+            <Link className="sm:text-base text-sm" to="/rooms">
+              자세히 보기 &gt;
+            </Link>
           </article>
         </section>
       </section>
-      <section className="mt-20">
-        <h3 className="text-4xl text-center">DINING</h3>
-        <section className="flex gap-7 mt-7">
-          <figure>
+      <section className="md:mt-20 mt-7">
+        <h3 className="md:text-4xl text-3xl text-center">DINING</h3>
+        <section className="md:p-0 md:flex-row flex flex-col gap-7 p-5 mt-7">
+          <figure className="basis-1/2">
             <img src="/images/intro/intro-dining-img.jpg" alt="" />
           </figure>
-          <article>
-            <h5 className="text-xl font-bold">다이닝</h5>
-            <p className="text-lg mt-5">
+          <article className="basis-1/2">
+            <h5 className="sm:text-xl text-lg font-bold">다이닝</h5>
+            <p className="sm:text-lg text-base mt-5">
               세계적으로 인정받는 셰프들이 직접 선보이는 다양한 일품요리를
               즐기실 수 있습니다.
             </p>
-            <ul className="text-md text-gray-500 mb-10">
+            <ul className="md:mb-10 sm:text-base text-sm text-gray-500 mb-5">
               <li>- 미쉐린 1스타 레스토랑 피에르 가니에르 서울</li>
               <li>- 신선한 재료를 엄선하여 만든 최고급 요리</li>
               <li>- 세련되고 현대적인 감각의 호텔 레스토랑</li>
             </ul>
-            <button onClick={() => window.alert("준비중입니다.")}>
+            <button
+              className="sm:text-base text-sm"
+              onClick={() => window.alert("준비중입니다.")}
+            >
               자세히 보기 &gt;
             </button>
             {/* <Link to="/dining">자세히 보기 &gt;</Link> */}

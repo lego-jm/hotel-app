@@ -20,13 +20,13 @@ export default function Rooms() {
   return (
     <Wrapper custom="max-w-none">
       <ContentIntro title="객실" text={text} />
-      <div className="border-y border-400 py-6 px-12">
-        <div className="max-w-7xl mx-auto flex">
+      <div className="sm:px-12 border-y border-400 py-6 px-4">
+        <div className="lg:flex-nowrap lg:gap-y-0 max-w-7xl mx-auto flex flex-wrap gap-y-4">
           <div className="flex items-center gap-2">
             <RxMixerHorizontal className="text-3xl" />
-            <span>상세검색</span>
+            <span className="whitespace-nowrap">상세검색</span>
           </div>
-          <ul className="flex items-center gap-2 ml-5">
+          <ul className="lg:flex-nowrap flex flex-wrap items-center gap-2 ml-5 whitespace-nowrap">
             {filters && (
               <>
                 <li className="text-xs">

@@ -12,15 +12,15 @@ export default function RoomDetail() {
   } = useLocation();
 
   return (
-    <section className="my-24">
-      <div className="flex flex-col items-center p-10">
+    <section className="md:my-24 mt-20">
+      <div className="md:text-base text-sm flex flex-col items-center p-10">
         <p>
           <span className="after:border-r after:border-gray-500 after:mx-4 font-bold">
             {location}
           </span>
           {roomtype}
         </p>
-        <h5 className="text-4xl mt-5">{title}</h5>
+        <h5 className="md:text-4xl text-2xl mt-5 text-center">{title}</h5>
       </div>
       <RoomDetailSwipe imgUrl={imgUrl} />
       <RoomDescription room={room} />

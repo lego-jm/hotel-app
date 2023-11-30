@@ -11,10 +11,10 @@ export default function PassWord({ handleChange, account, userInfo }) {
       <label className="self-start mt-5" htmlFor="password">
         비밀번호*
       </label>
-      <div className="flex gap-2 w-8/12 mb-3">
+      <div className="md:w-8/12 md:flex-row flex flex-col gap-2 mb-3">
         <input
           id="password"
-          className="w-1/2 border border-gray-400 p-2 px-3 outline-none"
+          className="basis-1/2 border border-gray-400 p-2 px-3 outline-none"
           type="password"
           name="password"
           placeholder="비밀번호를 입력하세요"
@@ -24,7 +24,7 @@ export default function PassWord({ handleChange, account, userInfo }) {
           required
         />
         <input
-          className="w-1/2 border border-gray-400 p-2 px-3 outline-none"
+          className="basis-1/2 border border-gray-400 p-2 px-3 outline-none"
           type="password"
           name="passwordCheck"
           placeholder="한번 더 같은 비밀번호를 입력하세요"

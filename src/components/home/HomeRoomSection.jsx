@@ -1,14 +1,32 @@
 import React from "react";
-import HomeInRoomCard from "./HomeInRoomCard";
 
 export default function HomeRoomSection() {
   return (
-    <section className="flex gap-3 justify-center my-10">
-      <HomeInRoomCard text="MAIN TOWER" img="/images/main-tower.jpg" />
-      <HomeInRoomCard
-        text="EXECUTIVE TOWER"
-        img="/images/executive-tower.jpg"
-      />
+    <section className="2xl:p-0 md:flex-row md:gap-3 md:w-full flex flex-col gap-10 justify-center my-10 p-7">
+      <div className="flex flex-col">
+        <div className="overflow-hidden">
+          <img
+            className="transition-all hover:scale-105 duration-500"
+            src="/images/main-tower.jpg"
+            alt="room-img"
+          />
+        </div>
+        <h3 className="sm:text-xl sm:h-32 flex justify-center items-center bg-theme-color text-white text-md h-24">
+          MAIN TOWER
+        </h3>
+      </div>
+      <div className="flex flex-col">
+        <div className="overflow-hidden">
+          <img
+            className="transition-all hover:scale-105 duration-500"
+            src="/images/executive-tower.jpg"
+            alt="room-img"
+          />
+        </div>
+        <h3 className="sm:text-xl sm:h-32 flex justify-center items-center bg-theme-color text-white text-md h-24">
+          EXECUTIVE TOWER
+        </h3>
+      </div>
     </section>
   );
 }

@@ -31,15 +31,15 @@ export default function MyPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <Wrapper custom="pt-9">
-      <h2 className="text-4xl text-center border-b-2 py-10 border-black">
+    <Wrapper custom="mb-10">
+      <h2 className="md:text-4xl text-3xl text-center border-b-2 py-10 border-black">
         나의 정보
       </h2>
-      <div className="flex gap-10 mt-10 text-center">
+      <div className="md:flex-row flex flex-col gap-10 mt-10 text-center">
         <MyPageInfo user={userInfo} />
         <MyPageUse />
       </div>
-      <div className="flex gap-5 mt-3">
+      <div className="md:p-0 md:flex-row flex flex-col gap-5 mt-3 p-3">
         <Button
           text="회원정보"
           type="button"

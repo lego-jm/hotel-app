@@ -17,9 +17,12 @@ export default function ReservationFilter({ setReservationDate }) {
   };
 
   return (
-    <div className="bg-gray-200 flex items-center justify-center gap-3 p-5 mt-16">
-      <h3>예약일자</h3>
-      <form onSubmit={handleSubmit} className="flex items-center gap-5">
+    <div className="md:mt-16 md:flex-row bg-gray-200 flex flex-col items-center justify-center gap-3 p-5 m-7">
+      <h3 className="md:text-base text-sm">예약일자</h3>
+      <form
+        onSubmit={handleSubmit}
+        className="md:text-base text-sm md:flex-row flex flex-col items-center gap-5"
+      >
         <div className="relative">
           <input
             className="border border-gray-500 p-2 outline-none cursor-default"
@@ -47,7 +50,7 @@ export default function ReservationFilter({ setReservationDate }) {
             </div>
           )}
         </div>
-        <p> ~ </p>
+        <p className="md:block hidden"> ~ </p>
         <div className="relative">
           <input
             className="border border-gray-500 p-2 outline-none cursor-default"

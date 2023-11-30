@@ -8,7 +8,7 @@ export default function ReservationDetail() {
 
   return (
     <Wrapper>
-      <h3 className="text-3xl text-center mb-6">예약 상세</h3>
+      <h3 className="md:text-3xl text-2xl text-center mb-6">예약 상세</h3>
       <ReservationUpdate reservation={state} />
     </Wrapper>
   );

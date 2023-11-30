@@ -28,11 +28,11 @@ export default function ReservationList({ reservationDate }) {
 
   return (
     <article className="mt-5">
-      <ul className="flex flex-col text-center mb-10">
+      <ul className="sm:text-base text-xs flex flex-col text-center mb-10">
         <li className="flex justify-between border-y border-gray-500 py-5">
           <span className="basis-1/6">No.</span>
-          <span className="basis-2/6">숙박기간</span>
-          <span className="basis-1/6">객실 이름</span>
+          <span className="sm:basis-2/6 basis-1/6">숙박기간</span>
+          <span className="basis-1/6">객실이름</span>
           <span className="basis-1/6">숙박인원</span>
           <span className="basis-1/6">예약일</span>
         </li>
@@ -49,7 +49,7 @@ export default function ReservationList({ reservationDate }) {
               />
             ))
         ) : (
-          <li className="text-lg py-5">예약 내역이 없습니다.</li>
+          <li className="sm:text-lg text-xs py-5">예약 내역이 없습니다.</li>
         )}
       </ul>
       <Pagination

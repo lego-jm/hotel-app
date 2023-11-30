@@ -6,7 +6,9 @@ export default function JoinMembeship() {
   return (
     <Wrapper>
       <JoinForm>
-        <h3 className="mb-20 text-4xl text-center">회원 정보 입력</h3>
+        <h3 className="md:text-3xl md:mb-20 mb-5 text-2xl text-center">
+          회원 정보 입력
+        </h3>
       </JoinForm>
     </Wrapper>
   );

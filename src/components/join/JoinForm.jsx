@@ -33,7 +33,7 @@ export default function JoinForm({ children, userInfo }) {
       );
       return;
     }
-    /* joinMemberQuery.mutate(
+    joinMemberQuery.mutate(
       { ...account, ...nationChoice },
       {
         onSuccess: (res) => {
@@ -42,7 +42,7 @@ export default function JoinForm({ children, userInfo }) {
           navigate("/");
         },
       }
-    ); */
+    );
   };
 
   const handleChange = (e) => {
@@ -53,15 +53,13 @@ export default function JoinForm({ children, userInfo }) {
     userInfo && setAccount(userInfo);
   }, [userInfo]);
 
-  console.log(nationChoice);
-
   return (
-    <section className="p-10">
+    <section className="md:p-10 md:text-base text-sm p-3">
       {children}
       <p className="mb-5 text-theme-color">*필수입력</p>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-5 border-t border-gray-200 py-5"
+        className="flex flex-col gap-5 border-t border-gray-200 py-5 w-full"
       >
         <IdCheck
           account={account}
@@ -73,12 +71,12 @@ export default function JoinForm({ children, userInfo }) {
           account={account}
           userInfo={userInfo}
         />
-        <div className="flex flex-col border-t border-gray-200">
+        <div className="md:w-4/12 flex flex-col border-t border-gray-200">
           <label className="self-start mt-5" htmlFor="nation">
             국가*
           </label>
           <select
-            className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
+            className="border border-gray-400 p-2 px-3 outline-none"
             name="nation"
             id="nation"
             onChange={(e) =>
@@ -97,10 +95,10 @@ export default function JoinForm({ children, userInfo }) {
           <label className="self-start mt-5" htmlFor="enNameFt">
             영문 이름*
           </label>
-          <div className="flex gap-2 w-8/12 mb-3">
+          <div className="md:w-8/12 md:flex-row flex flex-col gap-2 mb-3">
             <input
               id="enNameFt"
-              className="w-1/2 border border-gray-400 p-2 px-3 outline-none"
+              className="basis-1/2 border border-gray-400 p-2 px-3 outline-none"
               type="text"
               name="enNameFt"
               placeholder="영문 성을 입력하세요"
@@ -110,7 +108,7 @@ export default function JoinForm({ children, userInfo }) {
               required
             />
             <input
-              className="w-1/2 border border-gray-400 p-2 px-3 outline-none"
+              className="basis-1/2 border border-gray-400 p-2 px-3 outline-none"
               type="text"
               name="enNameLt"
               placeholder="영문 이름을 입력하세요"
@@ -127,7 +125,7 @@ export default function JoinForm({ children, userInfo }) {
           </label>
           <input
             id="birth"
-            className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
+            className="md:w-4/12 border border-gray-400 p-2 px-3 outline-none"
             type="text"
             name="birth"
             placeholder="YYYY.MM.DD"
@@ -144,7 +142,7 @@ export default function JoinForm({ children, userInfo }) {
           </label>
           <input
             id="phoneNumber"
-            className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
+            className="md:w-4/12 border border-gray-400 p-2 px-3 outline-none"
             type="number"
             name="phoneNumber"
             placeholder="연락처를 입력하세요"
