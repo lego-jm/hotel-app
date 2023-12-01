@@ -37,9 +37,13 @@ export default function JoinForm({ children, userInfo }) {
       { ...account, ...nationChoice },
       {
         onSuccess: (res) => {
-          validationCheck(res);
-          window.alert("회원가입이 완료되었습니다");
-          navigate("/");
+          console.log(validationCheck(res));
+          if (!validationCheck(res)) {
+            return;
+          } else {
+            window.alert("회원가입이 완료되었습니다");
+            navigate("/");
+          }
         },
       }
     );

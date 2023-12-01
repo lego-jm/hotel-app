@@ -4,14 +4,14 @@ export default function ReservationDescription({ room }) {
   return (
     <>
       <section className="border-t border-gray-300 py-14">
-        <h3 className="text-2xl mb-7">요금 정책</h3>
-        <p className="text-gray-500">
+        <h3 className="md:text-2xl text-xl mb-7">요금 정책</h3>
+        <p className="md:text-base text-sm text-gray-500">
           부가세10%와 봉사료10%(21%)가 부과됩니다.
         </p>
       </section>
       <section className="border-t border-gray-300 py-14">
-        <h3 className="text-2xl mb-7">취소 규정</h3>
-        <p className="text-gray-500">
+        <h3 className="md:text-2xl text-xl mb-7">취소 규정</h3>
+        <p className="md:text-base text-sm text-gray-500">
           예약 취소 및 변경은 체크인 하루 전 18:00(한국시간)까지 가능합니다.
           예약하신 일자에 체크인 되지 않거나 또는 위의 지정 시간 이후에 예약을
           취소했을 경우에는 예약 사항에 대해 노-쇼 (No Show) 처리 되며, 이에
@@ -20,9 +20,9 @@ export default function ReservationDescription({ room }) {
         </p>
       </section>
       <section className="border-t border-gray-300 py-14">
-        <h3 className="text-2xl mb-7">객실 정보</h3>
-        <ul className="text-gray-500">
-          <li className="flex gap-72 mb-3">
+        <h3 className="md:text-2xl text-xl mb-7">객실 정보</h3>
+        <ul className="md:text-base text-sm text-gray-500">
+          <li className=" flex flex-wrap gap-x-72 mb-3">
             <p>
               <span className="font-bold mr-7">투숙인원</span>
               {room.people}명
@@ -45,9 +45,8 @@ export default function ReservationDescription({ room }) {
         </ul>
       </section>
       <section className="border-t border-gray-300 py-14">
-        <h3 className="text-2xl mb-7">어메니티</h3>
-
-        <ul className="text-gray-500">
+        <h3 className="md:text-2xl text-xl mb-7">어메니티</h3>
+        <ul className="md:text-base text-sm text-gray-500">
           <li>
             <span className="font-bold mr-3">일반</span> 손전등 / 슬리퍼 /
             전화기 / 티포트 / 금고 / 구둣주걱 / 구두클리너 / 미니바 / 55” UHD TV
