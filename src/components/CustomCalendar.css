@@ -1,7 +1,3 @@
-/* .react-calendar {
-  @apply absolute top-3 left-3;
-} */
-
 /* react-calendar__tile  */
 /* 상단 네비게이션 */
 .react-calendar__navigation {
@@ -39,12 +35,8 @@
 }
 
 /* 요일 */
-.react-calendar__month-view__weekdays {
-  /* abbr {
-    // 텍스트 부분
-    font-size: 18px;
-    font-weight: 900;
-  } */
+.react-calendar__month-view__weekdays abbr {
+  @apply no-underline;
 }
 
 /* 일 각 타일 */
