@@ -8,6 +8,12 @@ export default function IdCheck({ account, handleChange, userInfo }) {
 
   const handleIdCheck = () => {
     if (account?.email) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(account?.email)) {
+        setText({ email: "이메일을 확인해주세요." });
+        return;
+      }
+
       idCheckQuery.mutate(account.email, {
         onSuccess: (isCheck) => {
           isCheck

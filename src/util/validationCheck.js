@@ -2,6 +2,7 @@ export function validationCheck(data) {
   const { errorCode } = data;
 
   console.log(data);
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (errorCode === "auth/invalid-login-credentials") {
     window.alert("비밀번호를 확인해주세요");

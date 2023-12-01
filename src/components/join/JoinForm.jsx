@@ -7,7 +7,7 @@ import IdCheck from "./IdCheck";
 import PassWord from "./PassWord";
 import Warning from "./Warning";
 import confirm from "../Confirm";
-import { validationCheck } from "../util/validationCheck";
+import { validationCheck } from "../../util/validationCheck";
 
 export default function JoinForm({ children, userInfo }) {
   const nationArr = nationData();
