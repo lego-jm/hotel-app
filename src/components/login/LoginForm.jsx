@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { googleLogin } from "../../api/firebase";
+// import { googleLogin } from "../../api/firebase";
 import Button from "../ui/Button";
 import { validationCheck } from "../util/validationCheck";
 import { useUsers } from "../../hooks/useUsers";
@@ -20,9 +20,9 @@ export default function LoginForm({ children }) {
     });
   };
 
-  const handleGoogleLogin = () => {
+  /* const handleGoogleLogin = () => {
     googleLogin().then(() => navigate("/"));
-  };
+  }; */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
