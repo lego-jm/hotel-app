@@ -12,7 +12,7 @@ export default function AttractionContents() {
   });
 
   const {
-    getAttractionQuery: { isLoading, error, data: attractions },
+    getAttractionQuery: { isLoading, data: attractions },
   } = useAttraction();
 
   const filterAttraction = attractions?.filter(

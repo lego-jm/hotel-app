@@ -7,7 +7,7 @@ import Loading from "../Loading";
 
 export default function ReservationList({ reservationDate }) {
   const {
-    getReservationQuery: { isLoading, error, data: reservations },
+    getReservationQuery: { isLoading, data: reservations },
   } = useReservation();
   let filteredList = [];
   const [page, setPage] = useState(1);
@@ -46,6 +46,7 @@ export default function ReservationList({ reservationDate }) {
                 offset={offset}
                 length={filteredList?.length}
                 no={index}
+                setLimit={setLimit}
               />
             ))
         ) : (

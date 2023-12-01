@@ -8,7 +8,7 @@ import AdminUserCard from "../../components/admin/user/AdminUserCard";
 
 export default function AdminUsers() {
   const {
-    getUsersQuery: { isLoading, error, data: users },
+    getUsersQuery: { isLoading, data: users },
   } = useUsers();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -38,6 +38,7 @@ export default function AdminUsers() {
                   offset={offset}
                   no={index}
                   length={users.length}
+                  setLimit={setLimit}
                 />
               ))}
         </AdminListWrapper>

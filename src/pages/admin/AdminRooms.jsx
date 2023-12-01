@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function AdminRooms() {
   const navigate = useNavigate();
   const {
-    getRoomsQuery: { isLoading, error, data: rooms },
+    getRoomsQuery: { isLoading, data: rooms },
   } = useRooms();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -44,6 +44,7 @@ export default function AdminRooms() {
                   offset={offset}
                   no={index}
                   length={rooms.length}
+                  setLimit={setLimit}
                 />
               ))}
         </AdminListWrapper>

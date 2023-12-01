@@ -40,12 +40,13 @@ export default function ReservationFilter({ setReservationDate }) {
               <Calendar
                 calendarType="gregory"
                 formatDay={(_, date) => moment(date).format("D")}
-                onChange={(value) =>
+                onChange={(value) => {
+                  setToggle(() => ({ isStart: false }));
                   setDate({
                     ...date,
                     startDate: moment(value).format("YYYY-MM-DD"),
-                  })
-                }
+                  });
+                }}
               />
             </div>
           )}
@@ -68,12 +69,13 @@ export default function ReservationFilter({ setReservationDate }) {
               <Calendar
                 calendarType="gregory"
                 formatDay={(_, date) => moment(date).format("D")}
-                onChange={(value) =>
+                onChange={(value) => {
+                  setToggle(() => ({ isEnd: false }));
                   setDate({
                     ...date,
                     endDate: moment(value).format("YYYY-MM-DD"),
-                  })
-                }
+                  });
+                }}
               />
             </div>
           )}

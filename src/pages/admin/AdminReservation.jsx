@@ -8,7 +8,7 @@ import Loading from "../../components/Loading";
 
 export default function AdminReservation() {
   const {
-    getAllReservationQuery: { isLoading, error, data: reservations },
+    getAllReservationQuery: { isLoading, data: reservations },
   } = useReservation();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -43,6 +43,7 @@ export default function AdminReservation() {
                   offset={offset}
                   no={index}
                   length={reservations.length}
+                  setLimit={setLimit}
                 />
               ))}
         </AdminListWrapper>

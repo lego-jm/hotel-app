@@ -12,7 +12,7 @@ export default function MyPage() {
   const navigate = useNavigate();
   const {
     deleteAccountQuery,
-    getUserInfoQuery: { isLoading, error, data: userInfo },
+    getUserInfoQuery: { isLoading, data: userInfo },
   } = useUsers();
 
   const handleRemoveAccount = () => {

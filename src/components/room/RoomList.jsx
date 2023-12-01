@@ -6,15 +6,16 @@ import { useRooms } from "../../hooks/useRooms";
 export default function RoomList({ filter }) {
   const [filterRooms, setFilterRooms] = useState();
   const {
-    getRoomsQuery: { isLoading, error, data: rooms },
+    getRoomsQuery: { isLoading, data: rooms },
   } = useRooms();
 
   useEffect(() => {
     if (filter !== "전체") {
-      setFilterRooms(rooms && rooms.filter((room) => room.roomtype === filter));
+      rooms && setFilterRooms(rooms.filter((room) => room.roomtype === filter));
     } else {
-      setFilterRooms(rooms);
+      rooms && setFilterRooms(rooms);
     }
+    // eslint-disable-next-line
   }, [filter]);
 
   if (isLoading) return <Loading />;

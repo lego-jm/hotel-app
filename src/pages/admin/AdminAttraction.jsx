@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function AdminAttraction() {
   const navigate = useNavigate();
   const {
-    getAttractionQuery: { isLoading, error, data: attractions },
+    getAttractionQuery: { isLoading, data: attractions },
   } = useAttraction();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -43,6 +43,7 @@ export default function AdminAttraction() {
                   offset={offset}
                   no={index}
                   length={attractions.length}
+                  setLimit={setLimit}
                 />
               ))}
         </AdminListWrapper>
