@@ -5,15 +5,22 @@
 /* react-calendar__tile  */
 /* 상단 네비게이션 */
 .react-calendar__navigation {
-  @apply bg-theme-color py-6 flex items-center;
+  @apply bg-theme-color py-6 flex items-center justify-between;
   @apply border-b-4 border-theme-color;
 }
 .react-calendar__navigation span {
   @apply text-white;
+  @apply sm:text-base text-sm break-keep;
 }
 
 .react-calendar__navigation button:disabled {
   @apply bg-theme-color;
+}
+
+.react-calendar__navigation button {
+  @apply !min-w-0;
+  /* @apply sm:min-w-0; */
+  @apply md:w-1/12 w-2/12;
 }
 
 .react-calendar__navigation button:enabled:hover,
@@ -42,7 +49,8 @@
 
 /* 일 각 타일 */
 .react-calendar__tile {
-  @apply text-center py-3.5 flex flex-col justify-start items-center;
+  @apply text-center flex flex-col justify-start items-center;
+  @apply sm:py-3.5 py-2 shrink-0;
 }
 
 /*hover, focus, 선택됐을 시 */

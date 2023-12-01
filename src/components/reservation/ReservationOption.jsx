@@ -59,8 +59,8 @@ export default function ReservationOption({ room }) {
           setReservationDate={setReservationDate}
           reservationDate={reservationDate}
         />
-        <div className="xl:flex-row flex flex-col gap-14 p-14">
-          <div className="xl:order-none flex flex-col gap-10 basis-1/2 order-1">
+        <div className="sm:p-3 md:p-14 xl:flex-row flex flex-col gap-14 p-0">
+          <div className="sm:p-0 xl:order-none flex flex-col gap-10 basis-1/2 order-1 p-3">
             <h3 className="md:text-2xl text-xl border-b gray-300">객실</h3>
             <PlusMinusButton people={people} setPeople={setPeople} />
             <p className="md:text-sm text-xs">
@@ -91,7 +91,7 @@ export default function ReservationOption({ room }) {
               event={handleClick}
             />
           </div>
-          <div className=" basis-1/2 flex justify-center items-center p-7">
+          <div className="sm:p-7 basis-1/2 flex justify-center items-center pt-3">
             <div className="md:text-base text-sm bg-gray-100 bg-opacity-80 h-full w-full p-10">
               <div className="flex flex-col gap-5 mb-5 border-b border-gray-300 py-5">
                 {diffDay !== 0 && <p>{`${diffDay}박 ${diffDay + 1}일`}</p>}

@@ -23,7 +23,7 @@ export default function CustomCalendar({
   }, [reservationDate]);
 
   return (
-    <div className="p-14 pb-0">
+    <div className="sm:p-14 p-3 pb-0">
       <h3 className="md:text-2xl text-xl border-b gray-300 mb-5">숙박 일자</h3>
       <div className="flex justify-center gap-5">
         <Calendar
