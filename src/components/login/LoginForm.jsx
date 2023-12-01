@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { googleLogin } from "../../api/firebase";
+import { googleLogin } from "../../api/firebase";
 import Button from "../ui/Button";
 import { validationCheck } from "../util/validationCheck";
 import { useUsers } from "../../hooks/useUsers";
@@ -20,9 +20,10 @@ export default function LoginForm({ children }) {
     });
   };
 
-  /* const handleGoogleLogin = () => {
-    googleLogin().then(() => navigate("/"));
-  }; */
+  const handleGoogleLogin = () => {
+    window.alert("준비중입니다.");
+    // googleLogin().then(() => navigate("/"));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,12 +70,12 @@ export default function LoginForm({ children }) {
           className="w-full bg-theme-color p-3 mt-2 rounded-lg hover:text-white transition-all duration-300"
         />
       </form>
-      {/* <Button
+      <Button
         text="Google 로그인"
         type="button"
         event={handleGoogleLogin}
         custom="w-full"
-      /> */}
+      />
     </section>
   );
 }
