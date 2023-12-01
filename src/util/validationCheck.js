@@ -1,4 +1,8 @@
 export function validationCheck(data) {
+  if (!data) {
+    return true;
+  }
+
   const { errorCode } = data;
 
   if (errorCode === "auth/invalid-login-credentials") {
@@ -13,7 +17,7 @@ export function validationCheck(data) {
   } else if (errorCode === "auth/too-many-requests") {
     window.alert("로그인 시도를 너무 많이 했습니다, 1분 후 다시 시도해주세요");
     return false;
-  } else {
-    return true;
   }
+
+  return true;
 }

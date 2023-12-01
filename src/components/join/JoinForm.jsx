@@ -37,7 +37,6 @@ export default function JoinForm({ children, userInfo }) {
       { ...account, ...nationChoice },
       {
         onSuccess: (res) => {
-          console.log(validationCheck(res));
           if (!validationCheck(res)) {
             return;
           } else {

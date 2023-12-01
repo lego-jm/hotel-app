@@ -46,7 +46,7 @@ export async function joinUser(newUser) {
         ...newUser,
         createdDate: nowDate,
         modifyDate: nowDate,
-      });
+      }).catch((error) => ({ errorCode: error.code }));
     })
     .catch((error) => ({ errorCode: error.code }));
 }
