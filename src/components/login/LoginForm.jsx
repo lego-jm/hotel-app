@@ -69,12 +69,12 @@ export default function LoginForm({ children }) {
           className="w-full bg-theme-color p-3 mt-2 rounded-lg hover:text-white transition-all duration-300"
         />
       </form>
-      <Button
+      {/* <Button
         text="Google 로그인"
         type="button"
         event={handleGoogleLogin}
         custom="w-full"
-      />
+      /> */}
     </section>
   );
 }
