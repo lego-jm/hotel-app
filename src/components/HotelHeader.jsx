@@ -12,7 +12,7 @@ export default function HotelHeader() {
   return (
     <header
       className={`${pathname === "/" ? "bg-opacity-80" : ""} ${
-        !pathname.includes("/admin") && "fixed top-0 left-0 w-full "
+        !pathname.includes("/admin") && "sticky top-0 left-0 w-full "
       } bg-white z-10 justify-center border-b border-gray-400 p-5 text-default-black md:flex`}
     >
       <div className="flex justify-between items-center w-full max-w-7xl whitespace-nowrap">
