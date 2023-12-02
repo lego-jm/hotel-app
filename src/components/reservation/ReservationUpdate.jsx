@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useReservation } from "../../hooks/useReservation";
 import Button from "../ui/Button";
+import Wrapper from "../Wrapper";
 
 export default function ReservationUpdate({ reservation }) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function ReservationUpdate({ reservation }) {
   };
 
   return (
-    <>
+    <Wrapper>
       <section className="md:text-base md:m-0 mx-3 text-xs flex flex-col gap-y-3 items-center justify-center">
         <div className="md:p-10 p-5 flex flex-col gap-5 border border-theme-color rounded-lg max-w-2xl w-full">
           <div className="flex gap-2">
@@ -84,6 +85,6 @@ export default function ReservationUpdate({ reservation }) {
           )}
         </div>
       </section>
-    </>
+    </Wrapper>
   );
 }
