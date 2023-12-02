@@ -16,6 +16,7 @@ export default function ReservationList({ reservationDate }) {
   const nowDate = moment().subtract(1, "months").format("YYYY-MM-DD");
 
   if (reservationDate) {
+    // 예약 조회 페이지 예약 내역 리스트
     filteredList = reservations?.filter((reservation) => {
       const createdDate = moment(reservation.createdDate).format("YYYY-MM-DD");
       const startDate = moment(reservationDate?.startDate).format("YYYY-MM-DD");
@@ -24,6 +25,7 @@ export default function ReservationList({ reservationDate }) {
       return createdDate >= startDate && createdDate <= endDate;
     });
   } else {
+    // 마이페이지 최근 1달 예약 내역 리스트
     filteredList = reservations?.filter(
       (reservation) =>
         moment(reservation.createdDate).format("YYYY-MM-DD") >= nowDate

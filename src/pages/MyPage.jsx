@@ -40,7 +40,7 @@ export default function MyPage() {
         <MyPageInfo user={userInfo} />
         <MyPageUse />
       </section>
-      <section className="mt-10">
+      <section className="my-10">
         <h3 className="md:text-3xl text-2xl pl-2">최근 1개월 예약</h3>
         <ReservationList />
       </section>
