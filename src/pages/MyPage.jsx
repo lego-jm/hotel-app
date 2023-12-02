@@ -42,7 +42,7 @@ export default function MyPage() {
       </section>
       <section className="my-10">
         <h3 className="md:text-3xl text-2xl pl-2">최근 1개월 예약</h3>
-        <ReservationList />
+        <ReservationList isMypage />
       </section>
       <section className="md:p-0 md:flex-row flex flex-col gap-5 mt-3 p-3">
         <Button
