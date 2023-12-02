@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Wrapper from "../components/Wrapper";
 import confirm from "../components/Confirm";
 import Loading from "../components/Loading";
+import ReservationList from "../components/reservation/ReservationList";
 
 export default function MyPage() {
   const navigate = useNavigate();
@@ -35,11 +36,15 @@ export default function MyPage() {
       <h2 className="md:text-4xl text-3xl text-center border-b-2 py-10 border-black">
         나의 정보
       </h2>
-      <div className="md:flex-row flex flex-col gap-10 mt-10 text-center">
+      <section className="md:flex-row flex flex-col gap-10 mt-10 text-center">
         <MyPageInfo user={userInfo} />
         <MyPageUse />
-      </div>
-      <div className="md:p-0 md:flex-row flex flex-col gap-5 mt-3 p-3">
+      </section>
+      <section className="mt-10">
+        <h3 className="md:text-3xl text-2xl pl-2">최근 1개월 예약</h3>
+        <ReservationList />
+      </section>
+      <section className="md:p-0 md:flex-row flex flex-col gap-5 mt-3 p-3">
         <Button
           text="회원정보"
           type="button"
@@ -53,7 +58,7 @@ export default function MyPage() {
           event={() => navigate("/reservation/check/")}
         />
         <Button text="회원탈퇴" type="button" event={handleRemoveAccount} />
-      </div>
+      </section>
     </Wrapper>
   );
 }

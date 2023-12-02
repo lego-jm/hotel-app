@@ -10,9 +10,10 @@ export default function ReservationList({ reservationDate }) {
     getReservationQuery: { isLoading, data: reservations },
   } = useReservation();
   let filteredList = [];
+  const LIMIT = 10;
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const offset = (page - 1) * limit;
+  const offset = (page - 1) * LIMIT;
+  const nowDate = moment().subtract(1, "months").format("YYYY-MM-DD");
 
   if (reservationDate) {
     filteredList = reservations?.filter((reservation) => {
@@ -22,6 +23,11 @@ export default function ReservationList({ reservationDate }) {
 
       return createdDate >= startDate && createdDate <= endDate;
     });
+  } else {
+    filteredList = reservations?.filter(
+      (reservation) =>
+        moment(reservation.createdDate).format("YYYY-MM-DD") >= nowDate
+    );
   }
 
   if (isLoading) return <Loading />;
@@ -38,7 +44,7 @@ export default function ReservationList({ reservationDate }) {
         </li>
         {filteredList?.length !== 0 ? (
           filteredList
-            ?.slice(offset, offset + limit)
+            ?.slice(offset, offset + LIMIT)
             .map((reservation, index) => (
               <ReservationCard
                 key={reservation.id}
@@ -46,7 +52,6 @@ export default function ReservationList({ reservationDate }) {
                 offset={offset}
                 length={filteredList?.length}
                 no={index}
-                setLimit={setLimit}
               />
             ))
         ) : (
@@ -56,7 +61,7 @@ export default function ReservationList({ reservationDate }) {
       <Pagination
         page={page}
         total={filteredList?.length}
-        limit={limit}
+        limit={LIMIT}
         setPage={setPage}
       />
     </article>
