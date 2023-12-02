@@ -34,12 +34,13 @@ export default function ReservationList({ reservationDate, isMypage }) {
     );
   }
 
-  console.log(reservationDate);
-
   if (isLoading) return <Loading />;
 
   return (
     <article className="mt-5">
+      {filteredList && (
+        <p className="md:text-base text-sm">총 {filteredList.length}건</p>
+      )}
       <ul className="sm:text-base text-xs flex flex-col text-center mb-10">
         <li className="flex justify-between border-y border-gray-500 py-5">
           <span className="basis-1/6">No.</span>
