@@ -5,7 +5,7 @@ import Wrapper from "../components/Wrapper";
 
 export default function Login() {
   return (
-    <Wrapper custom="pt-7">
+    <Wrapper custom="py-20">
       <LoginForm>
         <h3 className="md:text-2xl text-xl font-bold text-center">로그인</h3>
       </LoginForm>
