@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import { ReactQueryDevtools } from "react-query/devtools";
+import "animate.css/animate.min.css";
 
 function App() {
   const client = new QueryClient();
