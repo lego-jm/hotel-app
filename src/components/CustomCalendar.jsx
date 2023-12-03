@@ -6,12 +6,13 @@ import moment from "moment";
 import { useReservation } from "../hooks/useReservation";
 
 export default function CustomCalendar({
+  setDiffDay,
   setReservationDate,
   reservationDate,
   roomId,
 }) {
   const nowDate = new Date();
-  const [diffDay, setDiffDay] = useState([]);
+  const [disabledDay, setDisabledDay] = useState([]);
   const {
     getRoomReservationQuery: { data: roomReservations },
   } = useReservation(roomId);
@@ -25,7 +26,7 @@ export default function CustomCalendar({
       );
 
       return diffDayArr?.map((diff) =>
-        setDiffDay((prev) => [
+        setDisabledDay((prev) => [
           ...prev,
           moment(reservationDate.startDate)
             .add(diff, "days")
@@ -35,6 +36,14 @@ export default function CustomCalendar({
     });
   }, [roomReservations]);
 
+  useEffect(() => {
+    reservationDate &&
+      setDiffDay(
+        getDiffDate(reservationDate.startDate, reservationDate.endDate)
+      );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reservationDate]);
+
   return (
     <div className="sm:p-14 p-3 pb-0">
       <h3 className="md:text-2xl text-xl border-b gray-300 mb-5">숙박 일자</h3>
@@ -42,7 +51,7 @@ export default function CustomCalendar({
         <Calendar
           selectRange
           tileDisabled={({ _, date }) =>
-            diffDay.find(
+            disabledDay.find(
               (diffDate) => diffDate === moment(date).format("YYYY-MM-DD")
             )
           }
@@ -83,4 +92,11 @@ export default function CustomCalendar({
       )}
     </div>
   );
+}
+
+function getDiffDate(startDate, endDate) {
+  const start = moment(startDate);
+  const end = moment(endDate);
+
+  return end.diff(start, "days");
 }
