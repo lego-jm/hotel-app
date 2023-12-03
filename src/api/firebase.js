@@ -223,7 +223,7 @@ export async function getUserInfo(uid) {
     });
 }
 
-export async function getReservation(uid) {
+export async function getReservationUser(uid) {
   return get(ref(database, `reservation/${uid}`))
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -247,6 +247,23 @@ export async function getAllReservation() {
           Object.assign(...Object.values(snapshot.val()))
         ).sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
         return sort;
+      }
+      return null;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function getRoomReservation(roomId) {
+  return get(ref(database, `reservation/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const filter = Object.values(
+          Object.assign(...Object.values(snapshot.val()))
+        ).filter((room) => room.roomId === roomId && room.status !== "cancle");
+
+        return filter;
       }
       return null;
     })

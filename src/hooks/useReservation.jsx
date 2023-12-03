@@ -1,14 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   getAllReservation,
-  getReservation,
   addReservation,
   updateReservation,
   removeReservation,
+  getReservationUser,
+  getRoomReservation,
 } from "../api/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
-export function useReservation() {
+export function useReservation(roomId) {
   const queryClient = useQueryClient();
   const { user } = useAuthContext();
 
@@ -35,9 +36,15 @@ export function useReservation() {
     async () => getAllReservation(),
     { staleTime: 1000 * 60 * 1 }
   );
-  const getReservationQuery = useQuery(
+  const getReservationUserQuery = useQuery(
     ["reservation", user.uid],
-    async () => getReservation(user.uid),
+    async () => getReservationUser(user.uid),
+    { staleTime: 1000 * 60 * 5 }
+  );
+
+  const getRoomReservationQuery = useQuery(
+    ["reservation", roomId],
+    async () => getRoomReservation(roomId),
     { staleTime: 1000 * 60 * 5 }
   );
 
@@ -53,9 +60,10 @@ export function useReservation() {
 
   return {
     addReservationQuery,
-    getReservationQuery,
+    getReservationUserQuery,
     updateReservationQuery,
     getAllReservationQuery,
+    getRoomReservationQuery,
     removeReservationQuery,
   };
 }

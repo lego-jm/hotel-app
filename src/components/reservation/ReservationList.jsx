@@ -7,7 +7,7 @@ import Loading from "../Loading";
 
 export default function ReservationList({ reservationDate, isMypage }) {
   const {
-    getReservationQuery: { isLoading, data: reservations },
+    getReservationUserQuery: { isLoading, data: reservations },
   } = useReservation();
   let filteredList = [];
   const LIMIT = 10;

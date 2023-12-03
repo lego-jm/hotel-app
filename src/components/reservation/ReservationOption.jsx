@@ -27,7 +27,6 @@ export default function ReservationOption({ room }) {
       window.alert("날짜를 선택해주세요.");
       return;
     }
-
     confirm("예약을 진행하시겠습니까?", () =>
       addReservationQuery.mutate(
         {
@@ -58,6 +57,7 @@ export default function ReservationOption({ room }) {
           setDiffDay={setDiffDay}
           setReservationDate={setReservationDate}
           reservationDate={reservationDate}
+          roomId={room.id}
         />
         <div className="sm:p-3 md:p-14 xl:flex-row flex flex-col gap-14 p-0">
           <div className="sm:p-0 xl:order-none flex flex-col gap-10 basis-1/2 order-1 p-3">

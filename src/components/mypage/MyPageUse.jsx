@@ -4,7 +4,7 @@ import moment from "moment";
 
 export default function MyPageUse() {
   const {
-    getReservationQuery: { data: reservation },
+    getReservationUserQuery: { data: reservation },
   } = useReservation();
   const nowYear = moment().format("YYYY");
 

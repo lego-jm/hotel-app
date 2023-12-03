@@ -65,5 +65,9 @@
 
 /* disabled */
 .react-calendar__tile:disabled {
-  @apply bg-red-200 text-white;
+  @apply !relative bg-red-200 text-white;
+}
+.react-calendar__tile:disabled::before {
+  @apply !absolute top-0 left-0;
+  @apply w-1.5 h-1.5 bg-black rounded-full;
 }
