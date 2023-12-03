@@ -12,7 +12,7 @@ export default function RoomDetail() {
   } = useLocation();
 
   return (
-    <section className="md:my-8 mt-20">
+    <section className="md:my-8">
       <div className="md:text-base text-sm flex flex-col items-center p-10">
         <p>
           <span className="after:border-r after:border-gray-500 after:mx-4 font-bold">
