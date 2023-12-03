@@ -13,7 +13,7 @@ export default function AttractionSecondDepth({ select, setSelect }) {
         }
         className={`basis-1/3 p-3 border border-gray-300 ${
           select.secondDepth === "palace" || select.secondDepth === "experience"
-            ? "sm:border-b-0"
+            ? "sm:border-b-0 sm:bg-white sm:text-black bg-black bg-opacity-60 text-white"
             : ""
         } `}
       >
@@ -28,7 +28,7 @@ export default function AttractionSecondDepth({ select, setSelect }) {
         }
         className={`basis-1/3 p-3 border border-gray-300 ${
           select.secondDepth === "hanok" || select.secondDepth === "shopping"
-            ? "sm:border-b-0"
+            ? "sm:border-b-0 sm:bg-white sm:text-black bg-black bg-opacity-60 text-white"
             : ""
         } `}
       >
@@ -43,7 +43,7 @@ export default function AttractionSecondDepth({ select, setSelect }) {
         }
         className={`basis-1/3 p-3 border border-gray-300 ${
           select.secondDepth === "museum" || select.secondDepth === "show"
-            ? "sm:border-b-0"
+            ? "sm:border-b-0 sm:bg-white sm:text-black bg-black bg-opacity-60 text-white"
             : ""
         } `}
       >
