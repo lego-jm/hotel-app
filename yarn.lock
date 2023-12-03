@@ -7212,7 +7212,7 @@ nano-time@1.0.0:
   dependencies:
     big-integer "^1.6.16"
 
-nanoid@^3.3.6:
+nanoid@^3.2.0, nanoid@^3.3.6:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
   integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
@@ -8264,7 +8264,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.8.1:
+prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8708,6 +8708,14 @@ renderkid@^3.0.0:
     htmlparser2 "^6.1.0"
     lodash "^4.17.21"
     strip-ansi "^6.0.1"
+
+reoverlay@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/reoverlay/-/reoverlay-1.0.3.tgz#80ec58fa0ddd0d45dab838a567626b226e0ea977"
+  integrity sha512-KNk8JVf49+SS6qold8Hb6R/+Y1wti6qZfiA0YfqP+2gjWADUduM2HL2oDHQPS2HWcJLOBuGKUQF1/54DXIPEXw==
+  dependencies:
+    nanoid "^3.2.0"
+    prop-types "^15.7.2"
 
 require-directory@^2.1.1:
   version "2.1.1"

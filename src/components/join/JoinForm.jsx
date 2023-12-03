@@ -59,6 +59,7 @@ export default function JoinForm({ children, userInfo }) {
   return (
     <section className="md:p-10 md:text-base text-sm p-3">
       {children}
+
       <p className="mb-5 text-theme-color">*필수입력</p>
       <form
         onSubmit={handleSubmit}

@@ -6,8 +6,6 @@ import { useReservation } from "../../hooks/useReservation";
 import { useUsers } from "../../hooks/useUsers";
 import { useNavigate } from "react-router-dom";
 
-import confirm from "../Confirm";
-
 export default function ReservationOption({ room }) {
   const [diffDay, setDiffDay] = useState(0);
   const [people, setPeople] = useState(1);
@@ -27,7 +25,8 @@ export default function ReservationOption({ room }) {
       window.alert("날짜를 선택해주세요.");
       return;
     }
-    confirm("예약을 진행하시겠습니까?", () =>
+
+    if (window.confirm("예약을 진행하시겠습니까?")) {
       addReservationQuery.mutate(
         {
           userInfo,
@@ -45,8 +44,8 @@ export default function ReservationOption({ room }) {
             navigate("/rooms");
           },
         }
-      )
-    );
+      );
+    }
   };
 
   return (
