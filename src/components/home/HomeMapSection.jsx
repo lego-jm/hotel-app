@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import KakaoMap from "../KakaoMap";
 import { weatherApi } from "../../api/weather";
 import moment from "moment";
-import ScrollAnimation from "react-animate-on-scroll";
 
 export default function HomeMapSection() {
   const [weather, setWeather] = useState();
