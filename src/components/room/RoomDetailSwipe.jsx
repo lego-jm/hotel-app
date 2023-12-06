@@ -20,8 +20,8 @@ export default function RoomDetailSwipe({ imgUrl }) {
       className="mySwiper"
     >
       {imgUrl.map((url, index) => (
-        <SwiperSlide>
-          <figure key={index} className="overflow-hidden ">
+        <SwiperSlide key={index}>
+          <figure className="overflow-hidden ">
             <img className="w-full" src={url} alt="" />
           </figure>
         </SwiperSlide>

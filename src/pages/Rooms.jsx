@@ -39,8 +39,9 @@ export default function Rooms() {
                     전체
                   </button>
                 </li>
-                {filters?.map((filterItem) => (
+                {filters?.map((filterItem, index) => (
                   <RoomFilterTag
+                    key={index}
                     filterItem={filterItem}
                     filter={filter}
                     select={handleClick}

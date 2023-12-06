@@ -38,7 +38,7 @@ export default function AdminAttraction() {
               .slice(offset, offset + limit)
               .map((attraction, index) => (
                 <AdminAttactionCard
-                  key={attractions.id}
+                  key={attraction.id}
                   attraction={attraction}
                   offset={offset}
                   no={index}

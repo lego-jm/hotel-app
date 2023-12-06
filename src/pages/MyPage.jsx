@@ -5,7 +5,6 @@ import MyPageUse from "../components/mypage/MyPageUse";
 import { useUsers } from "../hooks/useUsers";
 import { useNavigate } from "react-router-dom";
 import Wrapper from "../components/Wrapper";
-import confirm from "../components/Confirm";
 import Loading from "../components/Loading";
 import ReservationList from "../components/reservation/ReservationList";
 
@@ -17,7 +16,11 @@ export default function MyPage() {
   } = useUsers();
 
   const handleRemoveAccount = () => {
-    confirm(`회원탈퇴를 진행하시겠습니까?\n탈퇴 후 되돌릴 수 없습니다.`, () =>
+    if (
+      window.confirm(
+        `회원탈퇴를 진행하시겠습니까?\n탈퇴 후 되돌릴 수 없습니다.`
+      )
+    ) {
       deleteAccountQuery.mutate(
         {},
         {
@@ -25,8 +28,8 @@ export default function MyPage() {
             window.alert("그동안 저희 리얼호텔을 이용해주셔서 감사합니다.");
           },
         }
-      )
-    );
+      );
+    }
   };
 
   if (isLoading) return <Loading />;

@@ -27,7 +27,9 @@ const database = getDatabase();
 const nowDate = moment().format("YYYY/MM/DD HH:mm:ss");
 
 export async function googleLogin() {
-  return signInWithPopup(auth, provider).catch((error) => console.error(error));
+  return signInWithPopup(auth, provider)
+    .then((res) => {})
+    .catch((error) => console.error(error));
 }
 
 export async function emailLogin(member) {
@@ -53,7 +55,6 @@ export async function joinUser(newUser) {
 
 export async function updateUser(updateUser) {
   delete updateUser.passwordCheck;
-  console.log(updateUser);
   set(ref(database, `users/${updateUser.uid}`), {
     ...updateUser,
     modifyDate: nowDate,
@@ -79,7 +80,6 @@ export async function idCheck(email) {
         const isIdCheck = Object.values(snapshot.val()).filter(
           (item) => item.email === email
         );
-
         return isIdCheck.length > 0 ? true : false;
       }
       return null;
@@ -96,6 +96,7 @@ export async function logOut() {
 export function getAuthState(callback) {
   onAuthStateChanged(auth, async (user) => {
     const updateUser = user ? await getAdminInfo(user) : null;
+
     callback(updateUser);
   });
 }
@@ -139,13 +140,16 @@ export async function getRooms() {
 
 async function getAdminInfo(user) {
   return get(ref(database, `admins/`))
-    .then((snapshot) => {
+    .then(async (snapshot) => {
       if (snapshot.exists()) {
         const isAdmin = snapshot.val().includes(user.uid);
-        if (isAdmin) {
-          return { ...user, isAdmin };
-        }
-        return { ...user };
+        const userInfo = get(ref(database, `users/${user?.uid}`));
+        const isSocialLogin = user.providerData[0].providerId === "google.com";
+        const isJoin = !(await userInfo).val() ? false : true;
+
+        if (isAdmin) return { ...user, isAdmin };
+
+        return !isSocialLogin && isJoin ? { ...user, isJoin } : null;
       }
     })
     .catch((error) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useUsers } from "../../hooks/useUsers";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 import nationData from "../../data/nation";
 import IdCheck from "./IdCheck";
@@ -12,9 +12,12 @@ import { validationCheck } from "../../util/validationCheck";
 export default function JoinForm({ children, userInfo }) {
   const nationArr = nationData();
   const navigate = useNavigate();
+  const { search } = useLocation();
   const [account, setAccount] = useState();
   const [nationChoice, setNationChoice] = useState();
   const { joinMemberQuery, updateUserQuery } = useUsers();
+
+  // console.log(search.indexOf("social"));
 
   const handleSubmit = (e) => {
     e.preventDefault();

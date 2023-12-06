@@ -38,9 +38,8 @@ export default function RoomCard({
         className="mySwiper"
       >
         {imgUrl.map((url, index) => (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             <figure
-              key={index}
               className="overflow-hidden cursor-pointer"
               onClick={() => navigate(`/rooms/${id}`, { state: { room } })}
             >
