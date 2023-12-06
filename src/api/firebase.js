@@ -27,9 +27,7 @@ const database = getDatabase();
 const nowDate = moment().format("YYYY/MM/DD HH:mm:ss");
 
 export async function googleLogin() {
-  return signInWithPopup(auth, provider)
-    .then((res) => {})
-    .catch((error) => console.error(error));
+  return signInWithPopup(auth, provider).catch((error) => console.error(error));
 }
 
 export async function emailLogin(member) {

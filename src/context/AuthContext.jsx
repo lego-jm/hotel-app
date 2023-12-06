@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAuthState } from "../api/firebase";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     /* if (!user?.isJoin) {
