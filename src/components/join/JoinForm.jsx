@@ -26,9 +26,10 @@ export default function JoinForm({ children, userInfo }) {
           { ...account, ...nationChoice },
           {
             onSuccess: (res) => {
-              validationCheck(res);
-              window.alert("수정이 완료되었습니다.");
-              navigate("/mypage");
+              if (validationCheck(res)) {
+                window.alert("수정이 완료되었습니다.");
+                navigate("/mypage");
+              }
             },
           }
         );
