@@ -6,7 +6,6 @@ import nationData from "../../data/nation";
 import IdCheck from "./IdCheck";
 import PassWord from "./PassWord";
 import Warning from "./Warning";
-import confirm from "../Confirm";
 import { validationCheck } from "../../util/validationCheck";
 
 export default function JoinForm({ children, userInfo }) {
@@ -22,7 +21,7 @@ export default function JoinForm({ children, userInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userInfo) {
-      confirm("수정하시겠습니까?", () =>
+      if (window.confirm("수정하시겠습니까?")) {
         updateUserQuery.mutate(
           { ...account, ...nationChoice },
           {
@@ -32,8 +31,8 @@ export default function JoinForm({ children, userInfo }) {
               navigate("/mypage");
             },
           }
-        )
-      );
+        );
+      }
       return;
     }
     joinMemberQuery.mutate(

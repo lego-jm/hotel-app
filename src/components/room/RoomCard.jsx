@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
+import { useAuthContext } from "../../context/AuthContext";
 
 export default function RoomCard({
   room,
@@ -19,6 +20,14 @@ export default function RoomCard({
   },
 }) {
   const navigate = useNavigate();
+  const { user } = useAuthContext();
+  const handleClick = () => {
+    if (user === null) {
+      window.alert("로그인 후 이용해주세요.");
+      return;
+    }
+    navigate(`/reservation/${id}`, { state: { room } });
+  };
 
   return (
     <div>
@@ -83,11 +92,7 @@ export default function RoomCard({
           </button>
         </div>
       </div>
-      <Button
-        text="예약하기"
-        type="button"
-        event={() => navigate(`/reservation/${id}`, { state: { room } })}
-      />
+      <Button text="예약하기" type="button" event={handleClick} />
     </div>
   );
 }
