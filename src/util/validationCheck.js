@@ -18,6 +18,4 @@ export function validationCheck(data) {
     window.alert("로그인 시도를 너무 많이 했습니다, 1분 후 다시 시도해주세요");
     return false;
   }
-
-  return true;
 }

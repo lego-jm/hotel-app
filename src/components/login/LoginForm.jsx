@@ -15,8 +15,7 @@ export default function LoginForm({ children }) {
     e.preventDefault();
     emailLoginQuery.mutate(account, {
       onSuccess: (res) => {
-        validationCheck(res);
-        navigate("/");
+        if (validationCheck(res)) navigate("/");
       },
     });
   };
