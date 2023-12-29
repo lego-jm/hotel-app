@@ -21,12 +21,23 @@ export default function ReservationOption({ room }) {
   const totalPrice = roomPrice + TIP_PRICE;
 
   const handleClick = () => {
+    /* const width = 700;
+    const height = 550;
+    const left = (window.innerWidth - width) / 2;
+    const top = (window.innerHeight - height) / 2; */
+
     if (!reservationDate?.startDate || !reservationDate?.endDate) {
       window.alert("날짜를 선택해주세요.");
       return;
     }
 
     if (window.confirm("예약을 진행하시겠습니까?")) {
+      /* window.open(
+        "/payment",
+        "_blank",
+        `width=${width}, height=${height}, left=${left}, top=${top}`
+      ); */
+
       addReservationQuery.mutate(
         {
           userInfo,

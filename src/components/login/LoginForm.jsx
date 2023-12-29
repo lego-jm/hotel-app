@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { googleLogin } from "../../api/firebase";
+import { googleLogin } from "../../api/firebase";
 import Button from "../ui/Button";
 import { useUsers } from "../../hooks/useUsers";
 import { validationCheck } from "../../util/validationCheck";
@@ -21,8 +21,8 @@ export default function LoginForm({ children }) {
   };
 
   const handleGoogleLogin = () => {
-    window.alert("준비중입니다.");
-    // googleLogin().then(() => navigate("/"));
+    // window.alert("준비중입니다.");
+    googleLogin().then(() => navigate("/"));
   };
 
   const handleChange = (e) => {
