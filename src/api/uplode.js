@@ -5,6 +5,10 @@ export async function upload(files) {
 
   data.append("upload_preset", uploadPreset);
 
+  if (!files) {
+    return;
+  }
+
   const uploadPromises = files.map(async (file) => {
     data.append("file", file);
     return fetch(url, { method: "post", body: data })

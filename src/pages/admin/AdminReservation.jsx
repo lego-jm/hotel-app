@@ -14,7 +14,7 @@ export default function AdminReservation() {
   const [limit, setLimit] = useState(10);
   const offset = (page - 1) * limit;
 
-  // console.log(reservations);
+  console.log(reservations);
 
   if (isLoading) return <Loading />;
 
@@ -41,7 +41,7 @@ export default function AdminReservation() {
                   key={reservation.id}
                   reservation={reservation}
                   offset={offset}
-                  no={index}
+                  index={index}
                   length={reservations.length}
                   setLimit={setLimit}
                 />

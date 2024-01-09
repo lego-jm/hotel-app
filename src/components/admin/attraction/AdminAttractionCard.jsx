@@ -3,26 +3,26 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminAttractionCard({
   attraction,
-  attraction: { title, category1, createdDate, id },
+  attraction: { title, firstCategory, createdDate, no },
   offset,
   length,
-  no,
+  index,
 }) {
   const navigate = useNavigate();
 
   return (
     <li className="flex justify-between text-center py-2">
-      <span className="basis-1/6">{length - offset - no}</span>
+      <span className="basis-1/6">{length - offset - index}</span>
       <span className="basis-1/6">
-        {category1 === "culture" && "문화"}
-        {category1 === "history" && "역사"}
+        {firstCategory === "culture" && "문화"}
+        {firstCategory === "history" && "역사"}
       </span>
       <span className="basis-1/6">{title}</span>
       <span className="basis-2/6">{createdDate}</span>
       <span
         className="basis-1/6 cursor-pointer"
         onClick={() =>
-          navigate(`/admin/attraction/${id}`, { state: { attraction } })
+          navigate(`/admin/attraction/${no}`, { state: { attraction } })
         }
       >
         상세보기

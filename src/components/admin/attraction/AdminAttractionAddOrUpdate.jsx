@@ -8,27 +8,28 @@ export default function AdminAttractionAddOrUpdate({ currentAttraction }) {
   const [file, setFile] = useState();
   const [attraction, setAttraction] = useState();
   const [category, setCategory] = useState();
-  const { addAttractionQuery, updateAttractionQuery, removeAttractionQuery } =
+  const { addAttractionQuery, updateAttractionQuery, deleteAttractionQuery } =
     useAttraction();
   const navigate = useNavigate();
   useEffect(() => {
     currentAttraction && setAttraction({ ...currentAttraction });
     currentAttraction &&
       setCategory({
-        category1: currentAttraction?.category1,
-        category2: currentAttraction?.category2,
+        firstCategory: currentAttraction?.firstCategory,
+        secondCategory: currentAttraction?.secondCategory,
       });
   }, [currentAttraction]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!currentAttraction) {
       upload(file).then((urls) => {
         addAttractionQuery.mutate(
           {
             ...attraction,
             ...category,
-            imgUrl: urls.map((data) => data.url),
+            imgUrl: urls.map((data) => data.url).toString(),
           },
           {
             onSuccess: () => navigate("/admin/attraction"),
@@ -66,14 +67,14 @@ export default function AdminAttractionAddOrUpdate({ currentAttraction }) {
         onSubmit={handleSubmit}
       >
         <div className="flex items-center gap-3">
-          <label className="w-1/12" htmlFor="category1">
+          <label className="w-1/12" htmlFor="firstCategory">
             카테고리
           </label>
           <select
             className="w-1/6 border border-gray-500 p-2 outline-none"
-            name="category1"
-            id="category1"
-            value={category?.category1 || ""}
+            name="firstCategory"
+            id="firstCategory"
+            value={category?.firstCategory || ""}
             onChange={(e) =>
               setCategory((prev) => ({
                 ...prev,
@@ -86,12 +87,12 @@ export default function AdminAttractionAddOrUpdate({ currentAttraction }) {
             <option value="culture">문화</option>
           </select>
 
-          {category?.category1 && (
+          {category?.firstCategory && (
             <select
               className="w-1/6 border border-gray-500 p-2 outline-none"
-              name="category2"
-              id="category2"
-              value={category?.category2 || ""}
+              name="secondCategory"
+              id="secondCategory"
+              value={category?.secondCategory || ""}
               onChange={(e) =>
                 setCategory((prev) => ({
                   ...prev,
@@ -99,7 +100,7 @@ export default function AdminAttractionAddOrUpdate({ currentAttraction }) {
                 }))
               }
             >
-              {category?.category1 === "history" ? (
+              {category?.firstCategory === "history" ? (
                 <>
                   <option value="">중카테고리</option>
                   <option value="palace">고궁</option>
@@ -149,18 +150,18 @@ export default function AdminAttractionAddOrUpdate({ currentAttraction }) {
           />
         </div>
         <div className="flex items-start gap-3">
-          <label className="w-1/12 mt-2" htmlFor="movetime">
+          <label className="w-1/12 mt-2" htmlFor="moveTime">
             이동 시간
           </label>
           <input
-            id="movetime"
+            id="moveTime"
             className="border w-3/6 border-gray-400 outline-none p-2 px-2 resize-none"
             type="text"
-            name="movetime"
+            name="moveTime"
             placeholder="이동 시간을 입력하세요"
             onChange={handleChange}
             rows={10}
-            value={attraction?.movetime || ""}
+            value={attraction?.moveTime || ""}
           />
         </div>
         <div className="flex items-center gap-3">
@@ -173,6 +174,7 @@ export default function AdminAttractionAddOrUpdate({ currentAttraction }) {
             type="file"
             name="file"
             onChange={handleChange}
+            required
             accept="image/*"
           />
         </div>
@@ -189,13 +191,16 @@ export default function AdminAttractionAddOrUpdate({ currentAttraction }) {
             <AdminButton
               type="button"
               text="명소 삭제"
-              event={() =>
-                removeAttractionQuery.mutate(currentAttraction.id, {
-                  onSuccess: () => {
-                    navigate("/admin/attraction");
-                  },
-                })
-              }
+              event={() => {
+                if (window.confirm("명소를 삭제하시겠습니까?")) {
+                  deleteAttractionQuery.mutate(currentAttraction.no, {
+                    onSuccess: () => {
+                      window.alert("명소를 삭제했습니다.");
+                      navigate("/admin/attraction");
+                    },
+                  });
+                }
+              }}
             />
           )}
         </div>

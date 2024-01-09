@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { googleLogin } from "../../api/firebase";
 import Button from "../ui/Button";
 import { useUsers } from "../../hooks/useUsers";
 import { validationCheck } from "../../util/validationCheck";
+import { useAuthContext } from "../../context/AuthContext";
+import { dataExpire } from "../../util/dataExpire";
 
 export default function LoginForm({ children }) {
   const [account, setAccount] = useState();
   const { emailLoginQuery } = useUsers();
+  const { setUser } = useAuthContext();
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    emailLoginQuery.mutate(account, {
-      onSuccess: (res) => {
-        if (validationCheck(res)) navigate("/");
-      },
-    });
-  };
 
-  const handleGoogleLogin = () => {
-    // window.alert("준비중입니다.");
-    googleLogin().then(() => navigate("/"));
+    if (validationCheck(account.email)) {
+      emailLoginQuery.mutate(account, {
+        onSuccess: (res) => {
+          const obj = dataExpire(res, 1000 * 60 * 60);
+          localStorage.setItem("user-token", JSON.stringify(obj));
+          setUser(res);
+          navigate("/");
+        },
+      });
+    }
   };
 
   const handleChange = (e) => {
@@ -70,12 +73,6 @@ export default function LoginForm({ children }) {
           className="w-full bg-theme-color p-3 mt-2 rounded-lg hover:text-white transition-all duration-300"
         />
       </form>
-      <Button
-        text="Google 로그인"
-        type="button"
-        event={handleGoogleLogin}
-        custom="w-full"
-      />
     </section>
   );
 }

@@ -78,7 +78,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/mypage/:uid",
+        path: "/mypage/info",
         element: (
           <ProtectRoute>
             <MyPageDatail />

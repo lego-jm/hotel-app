@@ -33,10 +33,10 @@ export default function AdminUsers() {
               .slice(offset, offset + limit)
               .map((user, index) => (
                 <AdminUserCard
-                  key={user.uid}
+                  key={user.no}
                   user={user}
                   offset={offset}
-                  no={index}
+                  index={index}
                   length={users.length}
                   setLimit={setLimit}
                 />

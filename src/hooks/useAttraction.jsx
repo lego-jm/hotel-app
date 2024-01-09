@@ -1,35 +1,39 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
+
 import {
   addAttraction,
-  getAttraction,
-  removeAttraction,
+  deleteAttraction,
+  getAllAttraction,
   updateAttraction,
-} from "../api/firebase";
+} from "../api/hotel-api";
+import { useAuthContext } from "../context/AuthContext";
 
 export function useAttraction() {
   const queryClient = useQueryClient();
+  const { user } = useAuthContext();
 
   const addAttractionQuery = useMutation(
-    async (attraction) => addAttraction(attraction),
+    async (attraction) => addAttraction(attraction, user.token),
     {
       onSuccess: () => queryClient.invalidateQueries(["attractions"]),
     }
   );
-  const getAttractionQuery = useQuery(
+  const getAllAttractionQuery = useQuery(
     ["attractions"],
-    async () => getAttraction(),
+    async () => getAllAttraction(),
     {
       staleTime: 1000 * 60 * 5,
     }
   );
   const updateAttractionQuery = useMutation(
-    async (attraction) => updateAttraction(attraction),
+    async (attraction) => updateAttraction(attraction, user.token),
     {
       onSuccess: () => queryClient.invalidateQueries(["attractions"]),
     }
   );
-  const removeAttractionQuery = useMutation(
-    async (attractionId) => removeAttraction(attractionId),
+
+  const deleteAttractionQuery = useMutation(
+    async (attractionId) => deleteAttraction(attractionId, user.token),
     {
       onSuccess: () => queryClient.invalidateQueries(["attractions"]),
     }
@@ -38,7 +42,7 @@ export function useAttraction() {
   return {
     addAttractionQuery,
     updateAttractionQuery,
-    getAttractionQuery,
-    removeAttractionQuery,
+    getAllAttractionQuery,
+    deleteAttractionQuery,
   };
 }

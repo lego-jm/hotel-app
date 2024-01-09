@@ -1,50 +1,55 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
+
 import {
   emailLogin,
-  getUserInfo,
-  getUsers,
-  idCheck,
-  joinUser,
-  removeAccount,
-  updatePassWordSendEmail,
-  updateUser,
-} from "../api/firebase";
+  joinMember,
+  getAllMember,
+  getMember,
+  updateMember,
+  deleteMember,
+  emailCheck,
+} from "../api/hotel-api";
 import { useAuthContext } from "../context/AuthContext";
 
 export function useUsers() {
   const queryClient = useQueryClient();
   const { user } = useAuthContext();
 
-  const emailLoginQuery = useMutation(async (account) => emailLogin(account), {
-    onSuccess: () => queryClient.invalidateQueries(["userInfo"]),
+  const emailLoginQuery = useMutation(async (user) => emailLogin(user), {
+    onSuccess: () => queryClient.invalidateQueries["userInfo"],
   });
-  const joinMemberQuery = useMutation(async (newUser) => joinUser(newUser));
-  const getUsersQuery = useQuery(["users"], async () => getUsers(), {
-    staleTime: 1000 * 60 * 5,
-  });
+  const joinMemberQuery = useMutation(async (newUser) => joinMember(newUser));
+  const getUsersQuery = useQuery(
+    ["users"],
+    async () => getAllMember(user.token),
+    {
+      staleTime: 1000 * 60 * 5,
+    }
+  );
   const getUserInfoQuery = useQuery(
-    ["userInfo", user?.uid],
-    async () => getUserInfo(user?.uid),
+    ["userInfo", user?.no],
+    async () => getMember(user?.no, user.token),
     { staleTime: 1000 * 60 * 5 }
   );
   const updateUserQuery = useMutation(
-    async (updateUserData) => updateUser(updateUserData),
-    { onSuccess: () => queryClient.invalidateQueries(["users"]) }
+    async (updateUserData) =>
+      updateMember({ ...updateUserData, userNo: user?.no }, user.token),
+    { onSuccess: () => queryClient.invalidateQueries(["userInfo"]) }
   );
-  const updatePassWordSendQuery = useMutation(async () =>
-    updatePassWordSendEmail(user.email)
+
+  const deleteAccountQuery = useMutation((userNo) =>
+    deleteMember(userNo, user.token)
   );
-  const idCheckQuery = useMutation(async (id) => idCheck(id));
-  const removeAccountQuery = useMutation(() => removeAccount(user));
+
+  const emailCheckQuery = useMutation(async (email) => emailCheck(email));
 
   return {
     emailLoginQuery,
     joinMemberQuery,
     updateUserQuery,
-    updatePassWordSendQuery,
     getUsersQuery,
     getUserInfoQuery,
-    idCheckQuery,
-    removeAccountQuery,
+    emailCheckQuery,
+    deleteAccountQuery,
   };
 }

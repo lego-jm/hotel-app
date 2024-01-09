@@ -34,6 +34,8 @@ export default function AdminUserUpdate() {
     setUpdateUser((prev) => ({ ...prev, [name]: value }));
   };
 
+  console.log(user);
+
   return (
     <>
       <h3 className="text-2xl mb-3">회원 수정</h3>
@@ -87,7 +89,7 @@ export default function AdminUserUpdate() {
               name="enNameFt"
               placeholder="영문 성을 입력하세요"
               onChange={handleChange}
-              value={updateUser?.enNameFt || ""}
+              value={updateUser?.firstName || ""}
               autoComplete="off"
               required
             />
@@ -97,41 +99,41 @@ export default function AdminUserUpdate() {
               name="enNameLt"
               placeholder="영문 이름을 입력하세요"
               onChange={handleChange}
-              value={updateUser?.enNameLt || ""}
+              value={updateUser?.lastName || ""}
               autoComplete="off"
               required
             />
           </div>
         </div>
         <div className="flex items-start gap-3">
-          <label className="w-1/12 mt-2" htmlFor="birth">
+          <label className="w-1/12 mt-2" htmlFor="birthDate">
             생년월일
           </label>
           <input
-            id="birth"
+            id="birthDate"
             className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
             type="text"
-            name="birth"
+            name="birthDate"
             placeholder="YYYY.MM.DD"
             onChange={handleChange}
-            value={updateUser?.birth || ""}
+            value={updateUser?.birthDate || ""}
             autoComplete="off"
             required
             maxLength={10}
           />
         </div>
         <div className="flex items-start gap-3">
-          <label className="w-1/12 mt-2" htmlFor="phoneNumber">
+          <label className="w-1/12 mt-2" htmlFor="phone">
             연락처
           </label>
           <input
-            id="phoneNumber"
+            id="phone"
             className="w-4/12 border border-gray-400 p-2 px-3 outline-none"
             type="number"
-            name="phoneNumber"
+            name="phone"
             placeholder="연락처를 입력하세요"
             onChange={handleChange}
-            value={updateUser?.phoneNumber || ""}
+            value={updateUser?.phone || ""}
             autoComplete="off"
             required
             maxLength={11}

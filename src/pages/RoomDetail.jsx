@@ -7,7 +7,7 @@ export default function RoomDetail() {
   const {
     state: {
       room,
-      room: { title, roomtype, imgUrl, location },
+      room: { title, roomtype, imgUrls, location },
     },
   } = useLocation();
 
@@ -22,7 +22,7 @@ export default function RoomDetail() {
         </p>
         <h5 className="md:text-4xl text-2xl mt-5 text-center">{title}</h5>
       </div>
-      <RoomDetailSwipe imgUrl={imgUrl} />
+      <RoomDetailSwipe imgUrl={imgUrls} />
       <RoomDescription room={room} />
     </section>
   );

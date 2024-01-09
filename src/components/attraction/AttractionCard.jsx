@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function AttractionCard({
-  attraction: { title, content, imgUrl, movetime },
+  attraction: { title, content, imgUrl, moveTime },
   index,
 }) {
   return (
@@ -12,8 +12,8 @@ export default function AttractionCard({
       <section className="lg:gap-7 lg:p-5 flex flex-col gap-4 basis-1/2 px-3">
         <h3 className="lg:mt-0 md:text-2xl text-xl mt-3">{title}</h3>
         <p className="md:text-base text-sm text-footer-font-color">{content}</p>
-        {movetime && (
-          <p className="md:text-base text-sm">이동 소요 시간 : {movetime}</p>
+        {moveTime && (
+          <p className="md:text-base text-sm">이동 소요 시간 : {moveTime}</p>
         )}
       </section>
     </li>

@@ -15,6 +15,7 @@ export default function ReservationList({ reservationDate, isMypage }) {
   const offset = (page - 1) * LIMIT;
   const nowDate = moment().subtract(1, "months").format("YYYY-MM-DD");
 
+  console.log(reservationDate);
   // 예약 조회 페이지 예약 내역 리스트
   if (reservationDate) {
     filteredList = reservations?.filter((reservation) => {
@@ -54,11 +55,11 @@ export default function ReservationList({ reservationDate, isMypage }) {
             ?.slice(offset, offset + LIMIT)
             .map((reservation, index) => (
               <ReservationCard
-                key={reservation.id}
+                key={reservation.no}
                 reservation={reservation}
                 offset={offset}
                 length={filteredList?.length}
-                no={index}
+                index={index}
               />
             ))
         ) : (

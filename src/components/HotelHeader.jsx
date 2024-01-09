@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { logOut } from "../api/firebase";
+import { logOut } from "../api/hotel-api";
 import { useAuthContext } from "../context/AuthContext";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
+import "../api/hotel-api";
 
 export default function HotelHeader() {
   const { pathname } = useLocation();
-  const { user } = useAuthContext();
+  const { user, setUser } = useAuthContext();
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -68,13 +69,15 @@ export default function HotelHeader() {
             >
               주요명소
             </Link>
-            <Link
-              to={`/reservation/check`}
-              className="lg:border-none lg:p-0 lg:w-auto hover:text-theme-color duration-300 p-5 border-b gray-200 w-5/6 text-center"
-              onClick={() => setIsActive(false)}
-            >
-              예약조회
-            </Link>
+
+            {user && (
+              <Link
+                to={`/reservation/check`}
+                className="lg:border-none lg:p-0 lg:w-auto hover:text-theme-color duration-300 p-5 border-b gray-200 w-5/6 text-center"
+              >
+                예약조회
+              </Link>
+            )}
           </nav>
           <nav className="lg:text-black lg:bg-transparent lg:flex-row lg:basis-2/6 lg:p-0 lg:justify-end flex flex-col justify-between gap-5 p-6 bg-neutral-700 text-white">
             <IoMdClose
@@ -82,7 +85,7 @@ export default function HotelHeader() {
               className="lg:hidden block text-3xl self-end"
             />
             <div className="flex justify-between items-center gap-5">
-              {user?.isAdmin && (
+              {user?.admin && (
                 <Link
                   to="/admin/users"
                   className="hover:text-theme-color duration-300 py-1"
@@ -90,7 +93,7 @@ export default function HotelHeader() {
                   관리자 화면
                 </Link>
               )}
-              {user && !user.isAdmin && (
+              {user && !user.admin && (
                 <Link
                   to="/mypage"
                   className="hover:text-theme-color duration-300 py-1"
@@ -102,7 +105,8 @@ export default function HotelHeader() {
               {user ? (
                 <Link
                   onClick={() => {
-                    logOut();
+                    logOut(setUser);
+                    setUser(null);
                     setIsActive(false);
                   }}
                   to="/login"

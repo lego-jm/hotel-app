@@ -8,15 +8,15 @@ import { useAuthContext } from "../../context/AuthContext";
 export default function RoomCard({
   room,
   room: {
+    no,
     title,
     people,
     bedtype,
     area,
     outlook,
     roomtype,
-    imgUrl,
     location,
-    id,
+    imgUrls,
   },
 }) {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function RoomCard({
       window.alert("로그인 후 이용해주세요.");
       return;
     }
-    navigate(`/reservation/${id}`, { state: { room } });
+    navigate(`/reservation/${no}`, { state: { room } });
   };
 
   return (
@@ -46,11 +46,11 @@ export default function RoomCard({
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        {imgUrl.map((url, index) => (
+        {imgUrls.map((url, index) => (
           <SwiperSlide key={index}>
             <figure
               className="overflow-hidden cursor-pointer"
-              onClick={() => navigate(`/rooms/${id}`, { state: { room } })}
+              onClick={() => navigate(`/rooms/${no}`, { state: { room } })}
             >
               <img
                 className="w-full hover:scale-105 transition-all duration-500"
@@ -86,7 +86,7 @@ export default function RoomCard({
           </div>
           <button
             className="self-end whitespace-nowrap opacity-70"
-            onClick={() => navigate(`/rooms/${id}`, { state: { room } })}
+            onClick={() => navigate(`/rooms/${no}`, { state: { room } })}
           >
             자세히 보기 &gt;
           </button>

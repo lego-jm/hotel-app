@@ -7,7 +7,7 @@ import { useRooms } from "../../../hooks/useRooms";
 export default function AdminAddOrUpdate({ currentRoom }) {
   const [file, setFile] = useState();
   const [room, setRoom] = useState();
-  const { addRoomQuery, updateRoomQuery, removeRoomQuery } = useRooms();
+  const { addRoomQuery, updateRoomQuery, deleteRoomQuery } = useRooms();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,17 +87,17 @@ export default function AdminAddOrUpdate({ currentRoom }) {
           />
         </div>
         <div className="flex items-center gap-3">
-          <label className="w-1/12" htmlFor="roomtype">
+          <label className="w-1/12" htmlFor="roomType">
             룸타입
           </label>
           <input
-            id="roomtype"
+            id="roomType"
             className="border w-3/6 border-gray-400 outline-none p-2 px-2"
             type="text"
-            name="roomtype"
+            name="roomType"
             placeholder="룸타입을 입력하세요"
             onChange={handleChange}
-            value={room?.roomtype || ""}
+            value={room?.roomType || ""}
             required
           />
         </div>
@@ -132,17 +132,17 @@ export default function AdminAddOrUpdate({ currentRoom }) {
           />
         </div>
         <div className="flex items-center gap-3">
-          <label className="w-1/12" htmlFor="bedtype">
+          <label className="w-1/12" htmlFor="bedType">
             침대타입
           </label>
           <input
-            id="bedtype"
+            id="bedType"
             className="border w-3/6 border-gray-400 outline-none p-2 px-2"
             type="text"
-            name="bedtype"
+            name="bedType"
             placeholder="침대타입을 입력하세요"
             onChange={handleChange}
-            value={room?.bedtype || ""}
+            value={room?.bedType || ""}
             required
           />
         </div>
@@ -221,13 +221,16 @@ export default function AdminAddOrUpdate({ currentRoom }) {
             <AdminButton
               type="button"
               text="객실 삭제"
-              event={() =>
-                removeRoomQuery.mutate(currentRoom.id, {
-                  onSuccess: () => {
-                    console.log("success");
-                  },
-                })
-              }
+              event={() => {
+                if (window.confirm("객실을 삭제하시겠습니까?")) {
+                  deleteRoomQuery.mutate(currentRoom.no, {
+                    onSuccess: () => {
+                      navigate("/admin/rooms");
+                      console.log("success");
+                    },
+                  });
+                }
+              }}
             />
           )}
         </div>

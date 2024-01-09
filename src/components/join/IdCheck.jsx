@@ -4,17 +4,18 @@ import Button from "../ui/Button";
 
 export default function IdCheck({ account, handleChange, userInfo }) {
   const [text, setText] = useState({ email: "", isCheck: false });
-  const { idCheckQuery } = useUsers();
+  const { emailCheckQuery } = useUsers();
 
   const handleIdCheck = () => {
     if (account?.email) {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailPattern.test(account?.email)) {
         setText({ email: "이메일을 확인해주세요." });
+        setTimeout(() => setText({ email: "" }), [1500]);
         return;
       }
 
-      idCheckQuery.mutate(account.email, {
+      emailCheckQuery.mutate(account.email, {
         onSuccess: (isCheck) => {
           isCheck
             ? setText({ email: "사용자가 이미 있습니다." })
@@ -24,6 +25,7 @@ export default function IdCheck({ account, handleChange, userInfo }) {
       });
     } else {
       setText({ email: "이메일을 먼저 입력해주세요." });
+      setTimeout(() => setText({ email: "" }), [1500]);
     }
   };
 

@@ -1,29 +1,31 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import {
-  addRoom,
-  getFilterList,
-  getRooms,
-  removeRoom,
-  updateRoom,
-} from "../api/firebase";
+import { getFilterList, updateRoom } from "../api/firebase";
+
+import { addRoom, getAllRoom, deleteRoom } from "../api/hotel-api";
+import { useAuthContext } from "../context/AuthContext";
 
 export function useRooms() {
   const queryClient = useQueryClient();
+  const { user } = useAuthContext();
 
-  const addRoomQuery = useMutation((room) => addRoom(room), {
+  const addRoomQuery = useMutation((room) => addRoom(room, user.token), {
     onSuccess: () => queryClient.invalidateQueries(["rooms"]),
   });
   const updateRoomQuery = useMutation((room) => updateRoom(room), {
     onSuccess: () => queryClient.invalidateQueries(["rooms"]),
   });
-  const getRoomsQuery = useQuery(["rooms"], async () => getRooms(), {
+  const getRoomsQuery = useQuery(["rooms"], async () => getAllRoom(), {
     staleTime: 1000 * 60 * 5,
   });
-  const removeRoomQuery = useMutation((id) => removeRoom(id), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(["rooms"]);
-    },
-  });
+  const deleteRoomQuery = useMutation(
+    (roomNo) => deleteRoom(roomNo, user.token),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["rooms"]);
+      },
+    }
+  );
+
   const getFilterQuery = useQuery(["filters"], async () => getFilterList(), {
     staleTime: 1000 * 60 * 10,
   });
@@ -32,7 +34,7 @@ export function useRooms() {
     addRoomQuery,
     updateRoomQuery,
     getRoomsQuery,
-    removeRoomQuery,
+    deleteRoomQuery,
     getFilterQuery,
   };
 }

@@ -1,12 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
-  getAllReservation,
-  addReservation,
   updateReservation,
   removeReservation,
-  getReservationUser,
   getRoomReservation,
 } from "../api/firebase";
+import {
+  addReservation,
+  getAllReservation,
+  getUserReservation,
+} from "../api/hotel-api";
 import { useAuthContext } from "../context/AuthContext";
 
 export function useReservation(roomId) {
@@ -14,7 +16,8 @@ export function useReservation(roomId) {
   const { user } = useAuthContext();
 
   const addReservationQuery = useMutation(
-    async (reservation) => addReservation(reservation, user.uid),
+    async (reservation) =>
+      addReservation({ ...reservation, userNo: user.no }, user.token),
     {
       onSuccess: () => {
         queryClient.invalidateQueries("all-reservation");
@@ -33,12 +36,13 @@ export function useReservation(roomId) {
   );
   const getAllReservationQuery = useQuery(
     ["all-reservation"],
-    async () => getAllReservation(),
+    async () => getAllReservation(user.token),
     { staleTime: 1000 * 60 * 1 }
   );
+
   const getReservationUserQuery = useQuery(
     ["reservation", user.uid],
-    async () => getReservationUser(user.uid),
+    async () => getUserReservation(user.no, user.token),
     { staleTime: 1000 * 60 * 5 }
   );
 

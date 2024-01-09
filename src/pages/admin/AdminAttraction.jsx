@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function AdminAttraction() {
   const navigate = useNavigate();
   const {
-    getAttractionQuery: { isLoading, data: attractions },
+    getAllAttractionQuery: { isLoading, data: attractions },
   } = useAttraction();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -38,10 +38,10 @@ export default function AdminAttraction() {
               .slice(offset, offset + limit)
               .map((attraction, index) => (
                 <AdminAttactionCard
-                  key={attraction.id}
+                  key={attraction.no}
                   attraction={attraction}
                   offset={offset}
-                  no={index}
+                  index={index}
                   length={attractions.length}
                   setLimit={setLimit}
                 />

@@ -23,8 +23,8 @@ export default function RoomList({ filter }) {
   return (
     <section className="max-w-7xl mx-auto mt-5 grid grid-cols-1 lg:grid-cols-2 gap-10 px-3">
       {filterRooms
-        ? filterRooms.map((room) => <RoomCard key={room.id} room={room} />)
-        : rooms.map((room) => <RoomCard key={room.id} room={room} />)}
+        ? filterRooms.map((room) => <RoomCard key={room.no} room={room} />)
+        : rooms.map((room) => <RoomCard key={room.no} room={room} />)}
     </section>
   );
 }

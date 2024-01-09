@@ -3,7 +3,7 @@ import RoomDescriptionCard from "./RoomDescriptionCard";
 import Wrapper from "../Wrapper";
 
 export default function RoomDescription({
-  room: { people, bedtype, area, outlook, location, id, content },
+  room: { people, bedtype, area, outlook, location, content },
 }) {
   return (
     <Wrapper custom="!my-0">

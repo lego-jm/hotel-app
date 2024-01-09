@@ -39,10 +39,10 @@ export default function AdminRooms() {
               .slice(offset, offset + limit)
               .map((room, index) => (
                 <AdminRoomCard
-                  key={room.id}
+                  key={room.no}
                   room={room}
                   offset={offset}
-                  no={index}
+                  index={index}
                   length={rooms.length}
                   setLimit={setLimit}
                 />

@@ -5,9 +5,7 @@ import { Navigate } from "react-router-dom";
 export default function ProtectRoute({ children, requireAdmin }) {
   const { user } = useAuthContext();
 
-  console.log(user);
-
-  if (!user || (!user.isAdmin && requireAdmin)) {
+  if (!user || (!user.admin && requireAdmin)) {
     return <Navigate to="/" replace></Navigate>;
   }
 

@@ -11,12 +11,11 @@ import { validationCheck } from "../../util/validationCheck";
 export default function JoinForm({ children, userInfo }) {
   const nationArr = nationData();
   const navigate = useNavigate();
-  // const { search } = useLocation();
   const [account, setAccount] = useState();
-  const [nationChoice, setNationChoice] = useState();
+  const [nationChoice, setNationChoice] = useState({
+    nation: !userInfo ? nationArr[0] : userInfo.nation,
+  });
   const { joinMemberQuery, updateUserQuery } = useUsers();
-
-  // console.log(search.indexOf("social"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +42,7 @@ export default function JoinForm({ children, userInfo }) {
           if (!validationCheck(res)) {
             return;
           } else {
-            window.alert("회원가입이 완료되었습니다");
+            window.alert("회원가입이 완료되었습니다\n로그인 후 이용해주세요.");
             navigate("/");
           }
         },
@@ -73,11 +72,7 @@ export default function JoinForm({ children, userInfo }) {
           handleChange={handleChange}
           userInfo={userInfo}
         />
-        <PassWord
-          handleChange={handleChange}
-          account={account}
-          userInfo={userInfo}
-        />
+        <PassWord handleChange={handleChange} account={account} />
         <div className="md:w-4/12 flex flex-col border-t border-gray-200">
           <label className="self-start mt-5" htmlFor="nation">
             국가*
@@ -89,7 +84,7 @@ export default function JoinForm({ children, userInfo }) {
             onChange={(e) =>
               setNationChoice({ [e.target.name]: e.target.value })
             }
-            value={account?.nation || nationChoice?.nation}
+            value={nationChoice.nation}
           >
             {nationArr.map((nation, index) => (
               <option key={index} value={nation}>
@@ -99,62 +94,62 @@ export default function JoinForm({ children, userInfo }) {
           </select>
         </div>
         <div className="flex flex-col border-t border-gray-200">
-          <label className="self-start mt-5" htmlFor="enNameFt">
+          <label className="self-start mt-5" htmlFor="firstName">
             영문 이름*
           </label>
           <div className="md:w-8/12 md:flex-row flex flex-col gap-2 mb-3">
             <input
-              id="enNameFt"
+              id="firstName"
               className="basis-1/2 border border-gray-400 p-2 px-3 outline-none"
               type="text"
-              name="enNameFt"
+              name="firstName"
               placeholder="영문 성을 입력하세요"
               onChange={handleChange}
-              value={account?.enNameFt || ""}
+              value={account?.firstName || ""}
               autoComplete="off"
               required
             />
             <input
               className="basis-1/2 border border-gray-400 p-2 px-3 outline-none"
               type="text"
-              name="enNameLt"
+              name="lastName"
               placeholder="영문 이름을 입력하세요"
               onChange={handleChange}
-              value={account?.enNameLt || ""}
+              value={account?.lastName || ""}
               autoComplete="off"
               required
             />
           </div>
         </div>
         <div className="flex flex-col border-t border-gray-200">
-          <label className="self-start mt-5" htmlFor="birth">
+          <label className="self-start mt-5" htmlFor="birthDate">
             생년월일*
           </label>
           <input
-            id="birth"
+            id="birthDate"
             className="md:w-4/12 border border-gray-400 p-2 px-3 outline-none"
             type="text"
-            name="birth"
+            name="birthDate"
             placeholder="YYYY.MM.DD"
             onChange={handleChange}
-            value={account?.birth || ""}
+            value={account?.birthDate || ""}
             autoComplete="off"
             required
             maxLength={10}
           />
         </div>
         <div className="flex flex-col border-t border-gray-200 gap-2">
-          <label className="self-start mt-5" htmlFor="phoneNumber">
+          <label className="self-start mt-5" htmlFor="phone">
             연락처*
           </label>
           <input
-            id="phoneNumber"
+            id="phone"
             className="md:w-4/12 border border-gray-400 p-2 px-3 outline-none"
             type="number"
-            name="phoneNumber"
+            name="phone"
             placeholder="연락처를 입력하세요"
             onChange={handleChange}
-            value={account?.phoneNumber || ""}
+            value={account?.phone || ""}
             autoComplete="off"
             required
             maxLength={11}

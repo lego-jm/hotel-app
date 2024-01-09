@@ -12,13 +12,13 @@ export default function AttractionContents() {
   });
 
   const {
-    getAttractionQuery: { isLoading, data: attractions },
+    getAllAttractionQuery: { isLoading, data: attractions },
   } = useAttraction();
 
   const filterAttraction = attractions?.filter(
     (attraction) =>
-      attraction.category1 === select.firstDepth &&
-      attraction.category2 === select.secondDepth
+      attraction.firstCategory === select.firstDepth &&
+      attraction.secondCategory === select.secondDepth
   );
 
   if (isLoading) return <Loading />;
@@ -32,7 +32,7 @@ export default function AttractionContents() {
       <ul className="">
         {filterAttraction?.map((attraction, index) => (
           <AttractionCard
-            key={attraction.id}
+            key={attraction.no}
             attraction={attraction}
             index={index}
           />

@@ -11,7 +11,18 @@ export default function AdminReservationUpdate() {
   const navigate = useNavigate();
   const [status, setStatus] = useState();
   const { updateReservationQuery } = useReservation();
-  const { userInfo } = reservation;
+
+  const {
+    email,
+    firstName,
+    lastName,
+    phone,
+    roomTitle,
+    people,
+    request,
+    startDate,
+    endDate,
+  } = reservation;
 
   useEffect(() => {
     reservation && setStatus(reservation.status);
@@ -38,9 +49,9 @@ export default function AdminReservationUpdate() {
       >
         <div className="flex items-center gap-3">
           <label className="w-2/12" htmlFor="email">
-            예약자 이름
+            예약자 이메일
           </label>
-          <p className="w-4/12 p-2 px-3">{userInfo?.email}</p>
+          <p className="w-4/12 p-2 px-3">{email}</p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -50,7 +61,7 @@ export default function AdminReservationUpdate() {
 
           <div className="flex gap-2 w-8/12">
             <p className="w-4/12 p-2 px-3">
-              {userInfo?.enNameFt} {userInfo?.enNameLt}
+              {firstName} {lastName}
             </p>
           </div>
         </div>
@@ -58,34 +69,34 @@ export default function AdminReservationUpdate() {
           <label className="w-2/12" htmlFor="phoneNumber">
             연락처
           </label>
-          <p className="w-4/12 p-2 px-3">{userInfo?.phoneNumber || ""}</p>
+          <p className="w-4/12 p-2 px-3">{phone || ""}</p>
         </div>
         <div className="flex items-center gap-3">
           <label className="w-2/12" htmlFor="roomTitle">
             객실 이름
           </label>
-          <p className="w-4/12 p-2 px-3">{reservation?.roomTitle || ""}</p>
+          <p className="w-4/12 p-2 px-3">{roomTitle || ""}</p>
         </div>
         <div className="flex items-center gap-3">
           <label className="w-2/12" htmlFor="phoneNumber">
             숙박 기간
           </label>
           <p className="w-4/12 p-2 px-3">
-            {`${reservation.reservationDate.startDate} ~ `}
-            {reservation.reservationDate.endDate}
+            {`${startDate} ~ `}
+            {endDate}
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <label className="w-2/12" htmlFor="phoneNumber">
+          <label className="w-2/12" htmlFor="people">
             숙박 인원
           </label>
-          <p className="w-4/12 p-2 px-3">{`${reservation.people}명`}</p>
+          <p className="w-4/12 p-2 px-3">{`${people}명`}</p>
         </div>
         <div className="flex items-center gap-3">
-          <label className="w-2/12" htmlFor="phoneNumber">
+          <label className="w-2/12" htmlFor="request">
             추가 요청 사항
           </label>
-          <p className="w-5/12 p-2 px-3">{reservation.request}</p>
+          <p className="w-5/12 p-2 px-3">{request}</p>
         </div>
         <div className="flex items-center gap-3">
           <label className="w-2/12" htmlFor="status">

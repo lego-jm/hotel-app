@@ -21,14 +21,13 @@ export default function MyPage() {
         `회원탈퇴를 진행하시겠습니까?\n탈퇴 후 되돌릴 수 없습니다.`
       )
     ) {
-      deleteAccountQuery.mutate(
-        {},
-        {
-          onSuccess: () => {
-            window.alert("그동안 저희 리얼호텔을 이용해주셔서 감사합니다.");
-          },
-        }
-      );
+      deleteAccountQuery.mutate(userInfo.no, {
+        onSuccess: () => {
+          window.alert("그동안 저희 리얼호텔을 이용해주셔서 감사합니다.");
+          localStorage.removeItem("user-token");
+          navigate("/");
+        },
+      });
     }
   };
 
@@ -51,9 +50,7 @@ export default function MyPage() {
         <Button
           text="회원정보"
           type="button"
-          event={() =>
-            navigate(`/mypage/${userInfo.uid}`, { state: { userInfo } })
-          }
+          event={() => navigate(`/mypage/info`, { state: { userInfo } })}
         />
         <Button
           text="예약상세조회"

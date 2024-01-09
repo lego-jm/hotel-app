@@ -3,7 +3,6 @@ import Button from "../ui/Button";
 import CustomCalendar from "../CustomCalendar";
 import PlusMinusButton from "./PlusMinusButton";
 import { useReservation } from "../../hooks/useReservation";
-import { useUsers } from "../../hooks/useUsers";
 import { useNavigate } from "react-router-dom";
 
 export default function ReservationOption({ room }) {
@@ -12,9 +11,6 @@ export default function ReservationOption({ room }) {
   const [request, setRequest] = useState("");
   const [reservationDate, setReservationDate] = useState();
   const { addReservationQuery } = useReservation();
-  const {
-    getUserInfoQuery: { data: userInfo },
-  } = useUsers();
   const navigate = useNavigate();
   const TIP_PRICE = 60900;
   const roomPrice = room.price * diffDay;
@@ -40,12 +36,11 @@ export default function ReservationOption({ room }) {
 
       addReservationQuery.mutate(
         {
-          userInfo,
-          roomId: room.id,
-          roomTitle: room.title,
+          roomNo: room.no,
           request,
           people,
-          reservationDate,
+          startDate: reservationDate.startDate,
+          endDate: reservationDate.endDate,
           totalPrice,
           diffDay,
         },
