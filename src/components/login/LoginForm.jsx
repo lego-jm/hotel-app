@@ -5,6 +5,7 @@ import { useUsers } from "../../hooks/useUsers";
 import { validationCheck } from "../../util/validationCheck";
 import { useAuthContext } from "../../context/AuthContext";
 import { dataExpire } from "../../util/dataExpire";
+import { apiErrorCheck } from "../../util/apiErrorCheck";
 
 export default function LoginForm({ children }) {
   const [account, setAccount] = useState();
@@ -16,13 +17,15 @@ export default function LoginForm({ children }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validationCheck(account.email)) {
+    if (validationCheck(account)) {
       emailLoginQuery.mutate(account, {
         onSuccess: (res) => {
-          const obj = dataExpire(res, 1000 * 60 * 60);
-          localStorage.setItem("user-token", JSON.stringify(obj));
-          setUser(res);
-          navigate("/");
+          if (apiErrorCheck(res)) {
+            const obj = dataExpire(res, 1000 * 60 * 60);
+            localStorage.setItem("user-token", JSON.stringify(obj));
+            setUser(res);
+            navigate("/");
+          }
         },
       });
     }
@@ -51,7 +54,6 @@ export default function LoginForm({ children }) {
           placeholder="이메일을 입력하세요"
           value={account?.email || ""}
           onChange={handleChange}
-          required
         />
         <label className="self-start mt-5" htmlFor="password">
           비밀번호
@@ -65,7 +67,6 @@ export default function LoginForm({ children }) {
           onChange={handleChange}
           value={account?.password || ""}
           autoComplete="off"
-          required
         />
         <Button
           text="로그인"

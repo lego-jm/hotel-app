@@ -30,7 +30,7 @@ export default function HomeMapSection() {
             <figure className="lg:basis-3/12 shrink-0 ">
               <img
                 className="w-full"
-                src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
+                src={`https://openweathermap.org/img/wn/${weather?.weather[0]?.icon}@2x.png`}
                 alt=""
               />
             </figure>

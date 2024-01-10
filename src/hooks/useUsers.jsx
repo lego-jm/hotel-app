@@ -21,24 +21,24 @@ export function useUsers() {
   const joinMemberQuery = useMutation(async (newUser) => joinMember(newUser));
   const getUsersQuery = useQuery(
     ["users"],
-    async () => getAllMember(user.token),
+    async () => getAllMember(user?.token),
     {
       staleTime: 1000 * 60 * 5,
     }
   );
   const getUserInfoQuery = useQuery(
-    ["userInfo", user?.no],
-    async () => getMember(user?.no, user.token),
+    ["userInfo"],
+    async () => getMember(user?.no, user?.token),
     { staleTime: 1000 * 60 * 5 }
   );
   const updateUserQuery = useMutation(
     async (updateUserData) =>
-      updateMember({ ...updateUserData, userNo: user?.no }, user.token),
+      updateMember({ ...updateUserData, userNo: user?.no }, user?.token),
     { onSuccess: () => queryClient.invalidateQueries(["userInfo"]) }
   );
 
   const deleteAccountQuery = useMutation((userNo) =>
-    deleteMember(userNo, user.token)
+    deleteMember(userNo, user?.token)
   );
 
   const emailCheckQuery = useMutation(async (email) => emailCheck(email));

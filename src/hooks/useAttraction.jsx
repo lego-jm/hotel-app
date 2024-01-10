@@ -13,7 +13,7 @@ export function useAttraction() {
   const { user } = useAuthContext();
 
   const addAttractionQuery = useMutation(
-    async (attraction) => addAttraction(attraction, user.token),
+    async (attraction) => addAttraction(attraction, user?.token),
     {
       onSuccess: () => queryClient.invalidateQueries(["attractions"]),
     }
@@ -26,14 +26,14 @@ export function useAttraction() {
     }
   );
   const updateAttractionQuery = useMutation(
-    async (attraction) => updateAttraction(attraction, user.token),
+    async (attraction) => updateAttraction(attraction, user?.token),
     {
       onSuccess: () => queryClient.invalidateQueries(["attractions"]),
     }
   );
 
   const deleteAttractionQuery = useMutation(
-    async (attractionId) => deleteAttraction(attractionId, user.token),
+    async (attractionId) => deleteAttraction(attractionId, user?.token),
     {
       onSuccess: () => queryClient.invalidateQueries(["attractions"]),
     }

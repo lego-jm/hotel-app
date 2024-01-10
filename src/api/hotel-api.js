@@ -18,6 +18,7 @@ export function logOut() {
 }
 
 export async function joinMember(user) {
+  console.log(user);
   return apiUrl
     .post("/api/member", user) //
     .then((res) => res);
@@ -38,14 +39,16 @@ export async function deleteMember(userNo) {
 }
 
 export async function getMember(userNo, token) {
-  return apiUrl
-    .get(`/api/member/${userNo}`, {
-      headers: { Authorization: token },
-    }) //
-    .then((res) => {
-      delete res.data.password;
-      return res.data;
-    });
+  if (userNo) {
+    return apiUrl
+      .get(`/api/member/${userNo}`, {
+        headers: { Authorization: token },
+      }) //
+      .then((res) => {
+        delete res.data.password;
+        return res.data;
+      });
+  }
 }
 
 export async function getAllMember(token) {
@@ -182,11 +185,14 @@ export async function deleteReservation(reservationNo, token) {
 }
 
 export async function getReservation(reservationNo, token) {
-  return apiUrl
-    .get(`/api/reservation/${reservationNo}`, {
-      headers: { Authorization: "Bearer " + token },
-    }) //
-    .then((res) => res);
+  if (reservationNo) {
+    return apiUrl
+      .get(`/api/reservation/${reservationNo}`, {
+        headers: { Authorization: "Bearer " + token },
+      }) //
+      .then((res) => res)
+      .catch((e) => console.log(e));
+  }
 }
 
 export async function getUserReservation(userNo, token) {

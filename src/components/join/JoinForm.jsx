@@ -7,6 +7,7 @@ import IdCheck from "./IdCheck";
 import PassWord from "./PassWord";
 import Warning from "./Warning";
 import { validationCheck } from "../../util/validationCheck";
+import { apiErrorCheck } from "../../util/apiErrorCheck";
 
 export default function JoinForm({ children, userInfo }) {
   const nationArr = nationData();
@@ -39,7 +40,7 @@ export default function JoinForm({ children, userInfo }) {
       { ...account, ...nationChoice },
       {
         onSuccess: (res) => {
-          if (!validationCheck(res)) {
+          if (!apiErrorCheck(res)) {
             return;
           } else {
             window.alert("회원가입이 완료되었습니다\n로그인 후 이용해주세요.");

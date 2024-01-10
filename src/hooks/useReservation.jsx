@@ -17,7 +17,7 @@ export function useReservation(roomId) {
 
   const addReservationQuery = useMutation(
     async (reservation) =>
-      addReservation({ ...reservation, userNo: user.no }, user.token),
+      addReservation({ ...reservation, userNo: user.no }, user?.token),
     {
       onSuccess: () => {
         queryClient.invalidateQueries("all-reservation");
@@ -36,13 +36,13 @@ export function useReservation(roomId) {
   );
   const getAllReservationQuery = useQuery(
     ["all-reservation"],
-    async () => getAllReservation(user.token),
+    async () => getAllReservation(user?.token),
     { staleTime: 1000 * 60 * 1 }
   );
 
   const getReservationUserQuery = useQuery(
-    ["reservation", user.uid],
-    async () => getUserReservation(user.no, user.token),
+    ["reservation", user?.no],
+    async () => getUserReservation(user?.no, user?.token),
     { staleTime: 1000 * 60 * 5 }
   );
 
@@ -53,7 +53,7 @@ export function useReservation(roomId) {
   );
 
   const removeReservationQuery = useMutation(
-    async (reservationId) => removeReservation(reservationId, user.uid),
+    async (reservationId) => removeReservation(reservationId, user?.no),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["all-reservation"]);

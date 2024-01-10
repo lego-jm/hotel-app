@@ -8,7 +8,7 @@ export function useRooms() {
   const queryClient = useQueryClient();
   const { user } = useAuthContext();
 
-  const addRoomQuery = useMutation((room) => addRoom(room, user.token), {
+  const addRoomQuery = useMutation((room) => addRoom(room, user?.token), {
     onSuccess: () => queryClient.invalidateQueries(["rooms"]),
   });
   const updateRoomQuery = useMutation((room) => updateRoom(room), {
@@ -18,7 +18,7 @@ export function useRooms() {
     staleTime: 1000 * 60 * 5,
   });
   const deleteRoomQuery = useMutation(
-    (roomNo) => deleteRoom(roomNo, user.token),
+    (roomNo) => deleteRoom(roomNo, user?.token),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["rooms"]);
