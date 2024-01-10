@@ -7,7 +7,7 @@ export default function RoomDetail() {
   const {
     state: {
       room,
-      room: { title, roomtype, imgUrls, location },
+      room: { title, roomType, imgUrls, location },
     },
   } = useLocation();
 
@@ -18,7 +18,7 @@ export default function RoomDetail() {
           <span className="after:border-r after:border-gray-500 after:mx-4 font-bold">
             {location}
           </span>
-          {roomtype}
+          {roomType}
         </p>
         <h5 className="md:text-4xl text-2xl mt-5 text-center">{title}</h5>
       </div>

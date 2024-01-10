@@ -126,6 +126,12 @@ export async function getAllRoom() {
     );
 }
 
+export async function getFilters() {
+  return apiUrl
+    .get("/api/room/filter") //
+    .then((res) => res.data);
+}
+
 /* Attraction Function */
 export async function addAttraction(attraction, token) {
   return apiUrl
@@ -136,7 +142,6 @@ export async function addAttraction(attraction, token) {
 }
 
 export async function updateAttraction(attraction, token) {
-  console.log(attraction);
   return apiUrl
     .post(`/api/admin/attraction/${attraction.no}`, attraction, {
       headers: { Authorization: "Bearer " + token },
@@ -198,7 +203,15 @@ export async function getUserReservation(userNo, token) {
   return apiUrl
     .get(`/api/reservation/user/${userNo}`, {
       headers: { Authorization: "Bearer " + token },
-    }) //
+    })
+    .then((res) => res.data);
+}
+
+export async function getRoomReservation(roomNo, token) {
+  return apiUrl
+    .get(`/api/reservation/room/${roomNo}`, {
+      headers: { Authorization: "Bearer " + token },
+    })
     .then((res) => res.data);
 }
 

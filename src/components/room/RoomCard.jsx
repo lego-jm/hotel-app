@@ -11,7 +11,7 @@ export default function RoomCard({
     no,
     title,
     people,
-    bedtype,
+    bedType,
     area,
     outlook,
     roomtype,
@@ -72,7 +72,7 @@ export default function RoomCard({
         <div className="sm:h-10 mt-5 flex justify-between h-auto">
           <div className="flex flex-wrap w-10/12">
             <p className="after:border-r after:border-gray-400 after:mx-2">
-              <span className="opacity-70">침대타입</span> {bedtype}
+              <span className="opacity-70">침대타입</span> {bedType}
             </p>
             <p className="after:border-r after:border-gray-400 after:mx-2">
               <span className="opacity-70">전망</span> {outlook}

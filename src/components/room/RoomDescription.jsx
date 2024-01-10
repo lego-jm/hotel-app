@@ -3,7 +3,7 @@ import RoomDescriptionCard from "./RoomDescriptionCard";
 import Wrapper from "../Wrapper";
 
 export default function RoomDescription({
-  room: { people, bedtype, area, outlook, location, content },
+  room: { people, bedType, area, outlook, location, content },
 }) {
   return (
     <Wrapper custom="!my-0">
@@ -18,7 +18,7 @@ export default function RoomDescription({
           <div className="flex flex-col gap-6">
             <div className="flex">
               <RoomDescriptionCard title="위치" data={location} />
-              <RoomDescriptionCard title="침대타입" data={bedtype} />
+              <RoomDescriptionCard title="침대타입" data={bedType} />
               <RoomDescriptionCard title="투숙인원" data={`${people}명`} />
             </div>
             <div className="flex">

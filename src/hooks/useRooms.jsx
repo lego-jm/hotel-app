@@ -1,7 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getFilterList, updateRoom } from "../api/firebase";
-
-import { addRoom, getAllRoom, deleteRoom } from "../api/hotel-api";
+import {
+  addRoom,
+  getAllRoom,
+  deleteRoom,
+  updateRoom,
+  getFilters,
+} from "../api/hotel-api";
 import { useAuthContext } from "../context/AuthContext";
 
 export function useRooms() {
@@ -26,7 +30,7 @@ export function useRooms() {
     }
   );
 
-  const getFilterQuery = useQuery(["filters"], async () => getFilterList(), {
+  const getFilterQuery = useQuery(["filters"], async () => getFilters(), {
     staleTime: 1000 * 60 * 10,
   });
 

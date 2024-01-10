@@ -11,7 +11,7 @@ export default function RoomList({ filter }) {
 
   useEffect(() => {
     if (filter !== "전체") {
-      rooms && setFilterRooms(rooms.filter((room) => room.roomtype === filter));
+      rooms && setFilterRooms(rooms.filter((room) => room.roomType === filter));
     } else {
       rooms && setFilterRooms(rooms);
     }
