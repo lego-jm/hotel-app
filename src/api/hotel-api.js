@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiUrl = axios.create({
-  baseURL: process.env.REACT_APP_HOTEL_API_URL,
-  // baseURL: "http://localhost:8080",
+  // baseURL: process.env.REACT_APP_HOTEL_API_URL,
+  baseURL: "http://localhost:8080",
 });
 
 /* Member Function */
@@ -18,7 +18,6 @@ export function logOut() {
 }
 
 export async function joinMember(user) {
-  console.log(user);
   return apiUrl
     .post("/api/member", user) //
     .then((res) => res);

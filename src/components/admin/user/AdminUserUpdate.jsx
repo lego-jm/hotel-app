@@ -8,7 +8,9 @@ export default function AdminUserUpdate() {
   const nationArr = nationData();
   const navigate = useNavigate();
   const [updateUser, setUpdateUser] = useState();
-  const [updateNation, setUpdateNation] = useState();
+  const [updateNation, setUpdateNation] = useState(
+    updateUser.nation && updateUser.nation
+  );
   const { updateUserQuery, removeAccountQuery } = useUsers();
   const {
     state: { user },
