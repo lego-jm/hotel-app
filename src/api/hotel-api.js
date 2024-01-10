@@ -112,11 +112,7 @@ export async function getRoom(roomNo) {
 }
 
 export async function getAllRoom() {
-  return fetch("http://ec2-13-209-97-209.ap-northeast-2.compute.amazonaws.com/")
-    .then((res) => JSON.parse(res))
-    .then((data) => data);
-
-  /* return apiUrl
+  return apiUrl
     .get("/api/room") //
     .then((res) =>
       res.data.map((item) => {
@@ -125,7 +121,7 @@ export async function getAllRoom() {
         }
         return { ...item, imgUrls: [item.imgUrls || ""] };
       })
-    ); */
+    );
 }
 
 /* Attraction Function */
