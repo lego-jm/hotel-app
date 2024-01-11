@@ -4,14 +4,19 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <div className="md:flex-nowrap sm:p-10 bg-footer-color text-footer-font-color flex justify-between p-5 flex-wrap">
-      <div className="sm:gap-10 flex flex-wrap gap-5 items-center">
-        <Link to="/" className="sm:flex-col flex items-center gap-2">
+      <div className="md:flex-row md:gap-0 flex items-center justify-between w-full flex-col gap-3">
+        <Link
+          to="/"
+          className="sm:flex-col flex items-center justify-center gap-2 w-1/12"
+        >
           <img className="sm:w-16 w-10" src="/images/logo-white.png" alt="" />
           <h3 className="sm:text-2xl text-lg">RealHotel</h3>
         </Link>
         {/* <div className="md:block md:flex-nowrap sm:text-sm text-xs flex flex-wrap whitespace-nowrap"> */}
-        <div className="text-center text-lg">
-          <p>해당 사이트는 포트폴리오용으로 제작된 사이트입니다.</p>
+        <div className="text-center text-lg w-11/12">
+          <p className="sm:text-base text-sm">
+            해당 사이트는 포트폴리오용으로 제작된 사이트입니다.
+          </p>
 
           {/* <span>(주)리얼호텔</span>
           <div className="flex">
