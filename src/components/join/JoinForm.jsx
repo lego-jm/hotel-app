@@ -52,7 +52,29 @@ export default function JoinForm({ children, userInfo }) {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === "firstName" || name === "lastName") {
+      const upper = value.substr(0, 1).toUpperCase();
+      const text = value.substr(1);
+      value = upper + text;
+    }
+
+    if (name === "birthDate") {
+      const formattedDate = value.replace(
+        /^(\d{4})(\d{2})(\d{2})$/,
+        "$1.$2.$3"
+      );
+      value = formattedDate;
+    }
+
+    if (name === "phone") {
+      const formattedPhoneNumber = value.replace(
+        /^(\d{3})(\d{4})(\d{4})$/,
+        "$1-$2-$3"
+      );
+      value = formattedPhoneNumber;
+    }
+
     setAccount((prev) => ({ ...prev, [name]: value }));
   };
   useEffect(() => {
@@ -131,7 +153,7 @@ export default function JoinForm({ children, userInfo }) {
             className="md:w-4/12 border border-gray-400 p-2 px-3 outline-none"
             type="text"
             name="birthDate"
-            placeholder="YYYY.MM.DD"
+            placeholder="ex) 19970308"
             onChange={handleChange}
             value={account?.birthDate || ""}
             autoComplete="off"
@@ -146,7 +168,7 @@ export default function JoinForm({ children, userInfo }) {
           <input
             id="phone"
             className="md:w-4/12 border border-gray-400 p-2 px-3 outline-none"
-            type="number"
+            type="text"
             name="phone"
             placeholder="연락처를 입력하세요"
             onChange={handleChange}
