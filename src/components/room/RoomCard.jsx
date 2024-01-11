@@ -22,7 +22,7 @@ export default function RoomCard({
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const handleClick = () => {
-    if (user === null) {
+    if (user === undefined) {
       window.alert("로그인 후 이용해주세요.");
       return;
     }
